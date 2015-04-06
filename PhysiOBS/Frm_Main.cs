@@ -14,11 +14,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing.Drawing2D;
 using Microsoft.VisualBasic.PowerPacks;
 
-//R - Statistics connection
-using STATCONNECTORCLNTLib;
-using StatConnectorCommonLib;
-using STATCONNECTORSRVLib;
-
 
 namespace PhysiOBS
 {

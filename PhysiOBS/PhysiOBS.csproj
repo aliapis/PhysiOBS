@@ -236,7 +236,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="karousel.txt" />
     <None Include="Resources\information.png" />
     <None Include="Resources\task_are.png" />
     <None Include="Resources\close_form.png" />

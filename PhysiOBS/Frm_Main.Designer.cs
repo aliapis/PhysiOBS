@@ -108,7 +108,7 @@
             this.GB_uservideo.Controls.Add(this.MPlayer_UserVideo);
             this.GB_uservideo.Location = new System.Drawing.Point(67, 4);
             this.GB_uservideo.Name = "GB_uservideo";
-            this.GB_uservideo.Size = new System.Drawing.Size(556, 299);
+            this.GB_uservideo.Size = new System.Drawing.Size(556, 288);
             this.GB_uservideo.TabIndex = 1;
             this.GB_uservideo.TabStop = false;
             this.GB_uservideo.Text = "User Observation";
@@ -120,7 +120,7 @@
             this.MPlayer_UserVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_UserVideo.Name = "MPlayer_UserVideo";
             this.MPlayer_UserVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_UserVideo.OcxState")));
-            this.MPlayer_UserVideo.Size = new System.Drawing.Size(550, 280);
+            this.MPlayer_UserVideo.Size = new System.Drawing.Size(550, 269);
             this.MPlayer_UserVideo.TabIndex = 1;
             this.MPlayer_UserVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_UserVideo_OpenStateChange);
             this.MPlayer_UserVideo.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MPlayer_UserVideo_PlayStateChange);
@@ -133,7 +133,7 @@
             this.GB_Screen.Controls.Add(this.MPlayer_ScreenVideo);
             this.GB_Screen.Location = new System.Drawing.Point(11, 3);
             this.GB_Screen.Name = "GB_Screen";
-            this.GB_Screen.Size = new System.Drawing.Size(556, 299);
+            this.GB_Screen.Size = new System.Drawing.Size(556, 288);
             this.GB_Screen.TabIndex = 2;
             this.GB_Screen.TabStop = false;
             this.GB_Screen.Text = "Screen Capture";
@@ -145,7 +145,7 @@
             this.MPlayer_ScreenVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_ScreenVideo.Name = "MPlayer_ScreenVideo";
             this.MPlayer_ScreenVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_ScreenVideo.OcxState")));
-            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(550, 280);
+            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(550, 269);
             this.MPlayer_ScreenVideo.TabIndex = 0;
             this.MPlayer_ScreenVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_ScreenVideo_OpenStateChange);
             // 
@@ -238,7 +238,7 @@
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1265, 208);
+            this.shapeContainer1.Size = new System.Drawing.Size(1265, 155);
             this.shapeContainer1.TabIndex = 59;
             this.shapeContainer1.TabStop = false;
             // 
@@ -423,6 +423,7 @@
             // 
             this.Total_Signal_PL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Total_Signal_PL.AutoScroll = true;
             this.Total_Signal_PL.Location = new System.Drawing.Point(2, 85);
             this.Total_Signal_PL.Name = "Total_Signal_PL";
             this.Total_Signal_PL.Size = new System.Drawing.Size(1262, 0);
@@ -590,8 +591,8 @@
             this.SC_MainHor.Panel2.Controls.Add(this.PL_TaskLine);
             this.SC_MainHor.Panel2.Controls.Add(this.PL_Navigation);
             this.SC_MainHor.Panel2.Controls.Add(this.shapeContainer1);
-            this.SC_MainHor.Size = new System.Drawing.Size(1265, 523);
-            this.SC_MainHor.SplitterDistance = 311;
+            this.SC_MainHor.Size = new System.Drawing.Size(1265, 459);
+            this.SC_MainHor.SplitterDistance = 300;
             this.SC_MainHor.TabIndex = 101;
             // 
             // SV_VideoSplitter
@@ -612,7 +613,7 @@
             this.SV_VideoSplitter.Panel2.Controls.Add(this.GB_Screen);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_Add_Video_S);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_video_S_Properties);
-            this.SV_VideoSplitter.Size = new System.Drawing.Size(1265, 311);
+            this.SV_VideoSplitter.Size = new System.Drawing.Size(1265, 300);
             this.SV_VideoSplitter.SplitterDistance = 629;
             this.SV_VideoSplitter.TabIndex = 25;
             // 
@@ -625,7 +626,7 @@
             this.PL_Navigation.Controls.Add(this.LB_Time);
             this.PL_Navigation.Controls.Add(this.tb_time);
             this.PL_Navigation.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PL_Navigation.Location = new System.Drawing.Point(0, 146);
+            this.PL_Navigation.Location = new System.Drawing.Point(0, 93);
             this.PL_Navigation.Name = "PL_Navigation";
             this.PL_Navigation.Size = new System.Drawing.Size(1265, 62);
             this.PL_Navigation.TabIndex = 101;
@@ -635,11 +636,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1265, 586);
+            this.ClientSize = new System.Drawing.Size(1265, 522);
             this.Controls.Add(this.SC_MainHor);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1281, 624);
+            this.MinimumSize = new System.Drawing.Size(1281, 560);
             this.Name = "Frm_Main";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

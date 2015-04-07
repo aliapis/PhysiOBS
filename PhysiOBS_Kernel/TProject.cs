@@ -11,11 +11,26 @@ namespace PhysiOBS_Kernel
         public String Date = "Jan, 2013";
         public String filename;
         public String title;
-        public int panelWidth;
-        public int m_ana_px;
-        
 
-        private Double _duration;
+
+        public int m_ana_px;
+
+
+        private int _panelwidth;
+        public int panelWidth
+        {
+            get
+            {
+                return _panelwidth;
+            }
+            set
+            {
+                _panelwidth = value;
+                m_ana_px = (int)_duration / (int)value;
+            }
+        }
+
+        private Double _duration=0;
         public Double duration
         {
             get

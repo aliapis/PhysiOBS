@@ -1848,5 +1848,18 @@ namespace PhysiOBS
 
         #endregion
 
+        private void Frm_Main_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void PL_TaskLine_Resize(object sender, EventArgs e)
+        {
+            Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
+            PL_TaskLine.Refresh();
+            ClearTasks();
+            DrawTasks();
+
+        }
+
     }
 }   

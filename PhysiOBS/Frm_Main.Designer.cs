@@ -276,6 +276,7 @@
             this.PL_TaskLine.Size = new System.Drawing.Size(985, 36);
             this.PL_TaskLine.TabIndex = 71;
             this.PL_TaskLine.Paint += new System.Windows.Forms.PaintEventHandler(this.PL_TaskLine_Paint);
+            this.PL_TaskLine.Resize += new System.EventHandler(this.PL_TaskLine_Resize);
             // 
             // BTNext_Task
             // 
@@ -645,6 +646,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
+            this.Resize += new System.EventHandler(this.Frm_Main_Resize);
             this.GB_uservideo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_UserVideo)).EndInit();
             this.GB_Screen.ResumeLayout(false);

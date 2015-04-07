@@ -47,6 +47,8 @@
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.PL_TaskLine = new System.Windows.Forms.Panel();
+            this.BTNext_Task = new System.Windows.Forms.Button();
+            this.BTPrevious_Task = new System.Windows.Forms.Button();
             this.Bar = new System.Windows.Forms.Panel();
             this.Timer_Project = new System.Windows.Forms.Timer(this.components);
             this.tb_time = new System.Windows.Forms.TextBox();
@@ -72,8 +74,6 @@
             this.BT_Add_Video_U = new System.Windows.Forms.Button();
             this.BT_Task_Frm = new System.Windows.Forms.Button();
             this.AddSignalBT = new System.Windows.Forms.Button();
-            this.BTNext_Task = new System.Windows.Forms.Button();
-            this.BTPrevious_Task = new System.Windows.Forms.Button();
             this.BTNext_Total = new System.Windows.Forms.Button();
             this.BTPrevious_Total = new System.Windows.Forms.Button();
             this.BT_PlayPause = new System.Windows.Forms.Button();
@@ -275,6 +275,28 @@
             this.PL_TaskLine.Size = new System.Drawing.Size(1265, 39);
             this.PL_TaskLine.TabIndex = 71;
             this.PL_TaskLine.Paint += new System.Windows.Forms.PaintEventHandler(this.PL_TaskLine_Paint);
+            // 
+            // BTNext_Task
+            // 
+            this.BTNext_Task.Image = global::PhysiOBS.Properties.Resources.forw;
+            this.BTNext_Task.Location = new System.Drawing.Point(1217, 1);
+            this.BTNext_Task.Name = "BTNext_Task";
+            this.BTNext_Task.Size = new System.Drawing.Size(45, 36);
+            this.BTNext_Task.TabIndex = 91;
+            this.toolTip.SetToolTip(this.BTNext_Task, "Next Point");
+            this.BTNext_Task.UseVisualStyleBackColor = true;
+            this.BTNext_Task.Click += new System.EventHandler(this.ΒΤNextClick);
+            // 
+            // BTPrevious_Task
+            // 
+            this.BTPrevious_Task.Image = global::PhysiOBS.Properties.Resources.back;
+            this.BTPrevious_Task.Location = new System.Drawing.Point(2, 1);
+            this.BTPrevious_Task.Name = "BTPrevious_Task";
+            this.BTPrevious_Task.Size = new System.Drawing.Size(45, 37);
+            this.BTPrevious_Task.TabIndex = 90;
+            this.toolTip.SetToolTip(this.BTPrevious_Task, "Previous Point");
+            this.BTPrevious_Task.UseVisualStyleBackColor = true;
+            this.BTPrevious_Task.Click += new System.EventHandler(this.BTPreviousClick);
             // 
             // Bar
             // 
@@ -496,28 +518,6 @@
             this.toolTip.SetToolTip(this.AddSignalBT, "Add Physiological Signal");
             this.AddSignalBT.UseVisualStyleBackColor = true;
             this.AddSignalBT.Click += new System.EventHandler(this.BTAddSignalClick);
-            // 
-            // BTNext_Task
-            // 
-            this.BTNext_Task.Image = global::PhysiOBS.Properties.Resources.forw;
-            this.BTNext_Task.Location = new System.Drawing.Point(1217, 1);
-            this.BTNext_Task.Name = "BTNext_Task";
-            this.BTNext_Task.Size = new System.Drawing.Size(45, 36);
-            this.BTNext_Task.TabIndex = 91;
-            this.toolTip.SetToolTip(this.BTNext_Task, "Next Point");
-            this.BTNext_Task.UseVisualStyleBackColor = true;
-            this.BTNext_Task.Click += new System.EventHandler(this.ΒΤNextClick);
-            // 
-            // BTPrevious_Task
-            // 
-            this.BTPrevious_Task.Image = global::PhysiOBS.Properties.Resources.back;
-            this.BTPrevious_Task.Location = new System.Drawing.Point(2, 1);
-            this.BTPrevious_Task.Name = "BTPrevious_Task";
-            this.BTPrevious_Task.Size = new System.Drawing.Size(45, 37);
-            this.BTPrevious_Task.TabIndex = 90;
-            this.toolTip.SetToolTip(this.BTPrevious_Task, "Previous Point");
-            this.BTPrevious_Task.UseVisualStyleBackColor = true;
-            this.BTPrevious_Task.Click += new System.EventHandler(this.BTPreviousClick);
             // 
             // BTNext_Total
             // 

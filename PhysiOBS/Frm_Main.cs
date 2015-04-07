@@ -1534,7 +1534,8 @@ namespace PhysiOBS
             Panel PanelSignal = new Panel();
             PanelSignal.Name = "PanelSignal_" + SID.ToString();
             PanelSignal.Parent = Total_Signal_PL;
-            PanelSignal.SetBounds(5, (OrderID-1) * (160), 1253, 156);
+            PanelSignal.SetBounds(5, (OrderID - 1) * (160), Total_Signal_PL.Width-9, 156);
+            PanelSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
             PanelSignal.BringToFront();
 
 
@@ -1543,7 +1544,8 @@ namespace PhysiOBS
             PanelGraph.Name = "PanelGraph_" + SID;
             PanelGraph.Parent = PanelSignal;
             PanelGraph.BackColor = Color.White;
-            PanelGraph.SetBounds(164, 0, 985, 108);
+            PanelGraph.SetBounds(164, 0, PanelSignal.Width - 164 - 104, 108);
+            PanelGraph.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
            
             Button BTRemoveSignal = new Button();
             PanelSignal.Controls.Add(BTRemoveSignal);
@@ -1553,6 +1555,7 @@ namespace PhysiOBS
             BTRemoveSignal.BackgroundImageLayout = ImageLayout.Stretch;
             BTRemoveSignal.Parent = PanelSignal;
             BTRemoveSignal.SetBounds(8, 22, 45, 45);
+            BTRemoveSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTRemoveSignal.Click += new EventHandler(BTRemoveSignalClick_NK);//Κλήση Event   
             ToolTip tooltp = new ToolTip();
             tooltp.SetToolTip(BTRemoveSignal, "iuiiiuiuiuiuiu");
@@ -1564,6 +1567,7 @@ namespace PhysiOBS
             ΒΤNextEmotion.BackgroundImageLayout = ImageLayout.Center;
             ΒΤNextEmotion.Parent = PanelSignal;
             ΒΤNextEmotion.SetBounds(113, 25, 45, 38);
+            ΒΤNextEmotion.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             ΒΤNextEmotion.Click += new EventHandler(ΒΤNextClick);//Κλήση Event next Event
 
             Button BTPreviousEmotion = new Button();
@@ -1574,6 +1578,7 @@ namespace PhysiOBS
             BTPreviousEmotion.Parent = PanelSignal;
             BTPreviousEmotion.SetBounds(65, 25, 45, 38);
             BTPreviousEmotion.BringToFront();
+            BTPreviousEmotion.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTPreviousEmotion.Click += new EventHandler(BTPreviousClick);//Κλήση Event next Event
 
             Panel New_Emotion_PL = new Panel();
@@ -1581,7 +1586,8 @@ namespace PhysiOBS
             New_Emotion_PL.Parent = PanelSignal;
             New_Emotion_PL.Name = "EmotionPanel_" + SID; 
             New_Emotion_PL.BackColor = Color.LightYellow;
-            New_Emotion_PL.SetBounds(164, 110, 985, 42);
+            New_Emotion_PL.SetBounds(164, 110, PanelSignal.Width - 164 - 104, 42);
+            New_Emotion_PL.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
             New_Emotion_PL.MouseDown += new MouseEventHandler(PL_Emotions_Bar_MouseDown);
             New_Emotion_PL.MouseMove += new MouseEventHandler(PL_Emotions_Bar_MouseMove);
             New_Emotion_PL.MouseUp += new MouseEventHandler(PL_Emotions_Bar_MouseUp);
@@ -1590,7 +1596,8 @@ namespace PhysiOBS
             PanelSignal.Controls.Add(New_Statistics_GB);
             New_Statistics_GB.Text = "Show on Graph";
             New_Statistics_GB.Parent = PanelSignal;
-            New_Statistics_GB.SetBounds(1155, 0, 95, 84);
+            New_Statistics_GB.SetBounds(PanelSignal.Width-98, 0, 95, 84);
+            New_Statistics_GB.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             New_Statistics_GB.BringToFront();
 
             CheckBox CB_Mean = new CheckBox();
@@ -1632,7 +1639,8 @@ namespace PhysiOBS
             TBMean.Parent = PanelSignal;
             TBMean.Text = "Mean";
             TBMean.ReadOnly = true;
-            TBMean.SetBounds(1211, 99, 39, 19);
+            TBMean.SetBounds(PanelSignal.Width - 42, 99, 39, 19);
+            TBMean.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             TextBox ΤΒStDev = new TextBox();
             PanelSignal.Controls.Add(ΤΒStDev);
@@ -1640,7 +1648,8 @@ namespace PhysiOBS
             ΤΒStDev.Name = "ΤΒStDev_" + SID;
             ΤΒStDev.Parent = PanelSignal;
             ΤΒStDev.ReadOnly = true;
-            ΤΒStDev.SetBounds(1211, 132, 39, 19);
+            ΤΒStDev.SetBounds(PanelSignal.Width-42, 132, 39, 19);
+            ΤΒStDev.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label Mean = new Label();//Πρόβάλλει τη μέση τιμή του σήματος!!!
             PanelSignal.Controls.Add(Mean);
@@ -1648,7 +1657,8 @@ namespace PhysiOBS
             Mean.Text = "Mean";
             Mean.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             Mean.Parent = PanelSignal;
-            Mean.SetBounds(1211, 86, 96, 3);
+            Mean.SetBounds(PanelSignal.Width - 42, 86, 96, 3);
+            Mean.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label STD = new Label();//Πρόβάλλει την τυπική απόκλιση του σήματος!!!
             PanelSignal.Controls.Add(STD);
@@ -1656,7 +1666,8 @@ namespace PhysiOBS
             STD.Text = "St.Dev";
             STD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             STD.Parent = PanelSignal;
-            STD.SetBounds(1211, 119, 96, 3);
+            STD.SetBounds(PanelSignal.Width - 42, 119, 96, 3);
+            STD.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Button BTObservedEmotions = new Button();
             PanelSignal.Controls.Add(BTObservedEmotions);
@@ -1665,9 +1676,10 @@ namespace PhysiOBS
             BTObservedEmotions.BackgroundImage = Properties.Resources.em_table;
             BTObservedEmotions.BackgroundImageLayout = ImageLayout.Stretch;
             BTObservedEmotions.Parent = PanelSignal;
-            BTObservedEmotions.SetBounds(1155, 104, 45, 43);
+            BTObservedEmotions.SetBounds(PanelSignal.Width - 98, 104, 45, 43);
             BTObservedEmotions.BringToFront();
             BTObservedEmotions.Click += new EventHandler(BT_Obs_Emotios_Click);
+            BTObservedEmotions.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label EmList = new Label();//Πρόβάλλει το είδος του σήματος Galvanic Skin Response etc.!!!
             PanelSignal.Controls.Add(EmList);
@@ -1675,7 +1687,9 @@ namespace PhysiOBS
             EmList.Text = "Em. List";
             EmList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             EmList.Parent = PanelSignal;
-            EmList.SetBounds(1155, 90, 96, 3);
+            EmList.SetBounds(PanelSignal.Width - 98, 90, 96, 3);
+            //EmList.SetBounds(PanelSignal.Width - 98, 104, 45, 43);
+            EmList.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label LabelEmotionName = new Label();//Πρόβάλλει το είδος του σήματος Galvanic Skin Response etc.!!!
             PanelSignal.Controls.Add(LabelEmotionName);
@@ -1684,6 +1698,7 @@ namespace PhysiOBS
             LabelEmotionName.Parent = PanelSignal;
             LabelEmotionName.Text = "....";
             LabelEmotionName.SetBounds(5, 86, 22, 13);
+            LabelEmotionName.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label New_Obs_Emotions_LB = new Label();
             PanelSignal.Controls.Add(New_Obs_Emotions_LB);
@@ -1693,20 +1708,22 @@ namespace PhysiOBS
             New_Obs_Emotions_LB.Parent = PanelSignal;
             New_Obs_Emotions_LB.SetBounds(32, 122, 135, 15);
             New_Obs_Emotions_LB.SendToBack();
+            New_Obs_Emotions_LB.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             PictureBox Info_Pic = new PictureBox();
             PanelSignal.Controls.Add(New_Obs_Emotions_LB);
             Info_Pic.SetBounds(0, 115, 32, 32);
             Info_Pic.Parent = PanelSignal;
             Info_Pic.Image = PhysiOBS.Properties.Resources.information;
+            Info_Pic.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Chart ChartSignal = new Chart();
             PanelGraph.Controls.Add(ChartSignal);
             ChartSignal.Name = "ChartSignal_" + SID;
             ChartSignal.Parent = PanelGraph;
-            //ChartSignal.SetBounds(1, 1, 985, 105);
-            ChartSignal.SetBounds(1, 1, 985, 100);//for test
+            ChartSignal.SetBounds(1, 1, PanelGraph.Width, 100);
             ChartSignal.BringToFront();
+            ChartSignal.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
 
             ShapeContainer canvas = new ShapeContainer();
             LineShape theLine1 = new LineShape();
@@ -1720,6 +1737,7 @@ namespace PhysiOBS
             theLine1.SelectionColor = Color.Blue;
             theLine1.StartPoint = new System.Drawing.Point(0, 109);
             theLine1.EndPoint = new System.Drawing.Point(163, 109);
+            theLine1.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             ShapeContainer canvas_2 = new ShapeContainer();
             LineShape theLine2 = new LineShape();
@@ -1732,6 +1750,7 @@ namespace PhysiOBS
             theLine2.BorderColor = Color.Blue;
             theLine2.StartPoint = new System.Drawing.Point(0, 151);
             theLine2.EndPoint = new System.Drawing.Point(163, 151);
+            theLine2.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label LB_SignalID = new Label();
             PanelSignal.Controls.Add(LB_SignalID);
@@ -1740,6 +1759,7 @@ namespace PhysiOBS
             LB_SignalID.Parent = PanelSignal;
             LB_SignalID.Text = "Bio-Signal_" + SID;
             LB_SignalID.SetBounds(2, 6, 92, 13);
+            LB_SignalID.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             return PanelSignal;
         }

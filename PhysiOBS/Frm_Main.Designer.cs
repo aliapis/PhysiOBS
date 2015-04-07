@@ -67,7 +67,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Total_Signal_PL = new System.Windows.Forms.Panel();
-            this.LB_TaskLine = new System.Windows.Forms.Label();
             this.BT_Add_Video_S = new System.Windows.Forms.Button();
             this.BT_video_S_Properties = new System.Windows.Forms.Button();
             this.BT_video_U_properties = new System.Windows.Forms.Button();
@@ -87,7 +86,6 @@
             this.GB_Screen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_ScreenVideo)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.PL_TaskLine.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.EmotionsMenou.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SC_MainHor)).BeginInit();
@@ -110,7 +108,7 @@
             this.GB_uservideo.Controls.Add(this.MPlayer_UserVideo);
             this.GB_uservideo.Location = new System.Drawing.Point(67, 4);
             this.GB_uservideo.Name = "GB_uservideo";
-            this.GB_uservideo.Size = new System.Drawing.Size(556, 388);
+            this.GB_uservideo.Size = new System.Drawing.Size(556, 299);
             this.GB_uservideo.TabIndex = 1;
             this.GB_uservideo.TabStop = false;
             this.GB_uservideo.Text = "User Observation";
@@ -122,7 +120,7 @@
             this.MPlayer_UserVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_UserVideo.Name = "MPlayer_UserVideo";
             this.MPlayer_UserVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_UserVideo.OcxState")));
-            this.MPlayer_UserVideo.Size = new System.Drawing.Size(550, 369);
+            this.MPlayer_UserVideo.Size = new System.Drawing.Size(550, 280);
             this.MPlayer_UserVideo.TabIndex = 1;
             this.MPlayer_UserVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_UserVideo_OpenStateChange);
             this.MPlayer_UserVideo.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MPlayer_UserVideo_PlayStateChange);
@@ -135,7 +133,7 @@
             this.GB_Screen.Controls.Add(this.MPlayer_ScreenVideo);
             this.GB_Screen.Location = new System.Drawing.Point(11, 3);
             this.GB_Screen.Name = "GB_Screen";
-            this.GB_Screen.Size = new System.Drawing.Size(556, 388);
+            this.GB_Screen.Size = new System.Drawing.Size(556, 299);
             this.GB_Screen.TabIndex = 2;
             this.GB_Screen.TabStop = false;
             this.GB_Screen.Text = "Screen Capture";
@@ -147,7 +145,7 @@
             this.MPlayer_ScreenVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_ScreenVideo.Name = "MPlayer_ScreenVideo";
             this.MPlayer_ScreenVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_ScreenVideo.OcxState")));
-            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(550, 369);
+            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(550, 280);
             this.MPlayer_ScreenVideo.TabIndex = 0;
             this.MPlayer_ScreenVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_ScreenVideo_OpenStateChange);
             // 
@@ -240,48 +238,51 @@
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1265, 267);
+            this.shapeContainer1.Size = new System.Drawing.Size(1265, 208);
             this.shapeContainer1.TabIndex = 59;
             this.shapeContainer1.TabStop = false;
             // 
             // lineShape2
             // 
+            this.lineShape2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape2.BorderColor = System.Drawing.Color.Blue;
             this.lineShape2.BorderWidth = 3;
             this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 5;
-            this.lineShape2.X2 = 1259;
-            this.lineShape2.Y1 = 434;
-            this.lineShape2.Y2 = 434;
+            this.lineShape2.X1 = 7;
+            this.lineShape2.X2 = 1258;
+            this.lineShape2.Y1 = 1;
+            this.lineShape2.Y2 = 1;
             // 
             // lineShape1
             // 
+            this.lineShape1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape1.BorderColor = System.Drawing.Color.Blue;
             this.lineShape1.BorderWidth = 3;
             this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 4;
-            this.lineShape1.X2 = 1260;
-            this.lineShape1.Y1 = 512;
-            this.lineShape1.Y2 = 512;
+            this.lineShape1.X1 = 7;
+            this.lineShape1.X2 = 1258;
+            this.lineShape1.Y1 = 80;
+            this.lineShape1.Y2 = 80;
             // 
             // PL_TaskLine
             // 
-            this.PL_TaskLine.Controls.Add(this.BTNext_Task);
-            this.PL_TaskLine.Controls.Add(this.BTPrevious_Task);
-            this.PL_TaskLine.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PL_TaskLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PL_TaskLine.ForeColor = System.Drawing.Color.Black;
-            this.PL_TaskLine.Location = new System.Drawing.Point(0, 0);
+            this.PL_TaskLine.Location = new System.Drawing.Point(171, 27);
             this.PL_TaskLine.Name = "PL_TaskLine";
-            this.PL_TaskLine.Size = new System.Drawing.Size(1265, 39);
+            this.PL_TaskLine.Size = new System.Drawing.Size(985, 36);
             this.PL_TaskLine.TabIndex = 71;
             this.PL_TaskLine.Paint += new System.Windows.Forms.PaintEventHandler(this.PL_TaskLine_Paint);
             // 
             // BTNext_Task
             // 
             this.BTNext_Task.Image = global::PhysiOBS.Properties.Resources.forw;
-            this.BTNext_Task.Location = new System.Drawing.Point(1217, 1);
+            this.BTNext_Task.Location = new System.Drawing.Point(120, 26);
             this.BTNext_Task.Name = "BTNext_Task";
-            this.BTNext_Task.Size = new System.Drawing.Size(45, 36);
+            this.BTNext_Task.Size = new System.Drawing.Size(45, 38);
             this.BTNext_Task.TabIndex = 91;
             this.toolTip.SetToolTip(this.BTNext_Task, "Next Point");
             this.BTNext_Task.UseVisualStyleBackColor = true;
@@ -290,9 +291,9 @@
             // BTPrevious_Task
             // 
             this.BTPrevious_Task.Image = global::PhysiOBS.Properties.Resources.back;
-            this.BTPrevious_Task.Location = new System.Drawing.Point(2, 1);
+            this.BTPrevious_Task.Location = new System.Drawing.Point(72, 26);
             this.BTPrevious_Task.Name = "BTPrevious_Task";
-            this.BTPrevious_Task.Size = new System.Drawing.Size(45, 37);
+            this.BTPrevious_Task.Size = new System.Drawing.Size(45, 38);
             this.BTPrevious_Task.TabIndex = 90;
             this.toolTip.SetToolTip(this.BTPrevious_Task, "Previous Point");
             this.BTPrevious_Task.UseVisualStyleBackColor = true;
@@ -302,7 +303,7 @@
             // 
             this.Bar.BackColor = System.Drawing.Color.Maroon;
             this.Bar.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.Bar.Location = new System.Drawing.Point(0, 0);
+            this.Bar.Location = new System.Drawing.Point(171, 27);
             this.Bar.Margin = new System.Windows.Forms.Padding(0);
             this.Bar.Name = "Bar";
             this.Bar.Size = new System.Drawing.Size(1, 36);
@@ -420,20 +421,12 @@
             // 
             // Total_Signal_PL
             // 
-            this.Total_Signal_PL.Location = new System.Drawing.Point(2, 518);
+            this.Total_Signal_PL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Total_Signal_PL.Location = new System.Drawing.Point(2, 85);
             this.Total_Signal_PL.Name = "Total_Signal_PL";
             this.Total_Signal_PL.Size = new System.Drawing.Size(1262, 0);
             this.Total_Signal_PL.TabIndex = 99;
-            // 
-            // LB_TaskLine
-            // 
-            this.LB_TaskLine.AutoSize = true;
-            this.LB_TaskLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.LB_TaskLine.Location = new System.Drawing.Point(596, 443);
-            this.LB_TaskLine.Name = "LB_TaskLine";
-            this.LB_TaskLine.Size = new System.Drawing.Size(66, 16);
-            this.LB_TaskLine.TabIndex = 100;
-            this.LB_TaskLine.Text = "Task Bar ";
             // 
             // BT_Add_Video_S
             // 
@@ -489,16 +482,17 @@
             // 
             // BT_Task_Frm
             // 
+            this.BT_Task_Frm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BT_Task_Frm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BT_Task_Frm.Enabled = false;
             this.BT_Task_Frm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.BT_Task_Frm.Image = global::PhysiOBS.Properties.Resources.task_are;
             this.BT_Task_Frm.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BT_Task_Frm.Location = new System.Drawing.Point(1159, 438);
+            this.BT_Task_Frm.Location = new System.Drawing.Point(1162, 5);
             this.BT_Task_Frm.Name = "BT_Task_Frm";
-            this.BT_Task_Frm.Size = new System.Drawing.Size(103, 69);
+            this.BT_Task_Frm.Size = new System.Drawing.Size(97, 70);
             this.BT_Task_Frm.TabIndex = 58;
-            this.BT_Task_Frm.Text = "Add/Remove/Edit Tasks";
+            this.BT_Task_Frm.Text = "Manage Tasks";
             this.BT_Task_Frm.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.BT_Task_Frm.UseVisualStyleBackColor = true;
             this.BT_Task_Frm.Click += new System.EventHandler(this.BT_Task_Frm_Click);
@@ -509,7 +503,7 @@
             this.AddSignalBT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.AddSignalBT.Image = global::PhysiOBS.Properties.Resources.AddSignal;
             this.AddSignalBT.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.AddSignalBT.Location = new System.Drawing.Point(4, 438);
+            this.AddSignalBT.Location = new System.Drawing.Point(5, 5);
             this.AddSignalBT.Name = "AddSignalBT";
             this.AddSignalBT.Size = new System.Drawing.Size(61, 70);
             this.AddSignalBT.TabIndex = 41;
@@ -576,6 +570,7 @@
             // 
             this.SC_MainHor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SC_MainHor.Location = new System.Drawing.Point(0, 63);
+            this.SC_MainHor.Margin = new System.Windows.Forms.Padding(0);
             this.SC_MainHor.Name = "SC_MainHor";
             this.SC_MainHor.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -586,15 +581,17 @@
             // 
             // SC_MainHor.Panel2
             // 
-            this.SC_MainHor.Panel2.Controls.Add(this.LB_TaskLine);
-            this.SC_MainHor.Panel2.Controls.Add(this.BT_Task_Frm);
-            this.SC_MainHor.Panel2.Controls.Add(this.AddSignalBT);
-            this.SC_MainHor.Panel2.Controls.Add(this.PL_Navigation);
-            this.SC_MainHor.Panel2.Controls.Add(this.PL_TaskLine);
+            this.SC_MainHor.Panel2.Controls.Add(this.Bar);
             this.SC_MainHor.Panel2.Controls.Add(this.Total_Signal_PL);
+            this.SC_MainHor.Panel2.Controls.Add(this.AddSignalBT);
+            this.SC_MainHor.Panel2.Controls.Add(this.BTNext_Task);
+            this.SC_MainHor.Panel2.Controls.Add(this.BTPrevious_Task);
+            this.SC_MainHor.Panel2.Controls.Add(this.BT_Task_Frm);
+            this.SC_MainHor.Panel2.Controls.Add(this.PL_TaskLine);
+            this.SC_MainHor.Panel2.Controls.Add(this.PL_Navigation);
             this.SC_MainHor.Panel2.Controls.Add(this.shapeContainer1);
-            this.SC_MainHor.Size = new System.Drawing.Size(1265, 671);
-            this.SC_MainHor.SplitterDistance = 400;
+            this.SC_MainHor.Size = new System.Drawing.Size(1265, 523);
+            this.SC_MainHor.SplitterDistance = 311;
             this.SC_MainHor.TabIndex = 101;
             // 
             // SV_VideoSplitter
@@ -615,7 +612,7 @@
             this.SV_VideoSplitter.Panel2.Controls.Add(this.GB_Screen);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_Add_Video_S);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_video_S_Properties);
-            this.SV_VideoSplitter.Size = new System.Drawing.Size(1265, 400);
+            this.SV_VideoSplitter.Size = new System.Drawing.Size(1265, 311);
             this.SV_VideoSplitter.SplitterDistance = 629;
             this.SV_VideoSplitter.TabIndex = 25;
             // 
@@ -625,11 +622,10 @@
             this.PL_Navigation.Controls.Add(this.BTPrevious_Total);
             this.PL_Navigation.Controls.Add(this.BT_PlayPause);
             this.PL_Navigation.Controls.Add(this.BT_Stop);
-            this.PL_Navigation.Controls.Add(this.Bar);
             this.PL_Navigation.Controls.Add(this.LB_Time);
             this.PL_Navigation.Controls.Add(this.tb_time);
             this.PL_Navigation.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PL_Navigation.Location = new System.Drawing.Point(0, 205);
+            this.PL_Navigation.Location = new System.Drawing.Point(0, 146);
             this.PL_Navigation.Name = "PL_Navigation";
             this.PL_Navigation.Size = new System.Drawing.Size(1265, 62);
             this.PL_Navigation.TabIndex = 101;
@@ -639,7 +635,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1265, 734);
+            this.ClientSize = new System.Drawing.Size(1265, 586);
             this.Controls.Add(this.SC_MainHor);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -654,12 +650,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_ScreenVideo)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.PL_TaskLine.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.EmotionsMenou.ResumeLayout(false);
             this.SC_MainHor.Panel1.ResumeLayout(false);
             this.SC_MainHor.Panel2.ResumeLayout(false);
-            this.SC_MainHor.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SC_MainHor)).EndInit();
             this.SC_MainHor.ResumeLayout(false);
             this.SV_VideoSplitter.Panel1.ResumeLayout(false);
@@ -722,7 +716,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel Total_Signal_PL;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
-        private System.Windows.Forms.Label LB_TaskLine;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.SplitContainer SC_MainHor;
         private System.Windows.Forms.SplitContainer SV_VideoSplitter;

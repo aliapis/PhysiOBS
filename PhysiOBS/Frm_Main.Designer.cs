@@ -559,6 +559,7 @@
             // 
             this.SC_MainHor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SC_MainHor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SC_MainHor.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.SC_MainHor.Location = new System.Drawing.Point(0, 63);
             this.SC_MainHor.Margin = new System.Windows.Forms.Padding(0);
             this.SC_MainHor.Name = "SC_MainHor";
@@ -645,9 +646,8 @@
             this.MinimumSize = new System.Drawing.Size(1281, 560);
             this.Name = "Frm_Main";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
-            this.Resize += new System.EventHandler(this.Frm_Main_Resize);
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.GB_uservideo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_UserVideo)).EndInit();
             this.GB_Screen.ResumeLayout(false);

@@ -371,6 +371,13 @@ namespace PhysiOBS
             actcontrol = null;
             Cursor = Cursors.Default;
         }
+
+        private void reAlocateBar()
+        {
+            int move = (int)(Math.Round(PL_TaskLine.Width * MPlayer_UserVideo.Ctlcontrols.currentPosition * 1000 / Manager.PhysioProject.duration));
+            Bar.SetBounds(PL_TaskLine.Location.X + move, Bar.Location.Y, Bar.Width, Bar.Height);
+        }
+
         #endregion
 
         #region Previous & Next Start and Stop points in Project
@@ -672,6 +679,16 @@ namespace PhysiOBS
             Task_Form.ShowDialog();
             ClearTasks();
             DrawTasks();
+        }
+
+        private void PL_TaskLine_Resize(object sender, EventArgs e)
+        {
+            Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
+            PL_TaskLine.Refresh();
+            ClearTasks();
+            DrawTasks();
+            reAlocateBar();
+            ReAlocateSignalsEmotions();
         }
 
         #region This part of code Resizes and moves the task panels in TaskLine Bar
@@ -1004,7 +1021,26 @@ namespace PhysiOBS
             }
         }
 
-        
+
+        public void ReAlocateSignalsEmotions()
+        {
+            foreach (TSignal signal in Manager.PhysioProject.signalList)
+                if (signal.type == "Bio-SIGNAL")
+                    ReAlocateSignalEmotions(signal);
+        }
+
+        public void ReAlocateSignalEmotions(TSignal signal)
+        {
+            //βρίσκω το control και στη συνέχεια καθαρίζω τα panels
+            Panel pp = (Panel)Total_Signal_PL.Controls["PanelSignal_" + signal.ID.ToString()];
+            Panel psvou=(Panel)pp.Controls["EmotionPanel_" + signal.ID.ToString()];
+            ClearEmotions(psvou);
+
+            //Δημιουργώ ξανά panel για όσα esmotions υπάρχουν στη λίστα για το συγκεκριμένο panel
+            DrawEmotions(signal.ID.ToString());
+        }
+
+ 
         public void CreateEmotionPanel(TEmotion emotion, string SignalID)
         {
             //Create BasicPanel
@@ -1849,18 +1885,11 @@ namespace PhysiOBS
 
         #endregion
 
-        private void Frm_Main_Resize(object sender, EventArgs e)
+        private void Frm_Main_Load(object sender, EventArgs e)
         {
+            this.Top = 1;
         }
 
-        private void PL_TaskLine_Resize(object sender, EventArgs e)
-        {
-            Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
-            PL_TaskLine.Refresh();
-            ClearTasks();
-            DrawTasks();
-
-        }
 
     }
 }   

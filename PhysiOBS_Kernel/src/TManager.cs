@@ -17,44 +17,10 @@ namespace PhysiOBS_Kernel
             PhysioProject = new TProject();
         }
 
-        public int SignalAI_ID
-        {
-            get
-            {
-                return getSignalList().AI_ID;
-            }
-            set
-            {
-                getSignalList().AI_ID = value;
-            }
-        }
-
         public String filename()
         {
             return PhysioProject.filename;
         }       
-        public TSignalList getSignalList()
-        {
-            return PhysioProject.signalList;
-        }
-        public TTaskList getTaskList()
-        {
-            return PhysioProject.taskList;
-        }
-        public TAssignmentList getAssignmentList()
-        {
-            return PhysioProject.assignmentList;
-        }     
-        public TCriticalPointsList getCriticalList()
-        {
-            return PhysioProject.criticalList;
-        }
-
-        public TEmotionList getEmotionList(string ID)
-        {
-            return PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList;
-        }
-
         public int saveProject(String Path)
         {
             try
@@ -194,8 +160,6 @@ namespace PhysiOBS_Kernel
                 return -1;
             }
         }
-
-
         public int loadProject(String Path)
         {
             try
@@ -444,37 +408,5 @@ namespace PhysiOBS_Kernel
                 return -1;
             }
         }
-
-        public TSignal addSignal(String fname, String title, String type, String stype, Double dur,String frm, Double del, String Out, String sample)
-        {
-            TSignal s = new TSignal();
-            s.filename=fname;
-            s.title=title;
-            s.type=type;
-            s.signaltype = stype;
-            s.duration=dur;
-            s.format=frm;
-            s.delay=0;
-            s.output = Out;
-            s.sampling = sample;      
-            PhysioProject.addSignal(s);
-            return s;
-        }
-        public TSignal addVideo(String fname, String type, String frm, Double dur)
-        {
-            TSignal s = new TSignal();
-            s.filename = fname;
-            s.type = type;
-            s.format = frm;
-            s.duration = dur;
-            PhysioProject.addSignal(s);
-            return s;
-        }        
-        public void removeSignal(TSignal R1)
-        {
-            getCriticalList().clear_points("emotion_" + R1.ID);
-            PhysioProject.removeSignal(R1);
-         }
-
     }
 }

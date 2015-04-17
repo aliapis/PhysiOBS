@@ -44,7 +44,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_emotion_options = new System.Windows.Forms.ToolStripButton();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.PL_TaskLine = new System.Windows.Forms.Panel();
             this.BTNext_Task = new System.Windows.Forms.Button();
@@ -81,6 +80,7 @@
             this.SC_MainHor = new System.Windows.Forms.SplitContainer();
             this.SV_VideoSplitter = new System.Windows.Forms.SplitContainer();
             this.PL_Navigation = new System.Windows.Forms.Panel();
+            this.LB_Duration = new System.Windows.Forms.Label();
             this.GB_uservideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_UserVideo)).BeginInit();
             this.GB_Screen.SuspendLayout();
@@ -108,7 +108,7 @@
             this.GB_uservideo.Controls.Add(this.MPlayer_UserVideo);
             this.GB_uservideo.Location = new System.Drawing.Point(67, 4);
             this.GB_uservideo.Name = "GB_uservideo";
-            this.GB_uservideo.Size = new System.Drawing.Size(556, 288);
+            this.GB_uservideo.Size = new System.Drawing.Size(555, 286);
             this.GB_uservideo.TabIndex = 1;
             this.GB_uservideo.TabStop = false;
             this.GB_uservideo.Text = "User Observation";
@@ -120,7 +120,7 @@
             this.MPlayer_UserVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_UserVideo.Name = "MPlayer_UserVideo";
             this.MPlayer_UserVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_UserVideo.OcxState")));
-            this.MPlayer_UserVideo.Size = new System.Drawing.Size(550, 269);
+            this.MPlayer_UserVideo.Size = new System.Drawing.Size(549, 267);
             this.MPlayer_UserVideo.TabIndex = 1;
             this.MPlayer_UserVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_UserVideo_OpenStateChange);
             this.MPlayer_UserVideo.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MPlayer_UserVideo_PlayStateChange);
@@ -133,7 +133,7 @@
             this.GB_Screen.Controls.Add(this.MPlayer_ScreenVideo);
             this.GB_Screen.Location = new System.Drawing.Point(11, 3);
             this.GB_Screen.Name = "GB_Screen";
-            this.GB_Screen.Size = new System.Drawing.Size(556, 288);
+            this.GB_Screen.Size = new System.Drawing.Size(555, 286);
             this.GB_Screen.TabIndex = 2;
             this.GB_Screen.TabStop = false;
             this.GB_Screen.Text = "Screen Capture";
@@ -145,7 +145,7 @@
             this.MPlayer_ScreenVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_ScreenVideo.Name = "MPlayer_ScreenVideo";
             this.MPlayer_ScreenVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_ScreenVideo.OcxState")));
-            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(550, 269);
+            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(549, 267);
             this.MPlayer_ScreenVideo.TabIndex = 0;
             this.MPlayer_ScreenVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_ScreenVideo_OpenStateChange);
             // 
@@ -236,23 +236,10 @@
             this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1265, 155);
+            this.shapeContainer1.Size = new System.Drawing.Size(1263, 155);
             this.shapeContainer1.TabIndex = 59;
             this.shapeContainer1.TabStop = false;
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lineShape2.BorderColor = System.Drawing.Color.Blue;
-            this.lineShape2.BorderWidth = 3;
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 7;
-            this.lineShape2.X2 = 1258;
-            this.lineShape2.Y1 = 1;
-            this.lineShape2.Y2 = 1;
             // 
             // lineShape1
             // 
@@ -262,7 +249,7 @@
             this.lineShape1.BorderWidth = 3;
             this.lineShape1.Name = "lineShape1";
             this.lineShape1.X1 = 7;
-            this.lineShape1.X2 = 1258;
+            this.lineShape1.X2 = 1256;
             this.lineShape1.Y1 = 80;
             this.lineShape1.Y2 = 80;
             // 
@@ -273,7 +260,7 @@
             this.PL_TaskLine.ForeColor = System.Drawing.Color.Black;
             this.PL_TaskLine.Location = new System.Drawing.Point(171, 27);
             this.PL_TaskLine.Name = "PL_TaskLine";
-            this.PL_TaskLine.Size = new System.Drawing.Size(985, 36);
+            this.PL_TaskLine.Size = new System.Drawing.Size(983, 36);
             this.PL_TaskLine.TabIndex = 71;
             this.PL_TaskLine.Paint += new System.Windows.Forms.PaintEventHandler(this.PL_TaskLine_Paint);
             this.PL_TaskLine.Resize += new System.EventHandler(this.PL_TaskLine_Resize);
@@ -323,7 +310,7 @@
             this.tb_time.BackColor = System.Drawing.SystemColors.Info;
             this.tb_time.Enabled = false;
             this.tb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.tb_time.Location = new System.Drawing.Point(794, 14);
+            this.tb_time.Location = new System.Drawing.Point(793, 14);
             this.tb_time.Name = "tb_time";
             this.tb_time.Size = new System.Drawing.Size(103, 24);
             this.tb_time.TabIndex = 74;
@@ -335,7 +322,7 @@
             this.LB_Time.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LB_Time.AutoSize = true;
             this.LB_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.LB_Time.Location = new System.Drawing.Point(903, 14);
+            this.LB_Time.Location = new System.Drawing.Point(902, 14);
             this.LB_Time.Name = "LB_Time";
             this.LB_Time.Size = new System.Drawing.Size(91, 20);
             this.LB_Time.TabIndex = 75;
@@ -427,7 +414,7 @@
             this.Total_Signal_PL.AutoScroll = true;
             this.Total_Signal_PL.Location = new System.Drawing.Point(2, 85);
             this.Total_Signal_PL.Name = "Total_Signal_PL";
-            this.Total_Signal_PL.Size = new System.Drawing.Size(1262, 0);
+            this.Total_Signal_PL.Size = new System.Drawing.Size(1260, 0);
             this.Total_Signal_PL.TabIndex = 99;
             // 
             // BT_Add_Video_S
@@ -435,7 +422,7 @@
             this.BT_Add_Video_S.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BT_Add_Video_S.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Add_Video_S.BackgroundImage")));
             this.BT_Add_Video_S.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Add_Video_S.Location = new System.Drawing.Point(573, 19);
+            this.BT_Add_Video_S.Location = new System.Drawing.Point(572, 19);
             this.BT_Add_Video_S.Name = "BT_Add_Video_S";
             this.BT_Add_Video_S.Size = new System.Drawing.Size(50, 50);
             this.BT_Add_Video_S.TabIndex = 23;
@@ -449,7 +436,7 @@
             this.BT_video_S_Properties.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_video_S_Properties.BackgroundImage")));
             this.BT_video_S_Properties.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BT_video_S_Properties.Enabled = false;
-            this.BT_video_S_Properties.Location = new System.Drawing.Point(573, 75);
+            this.BT_video_S_Properties.Location = new System.Drawing.Point(572, 75);
             this.BT_video_S_Properties.Name = "BT_video_S_Properties";
             this.BT_video_S_Properties.Size = new System.Drawing.Size(50, 50);
             this.BT_video_S_Properties.TabIndex = 24;
@@ -490,7 +477,7 @@
             this.BT_Task_Frm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.BT_Task_Frm.Image = global::PhysiOBS.Properties.Resources.task_are;
             this.BT_Task_Frm.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BT_Task_Frm.Location = new System.Drawing.Point(1162, 5);
+            this.BT_Task_Frm.Location = new System.Drawing.Point(1160, 5);
             this.BT_Task_Frm.Name = "BT_Task_Frm";
             this.BT_Task_Frm.Size = new System.Drawing.Size(97, 70);
             this.BT_Task_Frm.TabIndex = 58;
@@ -519,7 +506,7 @@
             // 
             this.BTNext_Total.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BTNext_Total.Image = ((System.Drawing.Image)(resources.GetObject("BTNext_Total.Image")));
-            this.BTNext_Total.Location = new System.Drawing.Point(730, 0);
+            this.BTNext_Total.Location = new System.Drawing.Point(729, 0);
             this.BTNext_Total.Name = "BTNext_Total";
             this.BTNext_Total.Size = new System.Drawing.Size(58, 55);
             this.BTNext_Total.TabIndex = 77;
@@ -531,7 +518,7 @@
             // 
             this.BTPrevious_Total.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BTPrevious_Total.Image = ((System.Drawing.Image)(resources.GetObject("BTPrevious_Total.Image")));
-            this.BTPrevious_Total.Location = new System.Drawing.Point(531, 0);
+            this.BTPrevious_Total.Location = new System.Drawing.Point(530, 0);
             this.BTPrevious_Total.Name = "BTPrevious_Total";
             this.BTPrevious_Total.Size = new System.Drawing.Size(62, 55);
             this.BTPrevious_Total.TabIndex = 76;
@@ -545,7 +532,7 @@
             this.BT_PlayPause.Enabled = false;
             this.BT_PlayPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.BT_PlayPause.Image = global::PhysiOBS.Properties.Resources.play;
-            this.BT_PlayPause.Location = new System.Drawing.Point(601, 0);
+            this.BT_PlayPause.Location = new System.Drawing.Point(600, 0);
             this.BT_PlayPause.Name = "BT_PlayPause";
             this.BT_PlayPause.Size = new System.Drawing.Size(56, 55);
             this.BT_PlayPause.TabIndex = 36;
@@ -560,7 +547,7 @@
             this.BT_Stop.Enabled = false;
             this.BT_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.BT_Stop.Image = ((System.Drawing.Image)(resources.GetObject("BT_Stop.Image")));
-            this.BT_Stop.Location = new System.Drawing.Point(663, 0);
+            this.BT_Stop.Location = new System.Drawing.Point(662, 0);
             this.BT_Stop.Name = "BT_Stop";
             this.BT_Stop.Size = new System.Drawing.Size(58, 55);
             this.BT_Stop.TabIndex = 37;
@@ -570,6 +557,7 @@
             // 
             // SC_MainHor
             // 
+            this.SC_MainHor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SC_MainHor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SC_MainHor.Location = new System.Drawing.Point(0, 63);
             this.SC_MainHor.Margin = new System.Windows.Forms.Padding(0);
@@ -594,6 +582,7 @@
             this.SC_MainHor.Panel2.Controls.Add(this.shapeContainer1);
             this.SC_MainHor.Size = new System.Drawing.Size(1265, 459);
             this.SC_MainHor.SplitterDistance = 300;
+            this.SC_MainHor.SplitterWidth = 2;
             this.SC_MainHor.TabIndex = 101;
             // 
             // SV_VideoSplitter
@@ -614,12 +603,13 @@
             this.SV_VideoSplitter.Panel2.Controls.Add(this.GB_Screen);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_Add_Video_S);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_video_S_Properties);
-            this.SV_VideoSplitter.Size = new System.Drawing.Size(1265, 300);
-            this.SV_VideoSplitter.SplitterDistance = 629;
+            this.SV_VideoSplitter.Size = new System.Drawing.Size(1263, 298);
+            this.SV_VideoSplitter.SplitterDistance = 628;
             this.SV_VideoSplitter.TabIndex = 25;
             // 
             // PL_Navigation
             // 
+            this.PL_Navigation.Controls.Add(this.LB_Duration);
             this.PL_Navigation.Controls.Add(this.BTNext_Total);
             this.PL_Navigation.Controls.Add(this.BTPrevious_Total);
             this.PL_Navigation.Controls.Add(this.BT_PlayPause);
@@ -629,8 +619,19 @@
             this.PL_Navigation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PL_Navigation.Location = new System.Drawing.Point(0, 93);
             this.PL_Navigation.Name = "PL_Navigation";
-            this.PL_Navigation.Size = new System.Drawing.Size(1265, 62);
+            this.PL_Navigation.Size = new System.Drawing.Size(1263, 62);
             this.PL_Navigation.TabIndex = 101;
+            // 
+            // LB_Duration
+            // 
+            this.LB_Duration.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LB_Duration.AutoSize = true;
+            this.LB_Duration.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.LB_Duration.Location = new System.Drawing.Point(999, 14);
+            this.LB_Duration.Name = "LB_Duration";
+            this.LB_Duration.Size = new System.Drawing.Size(52, 20);
+            this.LB_Duration.TabIndex = 78;
+            this.LB_Duration.Text = "Total: ";
             // 
             // Frm_Main
             // 
@@ -718,11 +719,11 @@
         private System.Windows.Forms.ToolStripMenuItem nervousnessToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel Total_Signal_PL;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.SplitContainer SC_MainHor;
         private System.Windows.Forms.SplitContainer SV_VideoSplitter;
         private System.Windows.Forms.Panel PL_Navigation;
+        private System.Windows.Forms.Label LB_Duration;
     }
 }
 

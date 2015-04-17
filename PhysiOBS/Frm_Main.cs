@@ -144,6 +144,7 @@ namespace PhysiOBS
             //allplay.Enabled = true;
             Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
             Manager.PhysioProject.duration = fdur.duration * 1000;
+            LB_Duration.Text = "Total: " + (Manager.PhysioProject.duration/1000).ToString();
             Timer_Project.Interval = Manager.PhysioProject.m_ana_px;
             MPlayer_UserVideo.Ctlcontrols.play();
         }

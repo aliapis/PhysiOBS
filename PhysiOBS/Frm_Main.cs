@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1419,12 +1420,12 @@ namespace PhysiOBS
                     float t = (float)(1.0 / Int32.Parse(Signal.sampling));
                     float time_S = t;
                     double sum = 0;
-                    int i = 0;
+                    int LineCount = 0;
                     double min=10^6;
                     double max = -10 ^ 7;
+                    ArrayList lines = new ArrayList();
                     foreach (String line in File.ReadAllLines(Signal.filename))
                     {
-                        i++;
                         if (double.Parse(line) > max)
                         {
                             max = double.Parse(line);
@@ -1433,31 +1434,31 @@ namespace PhysiOBS
                         {
                             min = double.Parse(line);
                         }
-                        
+                        lines.Add(double.Parse(line));
+                        LineCount++;                   
                     }
                     double oldrange = max - min;
                     double newrange = 100;
-
-                    double[] Scaled;
-                    Scaled = new double[i];
-                    int m = 0;
-                    foreach (String line in File.ReadAllLines(Signal.filename))
+                    double[] Scaled = new double[LineCount];
+                    int j=0;
+                    foreach(double d in lines)
                     {
-                        Scaled[m]=((((double.Parse(line)-min)*newrange)/oldrange)+0);
-                        sum = sum + Scaled[m];
-                        m++;
+                        Scaled[j] = (((double)lines[j] - min) * newrange) / oldrange;
+                        sum = sum + Scaled[j];
+                        j++;
                     }
-                    Double average = sum / m;
+                    Double average = sum / LineCount;
                     Double SumSqrt = 0;
-                    for (int j = 0; j < i;j++ )
+
+                    for (int i = 0; i < LineCount; i++ )
                     {
-                        SumSqrt = SumSqrt + (Scaled[j] - average) * (Scaled[j] - average);//Sum of Square
+                        SumSqrt = SumSqrt + (Scaled[i] - average) * (Scaled[i] - average);//Sum of Square
                     }
-                    double Stdev = Math.Sqrt(SumSqrt / (i - 1)); //Standard Deviation
-                    for (int j = 0; j < i;j++)
+                    double Stdev = Math.Sqrt(SumSqrt / (LineCount - 1)); //Standard Deviation
+                    for (int i = 0; i < LineCount; i++)
                     {
                         time_S = time_S + t;
-                        TableTotal.Rows.Add(time_S, Scaled[j], average, average + Stdev, average - Stdev, average + (2 * Stdev), average - (2 * Stdev));
+                        TableTotal.Rows.Add(time_S, Scaled[i], average, average + Stdev, average - Stdev, average + (2 * Stdev), average - (2 * Stdev));
                     }
                     //Τέλος Δημιουργίας δεδομένων για γράφημα
 

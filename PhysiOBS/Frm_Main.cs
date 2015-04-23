@@ -56,7 +56,7 @@ namespace PhysiOBS
             }
         }
         private Boolean IsVideoSloaded
-        {
+        {  
             get
             {
                 if (CurrentVideo_S != null)

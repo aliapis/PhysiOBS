@@ -14,10 +14,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing.Drawing2D;
 using Microsoft.VisualBasic.PowerPacks;
 
-//R - Statistics connection
-using STATCONNECTORCLNTLib;
-using StatConnectorCommonLib;
-using STATCONNECTORSRVLib;
 
 
 namespace PhysiOBS
@@ -48,6 +44,8 @@ namespace PhysiOBS
         bool emotion_mark = false;
         object contextMenuStripParent = null;
         private DateTime firstClick = DateTime.Now;
+
+  
 
         private Boolean IsVideoUloaded
         {
@@ -1760,7 +1758,15 @@ namespace PhysiOBS
             Sopt.ShowDialog();
             CurrentSignal = Sopt.Signal;
             if (CurrentSignal.filename == "") return;
-          
+            // Matbal connection //
+            
+            /*int input =7;
+            Class1 con = new Class1();
+            MWArray[] result = con.alex(1, input);
+            MWNumericArray output = (MWNumericArray)result[0];
+            MessageBox.Show(output.ToString());
+            */
+            //--------MATLAB--------//
             Manager.PhysioProject.signalList.Add(CurrentSignal);
             CurrentSignal.ID = Manager.SignalAI_ID++.ToString();
             this.Size = new Size(this.Width, this.Height+160);//Αλλαγή ύψους της Φόρμας 
@@ -1832,6 +1838,8 @@ namespace PhysiOBS
         }
 
         #endregion
+
+       
 
     }
 }   

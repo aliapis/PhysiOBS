@@ -13,7 +13,6 @@ namespace PhysiOBS_Kernel
         public String title;
         public int panelWidth;
         public int m_ana_px;
-        
 
         private Double _duration;
         public Double duration

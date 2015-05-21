@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MWArray, Version=2.15.0.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\dotnetbuilder\bin\win64\v2.0\MWArray.dll</HintPath>
@@ -67,11 +67,11 @@
     </Reference>
     <Reference Include="smoothing_testing, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\smooth\application\smoothing_testing.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\smoothing_testing\application\smoothing_testing.dll</HintPath>
     </Reference>
     <Reference Include="smoothing_testingNative, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\smooth\application\smoothing_testingNative.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\smoothing_testing\application\smoothing_testingNative.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -89,8 +89,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExternalDLL\Smoothing\for_testing\Smooth.cs" />
-    <Compile Include="ExternalDLL\Smoothing\for_testing\SmoothNative.cs" />
     <Compile Include="Frm_Emotions_Grid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,7 +183,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="ExternalDLL\Smoothing\for_testing\mccExcludedFiles.log" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -233,20 +230,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ExternalDLL\Smoothing\for_redistribution\MyAppInstaller_web.exe" />
-    <Content Include="ExternalDLL\Smoothing\for_redistribution_files_only\default_icon.ico" />
-    <Content Include="ExternalDLL\Smoothing\for_redistribution_files_only\readme.txt" />
-    <Content Include="ExternalDLL\Smoothing\for_redistribution_files_only\smoothing_testing.dll" />
-    <Content Include="ExternalDLL\Smoothing\for_redistribution_files_only\smoothing_testingNative.dll" />
-    <Content Include="ExternalDLL\Smoothing\for_redistribution_files_only\smoothing_testing_overview.html" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\readme.txt" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\requiredMCRProducts.txt" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\smoothing_testing.dll" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\smoothing_testing.xml" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\smoothing_testingNative.dll" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\smoothing_testingNative.xml" />
-    <Content Include="ExternalDLL\Smoothing\for_testing\smoothing_testing_overview.html" />
-    <Content Include="ExternalDLL\Smoothing\PackagingLog.txt" />
     <Content Include="karousel.txt" />
     <None Include="Resources\information.png" />
     <None Include="Resources\task_are.png" />

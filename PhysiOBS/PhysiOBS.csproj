@@ -16,7 +16,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,11 +37,15 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="RDotNet">
-      <HintPath>..\packages\R.NET.Community.1.5.14\lib\net40\RDotNet.dll</HintPath>
+    <Reference Include="MWArray, Version=2.15.0.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\MATLAB\MATLAB Runtime\v85\toolbox\dotnetbuilder\bin\win64\v2.0\MWArray.dll</HintPath>
     </Reference>
-    <Reference Include="RDotNet.NativeLibrary">
-      <HintPath>..\packages\R.NET.Community.1.5.14\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
+    <Reference Include="smoothing_testing">
+      <HintPath>..\..\..\..\..\Program Files\smoothing_testing\application\smoothing_testing.dll</HintPath>
+    </Reference>
+    <Reference Include="smoothing_testingNative">
+      <HintPath>..\..\..\..\..\Program Files\smoothing_testing\application\smoothing_testingNative.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -202,13 +206,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PhysiOBS_Kernel\PhysiOBS_Kernel.csproj">
-      <Project>{E3EDD338-EA06-45DE-9220-4848ACC9DC3C}</Project>
-      <Name>PhysiOBS_Kernel</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\information.png" />
     <None Include="Resources\task_are.png" />
     <None Include="Resources\close_form.png" />
@@ -232,7 +229,12 @@
     <None Include="Resources\play.png" />
     <None Include="Resources\pause.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PhysiOBS_Kernel\PhysiOBS_Kernel.csproj">
+      <Project>{e3edd338-ea06-45de-9220-4848acc9dc3c}</Project>
+      <Name>PhysiOBS_Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

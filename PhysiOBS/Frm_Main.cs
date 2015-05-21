@@ -14,7 +14,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing.Drawing2D;
 using Microsoft.VisualBasic.PowerPacks;
 
-//R - Statistics connection
+using MathWorks.MATLAB.NET.Arrays;
+using MathWorks.MATLAB.NET.Utility;
+using smoothing_testing;
 
 
 namespace PhysiOBS
@@ -1381,13 +1383,66 @@ namespace PhysiOBS
                     TableTotal.Columns.Add(new DataColumn("-1SD", typeof(float)));
                     TableTotal.Columns.Add(new DataColumn("+2SD", typeof(float)));
                     TableTotal.Columns.Add(new DataColumn("-2SD", typeof(float)));
+
+                    //Beggining matlab integration for smoothing
+                    //read table for send it to matlab
+                    int ind = 0;
+                    List<double> sample_list = new List<double>();
+                    foreach (String line in File.ReadAllLines(Signal.filename))
+                    {
+                        sample_list.Add(double.Parse(line));
+                        ind++;
+                    }
+
+                    double[] matlab = sample_list.ToArray();
+                    MWArray[] result = null; 
+                    MWNumericArray output =null;
+                    
+                    //Call smoothing_test function
+                    try
+                    {
+                        
+                        Smooth smth_proc = new Smooth();
+                                             
+                        MWNumericArray arg1=matlab;//Signal
+                        MWNumericArray arg2=0.76;//ErrorGoal default heuristic variable
+                        MWNumericArray arg3 = Int32.Parse(Signal.sampling);//sampling rate apo form
+
+
+                        result = smth_proc.smoothing_testing(1,arg1,arg2,arg3);//to 1 deixnei posa orismata tha exw exodo
+                        output = (MWNumericArray)result[0];//krataw to smootharismeno sima
+
+                        /* Initial code kavlorapano!!!
+                         double[] arr = 
+                        Class1 c = new Class1();
+                        MWNumericArray input = null;
+                        MWNumericArray output = null;
+                        MWArray[] result = null;
+                        input = 4;
+                        result = c.alex(1, input);
+                        output = (MWNumericArray)result[0];
+                        lb_result.Text = output.ToString();
+                        
+                        */
+                    }
+                    catch 
+                    {
+                        throw;
+                    }
+
+                    //
+                    double[] array_from_mat = (double[])((MWNumericArray)output).ToVector(MWArrayComponent.Real);//metatrepw se double to sima apo matlab
+
+                    int length = array_from_mat.Length;//krataw to length to pinaka pou exw parei apo matlab
+
                     float t = (float)(1.0 / Int32.Parse(Signal.sampling));
                     float time_S = t;
                     double sum = 0;
                     int i = 0;
                     double min=10^6;
                     double max = -10 ^ 7;
-                    foreach (String line in File.ReadAllLines(Signal.filename))
+
+                    /*foreach (String line in File.ReadAllLines(Signal.filename))
                     {
                         i++;
                         if (double.Parse(line) > max)
@@ -1397,33 +1452,52 @@ namespace PhysiOBS
                         if (double.Parse(line) < min)
                         {
                             min = double.Parse(line);
+                        }                      
+                    }*/
+
+                    for (i=0; i < length;i++)
+                    {
+                        //i++;
+                        if (array_from_mat[i] > max)
+                        {
+                            max = array_from_mat[i];
                         }
-                        
+                        if (array_from_mat[i] < min)
+                        {
+                            min = array_from_mat[i];
+                        }
                     }
+                    
                     double oldrange = max - min;
                     double newrange = 100;
 
                     double[] Scaled;
-                    Scaled = new double[i];
+                    Scaled = new double[length];
                     int m = 0;
-                    foreach (String line in File.ReadAllLines(Signal.filename))
+                    //foreach (String line in File.ReadAllLines(Signal.filename))
+                    for (i = 0; i < length; i++)
                     {
-                        Scaled[m]=((((double.Parse(line)-min)*newrange)/oldrange)+0);
-                        sum = sum + Scaled[m];
+                        //array_from_mat[m] = ((((double.Parse(line) - min) * newrange) / oldrange) + 0);
+                         Scaled[i] = ((((array_from_mat[i] - min) * newrange) / oldrange) + 0);
+                        sum = sum + Scaled[i];
                         m++;
                     }
-                    Double average = sum / m;
+                    //Double average = sum / m;
+                    
+                    Double average = sum / length;
                     Double SumSqrt = 0;
                     for (int j = 0; j < i;j++ )
                     {
                         SumSqrt = SumSqrt + (Scaled[j] - average) * (Scaled[j] - average);//Sum of Square
                     }
-                    double Stdev = Math.Sqrt(SumSqrt / (i - 1)); //Standard Deviation
+                    
+                    double Stdev = Math.Sqrt(SumSqrt / (length - 1)); //Standard Deviation
                     for (int j = 0; j < i;j++)
                     {
                         time_S = time_S + t;
                         TableTotal.Rows.Add(time_S, Scaled[j], average, average + Stdev, average - Stdev, average + (2 * Stdev), average - (2 * Stdev));
                     }
+                    //Termination of matlab connection!!!
                     //Τέλος Δημιουργίας δεδομένων για γράφημα
 
 

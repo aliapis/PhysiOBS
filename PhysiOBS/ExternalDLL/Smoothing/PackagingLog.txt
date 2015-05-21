@@ -1,0 +1,23 @@
+ant:
+<ant>
+  <mkdir dir="C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_redistribution" />
+  <mkdir dir="C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing" />
+  <mkdir dir="C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_redistribution_files_only" />
+</ant>
+mcc -W 'dotnet:smoothing_testing,Smooth,0.0,private' -T link:lib -d C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing -v class{Smooth:C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing.m} 
+Compiler version: 6.0 (R2015a)
+Dependency analysis by REQUIREMENTS.
+[Warning: Adding path "C:\Users\aliapis\Desktop\Smooth_via_Physiobs" to Compiler
+path instance.] 
+Parsing file "C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing.m"
+	(Referenced from: "Compiler Command Line").
+Deleting 0 temporary MEX authorization files.
+Generating file "C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\SmoothNative.cs".
+Generating file "C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\Smooth.cs".
+Generating file "C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\readme.txt".
+Executing command: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /optimize /doc:"C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\smoothing_testing.xml" /t:library /r:"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\dotnetbuilder\bin\win64\v2.0\MWArray.dll" /resource:"C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\smoothing_testing.ctf" /out:"C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\smoothing_testing.dll" "C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\Smooth.cs"Executing command: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /optimize /doc:"C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\smoothing_testingNative.xml" /t:library /r:"C:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\dotnetbuilder\bin\win64\v2.0\MWArray.dll" /resource:"C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\smoothing_testing.ctf" /out:"C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\smoothing_testingNative.dll" "C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_testing\SmoothNative.cs"
+Packaging...
+Creating the bundle...
+Web based installer created at C:\Users\aliapis\Desktop\Smooth_via_Physiobs\smoothing_testing\for_redistribution\MyAppInstaller_web.exe.
+Packaging complete.
+Elapsed packaging time was: 3 minutes and 6 seconds.

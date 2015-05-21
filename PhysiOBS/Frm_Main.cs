@@ -1474,7 +1474,6 @@ namespace PhysiOBS
                     int i = 0;
                     for (i = 0; i < length; i++)
                     {
-                        //i++;
                         if (array_from_mat[i] > max)
                         {
                             max = array_from_mat[i];
@@ -1491,16 +1490,12 @@ namespace PhysiOBS
                     double[] Scaled;
                     Scaled = new double[length];
                     int m = 0;
-                    //foreach (String line in File.ReadAllLines(Signal.filename))
                     for (i = 0; i < length; i++)
                     {
-                        //array_from_mat[m] = ((((double.Parse(line) - min) * newrange) / oldrange) + 0);
                         Scaled[i] = ((((array_from_mat[i] - min) * newrange) / oldrange) + 0);
                         sum = sum + Scaled[i];
                         m++;
                     }
-                    //Double average = sum / m;
-
                     Double average = sum / length;
                     Double SumSqrt = 0;
                     for (int j = 0; j < i; j++)

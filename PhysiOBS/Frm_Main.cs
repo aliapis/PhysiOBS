@@ -1646,8 +1646,8 @@ namespace PhysiOBS
             BTRemoveSignal.SetBounds(8, 22, 45, 45);
             BTRemoveSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTRemoveSignal.Click += new EventHandler(BTRemoveSignalClick_NK);//Κλήση Event   
-            ToolTip tooltp = new ToolTip();
-            tooltp.SetToolTip(BTRemoveSignal, "iuiiiuiuiuiuiu");
+            //ToolTip tooltp = new ToolTip();
+            //tooltp.SetToolTip(BTRemoveSignal, "iuiiiuiuiuiuiu");
 
             Button ΒΤNextEmotion = new Button();
             PanelSignal.Controls.Add(ΒΤNextEmotion);
@@ -1789,7 +1789,7 @@ namespace PhysiOBS
             LabelEmotionName.SetBounds(5, 86, 22, 13);
             LabelEmotionName.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
-            Label New_Obs_Emotions_LB = new Label();
+            /*Label New_Obs_Emotions_LB = new Label();
             PanelSignal.Controls.Add(New_Obs_Emotions_LB);
             New_Obs_Emotions_LB.AutoSize = true;
             New_Obs_Emotions_LB.Text = "Observed Emotions:";
@@ -1804,7 +1804,7 @@ namespace PhysiOBS
             Info_Pic.SetBounds(0, 115, 32, 32);
             Info_Pic.Parent = PanelSignal;
             Info_Pic.Image = PhysiOBS.Properties.Resources.information;
-            Info_Pic.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
+            Info_Pic.Anchor = (AnchorStyles.Top | AnchorStyles.Left);*/
 
             Chart ChartSignal = new Chart();
             PanelGraph.Controls.Add(ChartSignal);

@@ -1450,11 +1450,10 @@ namespace PhysiOBS
                     {
 
                         Smooth smth_proc = new Smooth();
-
+                        //Δηλώσεις ορισμάτων
                         MWNumericArray arg1 = matlab;//Signal
                         MWNumericArray arg2 = 0.76;//ErrorGoal default heuristic variable
                         MWNumericArray arg3 = Int32.Parse(Signal.sampling);//sampling rate apo form
-
 
                         result = smth_proc.smoothing_testing(1, arg1, arg2, arg3);//to 1 deixnei posa orismata tha exw exodo
                         output = (MWNumericArray)result[0];//krataw to smootharismeno sima
@@ -1469,7 +1468,6 @@ namespace PhysiOBS
                     double[] array_from_mat = (double[])((MWNumericArray)output).ToVector(MWArrayComponent.Real);//metatrepw se double to sima apo matlab
 
                     int length = array_from_mat.Length;//krataw to length to pinaka pou exw parei apo matlab
-
 
                     int i = 0;
                     for (i = 0; i < length; i++)

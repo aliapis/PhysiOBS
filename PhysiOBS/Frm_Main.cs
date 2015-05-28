@@ -1855,7 +1855,6 @@ namespace PhysiOBS
 
         private void BTAddSignalClick(object sender, EventArgs e)//Συνάρτηση για Event στο BTAddSignal
         {
-           
             Frm_Signal_Options Sopt = new Frm_Signal_Options();
             Sopt.Manager = Manager;// Public in Sopt Form
             TSignal CurrentSignal=new TSignal();

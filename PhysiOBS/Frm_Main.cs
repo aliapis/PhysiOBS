@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,10 @@ using WMPLib;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing.Drawing2D;
 using Microsoft.VisualBasic.PowerPacks;
+using smoothing_testing;
+using MathWorks.MATLAB.NET.Arrays;
+using MathWorks.MATLAB.NET.Utility;
+
 
 
 
@@ -45,8 +50,6 @@ namespace PhysiOBS
         object contextMenuStripParent = null;
         private DateTime firstClick = DateTime.Now;
 
-  
-
         private Boolean IsVideoUloaded
         {
             get
@@ -58,7 +61,7 @@ namespace PhysiOBS
             }
         }
         private Boolean IsVideoSloaded
-        {
+        {  
             get
             {
                 if (CurrentVideo_S != null)
@@ -105,7 +108,7 @@ namespace PhysiOBS
             MPlayer_ScreenVideo.URL = openFileDialog1.FileName;
             WindowsMediaPlayer wmp = new WindowsMediaPlayerClass();//Initiate's video duration
             IWMPMedia fdur = wmp.newMedia(S_filename);//Initiate's video duration
-            CurrentVideo_S = Manager.addVideo(S_filename, "VIDEO_S", finfo.Extension, fdur.duration);
+            CurrentVideo_S = Manager.PhysioProject.addVideo(S_filename, "VIDEO_S", finfo.Extension, fdur.duration);
             BT_video_S_Properties.Enabled = true;
             BT_Task_Frm.Enabled = true;
             //allplay.Enabled = true;
@@ -135,18 +138,19 @@ namespace PhysiOBS
             Bar.Enabled = true;
             tb_time.Enabled = true;
             Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
-            Manager.getTaskList().Clear();
+            Manager.PhysioProject.taskList.Clear();
             string U_filename = openFileDialog1.FileName;
             FileInfo finfo = new FileInfo(U_filename);
             WindowsMediaPlayer wmp = new WindowsMediaPlayerClass();//Initiate's video duration
             IWMPMedia fdur = wmp.newMedia(U_filename);//Initiate's video duration
             MPlayer_UserVideo.URL = openFileDialog1.FileName;
-            CurrentVideo_U = Manager.addVideo(U_filename, "VIDEO_U", finfo.Extension, fdur.duration * 1000);
+            CurrentVideo_U = Manager.PhysioProject.addVideo(U_filename, "VIDEO_U", finfo.Extension, fdur.duration * 1000);
             BT_video_U_properties.Enabled = true;
             BT_Task_Frm.Enabled = true;
             //allplay.Enabled = true;
             Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
             Manager.PhysioProject.duration = fdur.duration * 1000;
+            LB_Duration.Text = "Total: " + (Manager.PhysioProject.duration/1000).ToString();
             Timer_Project.Interval = Manager.PhysioProject.m_ana_px;
             MPlayer_UserVideo.Ctlcontrols.play();
         }
@@ -373,6 +377,13 @@ namespace PhysiOBS
             actcontrol = null;
             Cursor = Cursors.Default;
         }
+
+        private void reAlocateBar()
+        {
+            int move = (int)(Math.Round(PL_TaskLine.Width * MPlayer_UserVideo.Ctlcontrols.currentPosition * 1000 / Manager.PhysioProject.duration));
+            Bar.SetBounds(PL_TaskLine.Location.X + move, Bar.Location.Y, Bar.Width, Bar.Height);
+        }
+
         #endregion
 
         #region Previous & Next Start and Stop points in Project
@@ -459,7 +470,7 @@ namespace PhysiOBS
             //Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
             Manager.loadProject(openFileDialog1.FileName);
             Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
-            Manager.PhysioProject.duration = Manager.getSignalList().GetSignalByType("VIDEO_U").duration;
+            Manager.PhysioProject.duration = Manager.PhysioProject.signalList.GetSignalByType("VIDEO_U").duration;
             Timer_Project.Interval = Manager.PhysioProject.m_ana_px;
             UpdateUI_FromProject();
         }
@@ -492,8 +503,8 @@ namespace PhysiOBS
         private void BT_signal_analysis_Click(object sender, EventArgs e)
         {
             Frm_Ass_Alg Frm_Task = new Frm_Ass_Alg();
-            Frm_Task.SL = Manager.getSignalList();
-            Frm_Task.AL = Manager.getAssignmentList();
+            Frm_Task.SL = Manager.PhysioProject.signalList;
+            Frm_Task.AL = Manager.PhysioProject.assignmentList;
             Frm_Task.ShowDialog();
         }
 
@@ -507,9 +518,9 @@ namespace PhysiOBS
             Total_Signal_PL.Size = new Size(1262, 0);
             
             //VIDEO_U
-            if (Manager.getSignalList().GetSignalByType("VIDEO_U") != null)
+            if (Manager.PhysioProject.signalList.GetSignalByType("VIDEO_U") != null)
             {
-                CurrentVideo_U = Manager.getSignalList().GetSignalByType("VIDEO_U");
+                CurrentVideo_U = Manager.PhysioProject.signalList.GetSignalByType("VIDEO_U");
             }
             else
             {
@@ -527,9 +538,9 @@ namespace PhysiOBS
             }
 
             //VIDEO_S
-            if (Manager.getSignalList().GetSignalByType("VIDEO_S") != null)
+            if (Manager.PhysioProject.signalList.GetSignalByType("VIDEO_S") != null)
             {
-                CurrentVideo_S = Manager.getSignalList().GetSignalByType("VIDEO_S");
+                CurrentVideo_S = Manager.PhysioProject.signalList.GetSignalByType("VIDEO_S");
             }
             else
             {
@@ -547,31 +558,31 @@ namespace PhysiOBS
 
 
             //Loads project's tasks
-            foreach (TTask t in Manager.getTaskList())
+            foreach (TTask t in Manager.PhysioProject.taskList)
             {
                 TCriticalPoint point1 = new TCriticalPoint();
                 point1.name = t.name;
                 point1.time = t.start;
                 point1.Bar = "task";
                 point1.obj = (object)t;
-                Manager.getCriticalList().Add(point1);
+                Manager.PhysioProject.criticalList.Add(point1);
                 TCriticalPoint point2 = new TCriticalPoint();
                 point2.name = t.name;
                 point2.time = t.stop;
                 point2.Bar = "task";
                 point2.obj = (object)t;
-                Manager.getCriticalList().Add(point2);
+                Manager.PhysioProject.criticalList.Add(point2);
             }       
             DrawTasks();
             int orderID = 0;
-            Manager.SignalAI_ID = 0;
-            foreach (TSignal s in Manager.getSignalList())
+            Manager.PhysioProject.SignalAI_ID = 0;
+            foreach (TSignal s in Manager.PhysioProject.signalList)
             {
                 
                 if (s.type == "Bio-SIGNAL")
                 {
                     orderID++;
-                    if (Manager.SignalAI_ID <= Int32.Parse(s.ID)) Manager.SignalAI_ID = Int32.Parse(s.ID) + 1;
+                    if (Manager.PhysioProject.SignalAI_ID <= Int32.Parse(s.ID)) Manager.PhysioProject.SignalAI_ID = Int32.Parse(s.ID) + 1;
                     this.Size = new Size(this.Width, this.Height + 160);//Αλλαγή ύψους της Φόρμας 
                     Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height + 160);//Αλλαγή ύψους Total panel
                     Panel newP = create_signal_panel(Int32.Parse(s.ID), orderID);
@@ -589,7 +600,7 @@ namespace PhysiOBS
                     }
 
                     draw_graph(s);
-                    foreach (TEmotion em in Manager.getEmotionList(s.ID))
+                    foreach (TEmotion em in Manager.PhysioProject.getEmotionListBySignalID(s.ID))
                     {
                         CreateEmotionPanel(em, s.ID);
                     }  
@@ -602,7 +613,7 @@ namespace PhysiOBS
                     newP.Visible = true;            
                 }
             } 
-            Manager.getCriticalList().Sort();                 
+            Manager.PhysioProject.criticalList.Sort();                 
         }
 
         #endregion
@@ -650,15 +661,15 @@ namespace PhysiOBS
 
         public void DrawTasks()
         {
-            if (Manager.getTaskList().Count > 0)
+            if (Manager.PhysioProject.taskList.Count > 0)
             {
                 BTNext_Total.Enabled = true;
                 BTPrevious_Total.Enabled = true;
             }
             PL_TaskLine.BackColor = Color.White;
-            foreach (TTask t in Manager.getTaskList())
+            foreach (TTask t in Manager.PhysioProject.taskList)
             {
-                Manager.getCriticalList().update(t);
+                Manager.PhysioProject.criticalList.update(t);
                 draw(t);
             }
             
@@ -668,12 +679,22 @@ namespace PhysiOBS
         {
             PL_TaskLine.Refresh();
             Frm_User_Task Task_Form = new Frm_User_Task();
-            Task_Form.CP = Manager.getCriticalList();
-            Task_Form.TL = Manager.getTaskList();
+            Task_Form.CP = Manager.PhysioProject.criticalList;
+            Task_Form.TL = Manager.PhysioProject.taskList;
             Task_Form.StartPosition = FormStartPosition.CenterScreen;
             Task_Form.ShowDialog();
             ClearTasks();
             DrawTasks();
+        }
+
+        private void PL_TaskLine_Resize(object sender, EventArgs e)
+        {
+            Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
+            PL_TaskLine.Refresh();
+            ClearTasks();
+            DrawTasks();
+            reAlocateBar();
+            ReAlocateSignalsEmotions();
         }
 
         #region This part of code Resizes and moves the task panels in TaskLine Bar
@@ -699,7 +720,7 @@ namespace PhysiOBS
             if (DateTime.Now < firstClick.AddMilliseconds(SystemInformation.DoubleClickTime)) return; //periptosh doubleclick
             
             Panel p = (Panel)((Panel)sender).Parent;
-            TTask t = Manager.getTaskList().GetTaskByID(p.Name);
+            TTask t = Manager.PhysioProject.taskList.GetTaskByID(p.Name);
             t.start = p.Left * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;  
             t.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;+p.width;
             tooltp.SetToolTip(((Panel)sender).Parent, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
@@ -719,7 +740,7 @@ namespace PhysiOBS
         {
             panel_resize = false;
             Panel p = (Panel)((Panel)sender).Parent;
-            TTask t = Manager.getTaskList().GetTaskByID(p.Name);
+            TTask t = Manager.PhysioProject.taskList.GetTaskByID(p.Name);
                 if (right == true) //otan kanw resize mono apo dexia
                 {
                     t.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px;//antistoixo to p.left;+p.width;
@@ -811,7 +832,7 @@ namespace PhysiOBS
             panel_drag = false;
             panel_resize = false;
             Panel p = (Panel)((Panel)sender).Parent;
-            TTask t = Manager.getTaskList().GetTaskByID(p.Name);
+            TTask t = Manager.PhysioProject.taskList.GetTaskByID(p.Name);
             Frm_Task_Options Task_Options = new Frm_Task_Options();
             Task_Options.Task = t;
             Task_Options.StartPosition = FormStartPosition.CenterScreen;
@@ -886,16 +907,16 @@ namespace PhysiOBS
 
         private void DeleteEmotionPanel(string SignalID, string EmotionID)
         {
-            TEmotion emotion = Manager.getEmotionList(SignalID).GetEmotionByID(EmotionID);
+            TEmotion emotion = Manager.PhysioProject.getEmotionListBySignalID(SignalID).GetEmotionByID(EmotionID);
             Manager.PhysioProject.criticalList.clear_emotion(emotion);
-            Manager.getEmotionList(SignalID).Remove(emotion);
-            Manager.getCriticalList().Sort();
+            Manager.PhysioProject.getEmotionListBySignalID(SignalID).Remove(emotion);
+            Manager.PhysioProject.criticalList.Sort();
             current_emotion_panel.Dispose();
         }
       
         public void DrawEmotions(string SignalID)
         {
-            foreach (TEmotion e in Manager.getEmotionList(SignalID))
+            foreach (TEmotion e in Manager.PhysioProject.getEmotionListBySignalID(SignalID))
             {
                 CreateEmotionPanel(e, SignalID);
             }
@@ -905,8 +926,8 @@ namespace PhysiOBS
         {
             Frm_Emotions_Grid Emotion_Form = new Frm_Emotions_Grid();
             Emotion_Form.SignalID = ((Panel)((Button)sender).Parent).Name.Split('_')[1];
-            Emotion_Form.CP = Manager.getCriticalList();
-            Emotion_Form.EL = Manager.getEmotionList(((Panel)((Button)sender).Parent).Name.Split('_')[1]);
+            Emotion_Form.CP = Manager.PhysioProject.criticalList;
+            Emotion_Form.EL = Manager.PhysioProject.getEmotionListBySignalID(((Panel)((Button)sender).Parent).Name.Split('_')[1]);
             Emotion_Form.StartPosition = FormStartPosition.CenterScreen;
             Emotion_Form.ShowDialog();
            
@@ -932,38 +953,38 @@ namespace PhysiOBS
                 case "Anger":
                     emotion.name = "Anger";
                     CreateEmotionPanel(emotion, ID);
-                    Manager.getSignalList().GetSignalByID(ID).SignalEmotionList.Add(emotion);
+                    Manager.PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList.Add(emotion);
                     temp_emotion_panel.Width = 0;
                     break;
                 case "Anxiety":
                     emotion.name = "Anxiety";
                     CreateEmotionPanel(emotion, ID);
                     temp_emotion_panel.Width = 0;
-                     Manager.getSignalList().GetSignalByID(ID).SignalEmotionList.Add(emotion);
+                     Manager.PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList.Add(emotion);
                    break;
                 case "Happiness":
                     emotion.name = "Happiness";
                     CreateEmotionPanel(emotion, ID);
                     temp_emotion_panel.Width = 0;
-                     Manager.getSignalList().GetSignalByID(ID).SignalEmotionList.Add(emotion);
+                     Manager.PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList.Add(emotion);
                    break;
                 case "Uncertainty":
                     emotion.name = "Uncertainty";
                     CreateEmotionPanel(emotion, ID);
                     temp_emotion_panel.Width = 0;
-                    Manager.getSignalList().GetSignalByID(ID).SignalEmotionList.Add(emotion);
+                    Manager.PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList.Add(emotion);
                     break;
                 case "Upset":
                     emotion.name = "Upset";
                     CreateEmotionPanel(emotion, ID);
                     temp_emotion_panel.Width = 0;
-                    Manager.getSignalList().GetSignalByID(ID).SignalEmotionList.Add(emotion);
+                    Manager.PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList.Add(emotion);
                     break;
                 case "Nervousness":
                     emotion.name = "Nervousness";
                     CreateEmotionPanel(emotion, ID);
                     temp_emotion_panel.Width = 0;
-                    Manager.getSignalList().GetSignalByID(ID).SignalEmotionList.Add(emotion);
+                    Manager.PhysioProject.signalList.GetSignalByID(ID).SignalEmotionList.Add(emotion);
                     break;
                 case "Delete": ;
                     break;
@@ -1006,7 +1027,26 @@ namespace PhysiOBS
             }
         }
 
-        
+
+        public void ReAlocateSignalsEmotions()
+        {
+            foreach (TSignal signal in Manager.PhysioProject.signalList)
+                if (signal.type == "Bio-SIGNAL")
+                    ReAlocateSignalEmotions(signal);
+        }
+
+        public void ReAlocateSignalEmotions(TSignal signal)
+        {
+            //βρίσκω το control και στη συνέχεια καθαρίζω τα panels
+            Panel pp = (Panel)Total_Signal_PL.Controls["PanelSignal_" + signal.ID.ToString()];
+            Panel psvou=(Panel)pp.Controls["EmotionPanel_" + signal.ID.ToString()];
+            ClearEmotions(psvou);
+
+            //Δημιουργώ ξανά panel για όσα esmotions υπάρχουν στη λίστα για το συγκεκριμένο panel
+            DrawEmotions(signal.ID.ToString());
+        }
+
+ 
         public void CreateEmotionPanel(TEmotion emotion, string SignalID)
         {
             //Create BasicPanel
@@ -1014,7 +1054,7 @@ namespace PhysiOBS
             TCriticalPoint p2 = new TCriticalPoint();
             int h = TEmotionPropertiesList.height;
             Panel p = new Panel();
-            emotion.ID = (Manager.getSignalList().GetSignalByID(SignalID).SignalEmotionList.AI_ID++).ToString();
+            emotion.ID = (Manager.PhysioProject.signalList.GetSignalByID(SignalID).SignalEmotionList.AI_ID++).ToString();
             p.Name = emotion.ID;
             int x = (int)emotion.start / Manager.PhysioProject.m_ana_px;
             p1.name = emotion.name;
@@ -1031,7 +1071,7 @@ namespace PhysiOBS
             p.Location = new Point(x, emotion.GetProperties().order * h);
             p.BackColor = Color.FromName(emotion.GetProperties().color);
             p.Size = new Size(l, h);
-            p.Parent = (Panel)GetSignalControl(Manager.getSignalList().GetSignalByID(SignalID), "EmotionPanel_" + SignalID);
+            p.Parent = (Panel)GetSignalControl(Manager.PhysioProject.signalList.GetSignalByID(SignalID), "EmotionPanel_" + SignalID);
             p.BringToFront();
             //Create dragPanel
             Panel d = new Panel();
@@ -1092,7 +1132,7 @@ namespace PhysiOBS
             if (DateTime.Now < firstClick.AddMilliseconds(SystemInformation.DoubleClickTime)) return; //periptosh doubleclick
             string SignalID = ((Control)((Control)((Control)sender).Parent).Parent).Name.Split('_')[1];
             Panel p = (Panel)((Panel)sender).Parent;
-            TEmotion em = Manager.getEmotionList(SignalID).GetEmotionByID(p.Name);
+            TEmotion em = Manager.PhysioProject.getEmotionListBySignalID(SignalID).GetEmotionByID(p.Name);
             em.start = p.Left * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;  
             em.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;+p.width;               
             tooltp.SetToolTip((Panel)sender, "Emotion Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
@@ -1112,7 +1152,7 @@ namespace PhysiOBS
             string SignalID = ((Control)((Control)((Control)sender).Parent).Parent).Name.Split('_')[1];
             panel_resize = false;
             Panel p = (Panel)((Panel)sender).Parent;
-            TEmotion em = Manager.getEmotionList(SignalID).GetEmotionByID(p.Name);
+            TEmotion em = Manager.PhysioProject.getEmotionListBySignalID(SignalID).GetEmotionByID(p.Name);
                 if (right == true) //otan kanw resize mono apo dexia
                 {
                     em.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;+p.width;
@@ -1214,14 +1254,14 @@ namespace PhysiOBS
             Panel psvou =p;
             string SignalID = p.Name.Split('_')[1];
             p = (Panel)((Panel)sender).Parent;
-            TEmotion em = Manager.getEmotionList(SignalID).GetEmotionByID(p.Name);
+            TEmotion em = Manager.PhysioProject.getEmotionListBySignalID(SignalID).GetEmotionByID(p.Name);
             Frm_Emotion_options Emotion_Options = new Frm_Emotion_options();
-            Emotion_Options.CP = Manager.getCriticalList();
+            Emotion_Options.CP = Manager.PhysioProject.criticalList;
             Emotion_Options.Emotion = em;
             Emotion_Options.StartPosition = FormStartPosition.CenterScreen;
             Emotion_Options.ShowDialog();
             ClearEmotions(psvou);
-            Manager.getCriticalList().clear_points("emotion_" + SignalID);
+            Manager.PhysioProject.criticalList.clear_points("emotion_" + SignalID);
             DrawEmotions(SignalID);
             return;
         }
@@ -1385,46 +1425,92 @@ namespace PhysiOBS
                     float t = (float)(1.0 / Int32.Parse(Signal.sampling));
                     float time_S = t;
                     double sum = 0;
-                    int i = 0;
                     double min=10^6;
                     double max = -10 ^ 7;
+                   
+                    //merged--
+
+
+                    //Beggining matlab integration for smoothing
+                    //read table for send it to matlab
+                    int ind = 0;
+                    List<double> sample_list = new List<double>();
                     foreach (String line in File.ReadAllLines(Signal.filename))
                     {
-                        i++;
-                        if (double.Parse(line) > max)
-                        {
-                            max = double.Parse(line);
-                        }
-                        if (double.Parse(line) < min)
-                        {
-                            min = double.Parse(line);
-                        }
-                        
+                        sample_list.Add(double.Parse(line));
+                        ind++;
                     }
+
+                    double[] matlab = sample_list.ToArray();
+                    MWArray[] result = null;
+                    MWNumericArray output = null;
+
+                    //Call smoothing_test function
+                    try
+                    {
+
+                        Smooth smth_proc = new Smooth();
+                        //Δηλώσεις ορισμάτων
+                        MWNumericArray arg1 = matlab;//Signal
+                        MWNumericArray arg2 = 0.76;//ErrorGoal default heuristic variable
+                        MWNumericArray arg3 = Int32.Parse(Signal.sampling);//sampling rate apo form
+
+                        result = smth_proc.smoothing_testing(1, arg1, arg2, arg3);//to 1 deixnei posa orismata tha exw exodo
+                        output = (MWNumericArray)result[0];//krataw to smootharismeno sima
+
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+
+                    //
+                    double[] array_from_mat = (double[])((MWNumericArray)output).ToVector(MWArrayComponent.Real);//metatrepw se double to sima apo matlab
+
+                    int length = array_from_mat.Length;//krataw to length to pinaka pou exw parei apo matlab
+
+                    int i = 0;
+                    for (i = 0; i < length; i++)
+                    {
+                        if (array_from_mat[i] > max)
+                        {
+                            max = array_from_mat[i];
+                        }
+                        if (array_from_mat[i] < min)
+                        {
+                            min = array_from_mat[i];
+                        }
+                    }
+
                     double oldrange = max - min;
                     double newrange = 100;
 
                     double[] Scaled;
-                    Scaled = new double[i];
+                    Scaled = new double[length];
                     int m = 0;
-                    foreach (String line in File.ReadAllLines(Signal.filename))
+                    for (i = 0; i < length; i++)
                     {
-                        Scaled[m]=((((double.Parse(line)-min)*newrange)/oldrange)+0);
-                        sum = sum + Scaled[m];
+                        Scaled[i] = ((((array_from_mat[i] - min) * newrange) / oldrange) + 0);
+                        sum = sum + Scaled[i];
                         m++;
                     }
-                    Double average = sum / m;
+                    Double average = sum / length;
                     Double SumSqrt = 0;
-                    for (int j = 0; j < i;j++ )
+                    for (int j = 0; j < i; j++)
                     {
                         SumSqrt = SumSqrt + (Scaled[j] - average) * (Scaled[j] - average);//Sum of Square
                     }
-                    double Stdev = Math.Sqrt(SumSqrt / (i - 1)); //Standard Deviation
-                    for (int j = 0; j < i;j++)
+
+                    double Stdev = Math.Sqrt(SumSqrt / (length - 1)); //Standard Deviation
+                    for (int j = 0; j < i; j++)
                     {
                         time_S = time_S + t;
                         TableTotal.Rows.Add(time_S, Scaled[j], average, average + Stdev, average - Stdev, average + (2 * Stdev), average - (2 * Stdev));
                     }
+                    //Termination of matlab connection!!!
+
+                    //--merged
+                    
                     //Τέλος Δημιουργίας δεδομένων για γράφημα
 
 
@@ -1537,7 +1623,8 @@ namespace PhysiOBS
             Panel PanelSignal = new Panel();
             PanelSignal.Name = "PanelSignal_" + SID.ToString();
             PanelSignal.Parent = Total_Signal_PL;
-            PanelSignal.SetBounds(5, (OrderID-1) * (160), 1253, 156);
+            PanelSignal.SetBounds(5, (OrderID - 1) * (160), Total_Signal_PL.Width-9, 156);
+            PanelSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
             PanelSignal.BringToFront();
 
 
@@ -1546,7 +1633,8 @@ namespace PhysiOBS
             PanelGraph.Name = "PanelGraph_" + SID;
             PanelGraph.Parent = PanelSignal;
             PanelGraph.BackColor = Color.White;
-            PanelGraph.SetBounds(164, 0, 985, 108);
+            PanelGraph.SetBounds(164, 0, PanelSignal.Width - 164 - 104, 108);
+            PanelGraph.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
            
             Button BTRemoveSignal = new Button();
             PanelSignal.Controls.Add(BTRemoveSignal);
@@ -1556,9 +1644,10 @@ namespace PhysiOBS
             BTRemoveSignal.BackgroundImageLayout = ImageLayout.Stretch;
             BTRemoveSignal.Parent = PanelSignal;
             BTRemoveSignal.SetBounds(8, 22, 45, 45);
+            BTRemoveSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTRemoveSignal.Click += new EventHandler(BTRemoveSignalClick_NK);//Κλήση Event   
-            ToolTip tooltp = new ToolTip();
-            tooltp.SetToolTip(BTRemoveSignal, "iuiiiuiuiuiuiu");
+            //ToolTip tooltp = new ToolTip();
+            //tooltp.SetToolTip(BTRemoveSignal, "iuiiiuiuiuiuiu");
 
             Button ΒΤNextEmotion = new Button();
             PanelSignal.Controls.Add(ΒΤNextEmotion);
@@ -1567,6 +1656,7 @@ namespace PhysiOBS
             ΒΤNextEmotion.BackgroundImageLayout = ImageLayout.Center;
             ΒΤNextEmotion.Parent = PanelSignal;
             ΒΤNextEmotion.SetBounds(113, 25, 45, 38);
+            ΒΤNextEmotion.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             ΒΤNextEmotion.Click += new EventHandler(ΒΤNextClick);//Κλήση Event next Event
 
             Button BTPreviousEmotion = new Button();
@@ -1577,6 +1667,7 @@ namespace PhysiOBS
             BTPreviousEmotion.Parent = PanelSignal;
             BTPreviousEmotion.SetBounds(65, 25, 45, 38);
             BTPreviousEmotion.BringToFront();
+            BTPreviousEmotion.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTPreviousEmotion.Click += new EventHandler(BTPreviousClick);//Κλήση Event next Event
 
             Panel New_Emotion_PL = new Panel();
@@ -1584,7 +1675,8 @@ namespace PhysiOBS
             New_Emotion_PL.Parent = PanelSignal;
             New_Emotion_PL.Name = "EmotionPanel_" + SID; 
             New_Emotion_PL.BackColor = Color.LightYellow;
-            New_Emotion_PL.SetBounds(164, 110, 985, 42);
+            New_Emotion_PL.SetBounds(164, 110, PanelSignal.Width - 164 - 104, 42);
+            New_Emotion_PL.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
             New_Emotion_PL.MouseDown += new MouseEventHandler(PL_Emotions_Bar_MouseDown);
             New_Emotion_PL.MouseMove += new MouseEventHandler(PL_Emotions_Bar_MouseMove);
             New_Emotion_PL.MouseUp += new MouseEventHandler(PL_Emotions_Bar_MouseUp);
@@ -1593,7 +1685,8 @@ namespace PhysiOBS
             PanelSignal.Controls.Add(New_Statistics_GB);
             New_Statistics_GB.Text = "Show on Graph";
             New_Statistics_GB.Parent = PanelSignal;
-            New_Statistics_GB.SetBounds(1155, 0, 95, 84);
+            New_Statistics_GB.SetBounds(PanelSignal.Width-98, 0, 95, 84);
+            New_Statistics_GB.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             New_Statistics_GB.BringToFront();
 
             CheckBox CB_Mean = new CheckBox();
@@ -1635,7 +1728,8 @@ namespace PhysiOBS
             TBMean.Parent = PanelSignal;
             TBMean.Text = "Mean";
             TBMean.ReadOnly = true;
-            TBMean.SetBounds(1211, 99, 39, 19);
+            TBMean.SetBounds(PanelSignal.Width - 42, 99, 39, 19);
+            TBMean.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             TextBox ΤΒStDev = new TextBox();
             PanelSignal.Controls.Add(ΤΒStDev);
@@ -1643,7 +1737,8 @@ namespace PhysiOBS
             ΤΒStDev.Name = "ΤΒStDev_" + SID;
             ΤΒStDev.Parent = PanelSignal;
             ΤΒStDev.ReadOnly = true;
-            ΤΒStDev.SetBounds(1211, 132, 39, 19);
+            ΤΒStDev.SetBounds(PanelSignal.Width-42, 132, 39, 19);
+            ΤΒStDev.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label Mean = new Label();//Πρόβάλλει τη μέση τιμή του σήματος!!!
             PanelSignal.Controls.Add(Mean);
@@ -1651,7 +1746,8 @@ namespace PhysiOBS
             Mean.Text = "Mean";
             Mean.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             Mean.Parent = PanelSignal;
-            Mean.SetBounds(1211, 86, 96, 3);
+            Mean.SetBounds(PanelSignal.Width - 42, 86, 96, 3);
+            Mean.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label STD = new Label();//Πρόβάλλει την τυπική απόκλιση του σήματος!!!
             PanelSignal.Controls.Add(STD);
@@ -1659,7 +1755,8 @@ namespace PhysiOBS
             STD.Text = "St.Dev";
             STD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             STD.Parent = PanelSignal;
-            STD.SetBounds(1211, 119, 96, 3);
+            STD.SetBounds(PanelSignal.Width - 42, 119, 96, 3);
+            STD.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Button BTObservedEmotions = new Button();
             PanelSignal.Controls.Add(BTObservedEmotions);
@@ -1668,9 +1765,10 @@ namespace PhysiOBS
             BTObservedEmotions.BackgroundImage = Properties.Resources.em_table;
             BTObservedEmotions.BackgroundImageLayout = ImageLayout.Stretch;
             BTObservedEmotions.Parent = PanelSignal;
-            BTObservedEmotions.SetBounds(1155, 104, 45, 43);
+            BTObservedEmotions.SetBounds(PanelSignal.Width - 98, 104, 45, 43);
             BTObservedEmotions.BringToFront();
             BTObservedEmotions.Click += new EventHandler(BT_Obs_Emotios_Click);
+            BTObservedEmotions.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label EmList = new Label();//Πρόβάλλει το είδος του σήματος Galvanic Skin Response etc.!!!
             PanelSignal.Controls.Add(EmList);
@@ -1678,7 +1776,9 @@ namespace PhysiOBS
             EmList.Text = "Em. List";
             EmList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             EmList.Parent = PanelSignal;
-            EmList.SetBounds(1155, 90, 96, 3);
+            EmList.SetBounds(PanelSignal.Width - 98, 90, 96, 3);
+            //EmList.SetBounds(PanelSignal.Width - 98, 104, 45, 43);
+            EmList.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
             Label LabelEmotionName = new Label();//Πρόβάλλει το είδος του σήματος Galvanic Skin Response etc.!!!
             PanelSignal.Controls.Add(LabelEmotionName);
@@ -1687,8 +1787,9 @@ namespace PhysiOBS
             LabelEmotionName.Parent = PanelSignal;
             LabelEmotionName.Text = "....";
             LabelEmotionName.SetBounds(5, 86, 22, 13);
+            LabelEmotionName.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
-            Label New_Obs_Emotions_LB = new Label();
+            /*Label New_Obs_Emotions_LB = new Label();
             PanelSignal.Controls.Add(New_Obs_Emotions_LB);
             New_Obs_Emotions_LB.AutoSize = true;
             New_Obs_Emotions_LB.Text = "Observed Emotions:";
@@ -1696,20 +1797,22 @@ namespace PhysiOBS
             New_Obs_Emotions_LB.Parent = PanelSignal;
             New_Obs_Emotions_LB.SetBounds(32, 122, 135, 15);
             New_Obs_Emotions_LB.SendToBack();
+            New_Obs_Emotions_LB.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             PictureBox Info_Pic = new PictureBox();
             PanelSignal.Controls.Add(New_Obs_Emotions_LB);
             Info_Pic.SetBounds(0, 115, 32, 32);
             Info_Pic.Parent = PanelSignal;
             Info_Pic.Image = PhysiOBS.Properties.Resources.information;
+            Info_Pic.Anchor = (AnchorStyles.Top | AnchorStyles.Left);*/
 
             Chart ChartSignal = new Chart();
             PanelGraph.Controls.Add(ChartSignal);
             ChartSignal.Name = "ChartSignal_" + SID;
             ChartSignal.Parent = PanelGraph;
-            //ChartSignal.SetBounds(1, 1, 985, 105);
-            ChartSignal.SetBounds(1, 1, 985, 100);//for test
+            ChartSignal.SetBounds(1, 1, PanelGraph.Width, 100);
             ChartSignal.BringToFront();
+            ChartSignal.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
 
             ShapeContainer canvas = new ShapeContainer();
             LineShape theLine1 = new LineShape();
@@ -1723,6 +1826,7 @@ namespace PhysiOBS
             theLine1.SelectionColor = Color.Blue;
             theLine1.StartPoint = new System.Drawing.Point(0, 109);
             theLine1.EndPoint = new System.Drawing.Point(163, 109);
+            theLine1.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             ShapeContainer canvas_2 = new ShapeContainer();
             LineShape theLine2 = new LineShape();
@@ -1735,6 +1839,7 @@ namespace PhysiOBS
             theLine2.BorderColor = Color.Blue;
             theLine2.StartPoint = new System.Drawing.Point(0, 151);
             theLine2.EndPoint = new System.Drawing.Point(163, 151);
+            theLine2.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label LB_SignalID = new Label();
             PanelSignal.Controls.Add(LB_SignalID);
@@ -1743,13 +1848,13 @@ namespace PhysiOBS
             LB_SignalID.Parent = PanelSignal;
             LB_SignalID.Text = "Bio-Signal_" + SID;
             LB_SignalID.SetBounds(2, 6, 92, 13);
+            LB_SignalID.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             return PanelSignal;
         }
 
         private void BTAddSignalClick(object sender, EventArgs e)//Συνάρτηση για Event στο BTAddSignal
         {
-           
             Frm_Signal_Options Sopt = new Frm_Signal_Options();
             Sopt.Manager = Manager;// Public in Sopt Form
             TSignal CurrentSignal=new TSignal();
@@ -1758,17 +1863,9 @@ namespace PhysiOBS
             Sopt.ShowDialog();
             CurrentSignal = Sopt.Signal;
             if (CurrentSignal.filename == "") return;
-            // Matbal connection //
-            
-            /*int input =7;
-            Class1 con = new Class1();
-            MWArray[] result = con.alex(1, input);
-            MWNumericArray output = (MWNumericArray)result[0];
-            MessageBox.Show(output.ToString());
-            */
-            //--------MATLAB--------//
+          
             Manager.PhysioProject.signalList.Add(CurrentSignal);
-            CurrentSignal.ID = Manager.SignalAI_ID++.ToString();
+            CurrentSignal.ID = Manager.PhysioProject.SignalAI_ID++.ToString();
             this.Size = new Size(this.Width, this.Height+160);//Αλλαγή ύψους της Φόρμας 
             Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height + 160);//Αλλαγή ύψους Total panel
             Panel newP = create_signal_panel(Int32.Parse(CurrentSignal.ID), Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL"));
@@ -1800,7 +1897,7 @@ namespace PhysiOBS
         private void ReorderSignalPanels()
         {
             int i=0;
-            foreach (TSignal s in Manager.getSignalList())
+            foreach (TSignal s in Manager.PhysioProject.signalList)
             {
                 if (s.type != "Bio-SIGNAL") continue;
                 Panel p = (Panel)Total_Signal_PL.Controls["PanelSignal_" + s.ID];
@@ -1817,15 +1914,15 @@ namespace PhysiOBS
             {
 
                 //1. Delete Signal
-                TSignal DelSignal = Manager.getSignalList().GetSignalByID(ID);
-                Manager.removeSignal(DelSignal);
+                TSignal DelSignal = Manager.PhysioProject.signalList.GetSignalByID(ID);
+                Manager.PhysioProject.removeSignal(DelSignal);
 
                 //2. Remove Panel
                 Panel c = (Panel)Total_Signal_PL.Controls["PanelSignal_" + ID];
                 this.Size = new Size(this.Width, this.Height - 160);//Αλλαγή ύψους της Φόρμας 
                 Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height - 160);//Αλλαγή ύψους Total panel                    
                 Bar.Size = new Size(1, Bar.Height - 160);//Αρχικοποίηση Bar
-                if (Manager.getSignalList().GetSignalCountByType("Bio-SIGNAL") == 0)
+                if (Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL") == 0)
                 Bar.Size = new Size(1, 36);//Αρχικοποίηση Bar
                 c.Dispose();
                 ReorderSignalPanels();
@@ -1839,7 +1936,11 @@ namespace PhysiOBS
 
         #endregion
 
-       
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+            this.Top = 1;
+        }
+
 
     }
 }   

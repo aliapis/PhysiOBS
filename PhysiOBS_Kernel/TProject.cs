@@ -11,8 +11,34 @@ namespace PhysiOBS_Kernel
         public String Date = "Jan, 2013";
         public String filename;
         public String title;
-        public int panelWidth;
+
+
         public int m_ana_px;
+        public int SignalAI_ID
+        {
+            get
+            {
+                return signalList.AI_ID;
+            }
+            set
+            {
+                signalList.AI_ID = value;
+            }
+        }
+        
+        private int _panelwidth;
+        public int panelWidth
+        {
+            get
+            {
+                return _panelwidth;
+            }
+            set
+            {
+                _panelwidth = value;
+                m_ana_px = (int)_duration / (int)value;
+            }
+        }
 
         private Double _duration;
         public Double duration
@@ -41,16 +67,23 @@ namespace PhysiOBS_Kernel
             taskList = new TTaskList();
             assignmentList = new TAssignmentList();
             criticalList = new TCriticalPointsList();
+            _duration = 0;
+            _panelwidth = 0;
+            m_ana_px = 0;
         }
 
         public void Clear()
         {
             title = "";
+            filename = "";
             Version = "";
             Date = "";
             signalList.Clear();
             taskList.Clear();
             assignmentList.Clear();
+            _duration = 0;
+            _panelwidth = 0;
+            m_ana_px = 0;
         }
 
         public void addSignal(TSignal s)
@@ -67,12 +100,44 @@ namespace PhysiOBS_Kernel
             }
             signalList.Add(s);
         }
-
         public void removeSignal(TSignal s)
         {
+            criticalList.clear_points("emotion_" + s.ID);
             s.SignalEmotionList.Clear();
             signalList.Remove(s);
         }
+
+        public TSignal addSignal(String fname, String title, String type, String stype, Double dur, String frm, Double del, String Out, String sample)
+        {
+            TSignal s = new TSignal();
+            s.filename = fname;
+            s.title = title;
+            s.type = type;
+            s.signaltype = stype;
+            s.duration = dur;
+            s.format = frm;
+            s.delay = 0;
+            s.output = Out;
+            s.sampling = sample;
+            addSignal(s);
+            return s;
+        }
+        public TSignal addVideo(String fname, String type, String frm, Double dur)
+        {
+            TSignal s = new TSignal();
+            s.filename = fname;
+            s.type = type;
+            s.format = frm;
+            s.duration = dur;
+            addSignal(s);
+            return s;
+        }
+
+        public TEmotionList getEmotionListBySignalID(string ID)
+        {
+            return signalList.GetSignalByID(ID).SignalEmotionList;
+        }
+
       
     }
 }

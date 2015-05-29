@@ -58,7 +58,7 @@ namespace PhysiOBS_Kernel //Na vgazw to src apo tin katalixi!!!
 
     public class TEmotion:TPeriod
     {
-        string ID;
+        //string ID;
 
         public TEmotion()
         {

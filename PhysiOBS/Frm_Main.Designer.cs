@@ -108,7 +108,7 @@
             this.GB_uservideo.Controls.Add(this.MPlayer_UserVideo);
             this.GB_uservideo.Location = new System.Drawing.Point(67, 4);
             this.GB_uservideo.Name = "GB_uservideo";
-            this.GB_uservideo.Size = new System.Drawing.Size(555, 286);
+            this.GB_uservideo.Size = new System.Drawing.Size(555, 291);
             this.GB_uservideo.TabIndex = 1;
             this.GB_uservideo.TabStop = false;
             this.GB_uservideo.Text = "User Observation";
@@ -120,10 +120,8 @@
             this.MPlayer_UserVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_UserVideo.Name = "MPlayer_UserVideo";
             this.MPlayer_UserVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_UserVideo.OcxState")));
-            this.MPlayer_UserVideo.Size = new System.Drawing.Size(549, 267);
-            this.MPlayer_UserVideo.TabIndex = 1;
-            this.MPlayer_UserVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_UserVideo_OpenStateChange);
-            this.MPlayer_UserVideo.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MPlayer_UserVideo_PlayStateChange);
+            this.MPlayer_UserVideo.Size = new System.Drawing.Size(549, 272);
+            this.MPlayer_UserVideo.TabIndex = 0;
             // 
             // GB_Screen
             // 
@@ -133,7 +131,7 @@
             this.GB_Screen.Controls.Add(this.MPlayer_ScreenVideo);
             this.GB_Screen.Location = new System.Drawing.Point(11, 3);
             this.GB_Screen.Name = "GB_Screen";
-            this.GB_Screen.Size = new System.Drawing.Size(555, 286);
+            this.GB_Screen.Size = new System.Drawing.Size(555, 292);
             this.GB_Screen.TabIndex = 2;
             this.GB_Screen.TabStop = false;
             this.GB_Screen.Text = "Screen Capture";
@@ -145,9 +143,8 @@
             this.MPlayer_ScreenVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_ScreenVideo.Name = "MPlayer_ScreenVideo";
             this.MPlayer_ScreenVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_ScreenVideo.OcxState")));
-            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(549, 267);
-            this.MPlayer_ScreenVideo.TabIndex = 0;
-            this.MPlayer_ScreenVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_ScreenVideo_OpenStateChange);
+            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(549, 273);
+            this.MPlayer_ScreenVideo.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -674,7 +671,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox GB_uservideo;
-        private AxWMPLib.AxWindowsMediaPlayer MPlayer_UserVideo;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button BT_Add_Video_U;
         private System.Windows.Forms.Button BT_video_U_properties;
@@ -693,7 +689,6 @@
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private AxWMPLib.AxWindowsMediaPlayer MPlayer_ScreenVideo;
         private System.Windows.Forms.Panel Bar;
         private System.Windows.Forms.Timer Timer_Project;
         private System.Windows.Forms.TextBox tb_time;
@@ -724,6 +719,8 @@
         private System.Windows.Forms.SplitContainer SV_VideoSplitter;
         private System.Windows.Forms.Panel PL_Navigation;
         private System.Windows.Forms.Label LB_Duration;
+        private AxWMPLib.AxWindowsMediaPlayer MPlayer_UserVideo;
+        private AxWMPLib.AxWindowsMediaPlayer MPlayer_ScreenVideo;
     }
 }
 

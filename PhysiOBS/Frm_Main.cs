@@ -52,6 +52,7 @@ namespace PhysiOBS
 
         //----smoothing variables----//
         public List<int> Counter_For_Smooth_list = new List<int>();
+        public List<int> SID_Info = new List<int>();
         public List<double> error_list = new List<double>(); 
         public List<double[]> rawsignals = new List<double[]>();//θα κρατάει όλα τα rawsignals θα πάρει τιμή μέσα στην draw_graph
         public List<DataTable> alltables = new List<DataTable>();//θα κρατάει όλα τα datatables θα πάρει τιμή μέσα στην draw_graph
@@ -1323,13 +1324,57 @@ namespace PhysiOBS
 
         #region This part of code Enable and Disable Mean and SD in graph
 
+        private void CB_Raw_CheckedChanged(object sender, EventArgs ee)
+        {
+            string ID = ((CheckBox)sender).Name.Split('_')[1];
+            Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
+            if (((CheckBox)sender).Checked == true)
+            {
+                //Time && Raw Data                  
+                ch.Series[0].Enabled = true;
+                ch.Series[0].BorderWidth = 1;
+                ch.Series[0].Color = Color.Black;
+                ch.Series[0].ChartType = SeriesChartType.Line;
+
+                for (int i = 0; i < SID_Info.Count; i++)
+                {
+                    if (SID_Info[i] == int.Parse(ID))
+                    {
+                        ch.Series[0].XValueMember = alltables[i].Columns[0].ColumnName;
+                        ch.Series[0].YValueMembers = alltables[i].Columns[1].ColumnName;
+                        break;
+                    }
+                }
+                
+            }
+            else
+            {
+                ch.Series[0].Enabled = false;
+            }
+        }
+
         private void CB_Mean_CheckedChanged(object sender, EventArgs ee)
         {
             string ID=((CheckBox)sender).Name.Split('_')[1];
             Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
             if (((CheckBox)sender).Checked == true)
             {
+                //Time && Mean
                 ch.Series[1].Enabled = true;
+                ch.Series[1].BorderWidth = 1;
+                ch.Series[1].Color = Color.Red;
+                ch.Series[1].ChartType = SeriesChartType.Line;
+                
+                for (int i = 0; i < SID_Info.Count; i++)
+                {
+                    if (SID_Info[i] == int.Parse(ID))
+                    {
+                        ch.Series[1].XValueMember = alltables[i].Columns[0].ColumnName;
+                        ch.Series[1].YValueMembers = alltables[i].Columns[2].ColumnName;
+                        break;
+                    }
+                }
+                
             }
             else
             {
@@ -1343,8 +1388,29 @@ namespace PhysiOBS
             Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
             if (((CheckBox)sender).Checked == true)
             {
+                //Time && +1SD
                 ch.Series[2].Enabled = true;
+                ch.Series[2].BorderWidth = 1;
+                ch.Series[2].Color = Color.Sienna;
+                ch.Series[2].ChartType = SeriesChartType.Line;
+                //Time && -1SD
                 ch.Series[3].Enabled = true;
+                ch.Series[3].BorderWidth = 1;
+                ch.Series[3].Color = Color.Sienna;
+                ch.Series[3].ChartType = SeriesChartType.Line;
+
+                for (int i = 0; i < SID_Info.Count; i++)
+                {
+                    if (SID_Info[i] == int.Parse(ID))
+                    {
+                        ch.Series[2].XValueMember = alltables[i].Columns[0].ColumnName;
+                        ch.Series[2].YValueMembers = alltables[i].Columns[3].ColumnName;
+                        ch.Series[3].XValueMember = alltables[i].Columns[0].ColumnName;
+                        ch.Series[3].YValueMembers = alltables[i].Columns[4].ColumnName;
+                        break;
+                    }
+                }
+                
             }
             else
             {
@@ -1356,10 +1422,32 @@ namespace PhysiOBS
         {
             string ID = ((CheckBox)sender).Name.Split('_')[1];
             Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
+
             if (((CheckBox)sender).Checked == true)
             {
+                //Time && +2SD
                 ch.Series[4].Enabled = true;
+                ch.Series[4].BorderWidth = 1;
+                ch.Series[4].Color = Color.RoyalBlue;
+                ch.Series[4].ChartType = SeriesChartType.Line;
+                //Time && -2SD
                 ch.Series[5].Enabled = true;
+                ch.Series[5].BorderWidth = 1;
+                ch.Series[5].Color = Color.RoyalBlue;
+                ch.Series[5].ChartType = SeriesChartType.Line;
+
+                for (int i = 0; i < SID_Info.Count; i++)
+                {
+                    if (SID_Info[i] == int.Parse(ID))
+                    {
+                        ch.Series[4].XValueMember = alltables[i].Columns[0].ColumnName;
+                        ch.Series[4].YValueMembers = alltables[i].Columns[5].ColumnName;
+                        ch.Series[5].XValueMember = alltables[i].Columns[0].ColumnName;
+                        ch.Series[5].YValueMembers = alltables[i].Columns[6].ColumnName;
+                        break;
+                    }
+                }
+                
             }
             else
             {
@@ -1435,7 +1523,7 @@ namespace PhysiOBS
                     TableTotal.Columns.Add(new DataColumn("-1SD", typeof(float)));
                     TableTotal.Columns.Add(new DataColumn("+2SD", typeof(float)));
                     TableTotal.Columns.Add(new DataColumn("-2SD", typeof(float)));
-                    TableTotal.Columns.Add(new DataColumn("Smoothing Signal", typeof(float)));//smoothing sima
+                    //TableTotal.Columns.Add(new DataColumn("Smoothing Signal", typeof(float)));//smoothing sima
 
                     alltables.Add(TableTotal);//mesa sti lista me ta all tables
 
@@ -1463,35 +1551,23 @@ namespace PhysiOBS
                     int i = 0;
                     for (i = 0; i < length; i++)
                     {
-                        if (raw_bio_signal[i] > max)
-                        {
-                            max = raw_bio_signal[i];
-                        }
-                        if (raw_bio_signal[i] < min)
-                        {
-                            min = raw_bio_signal[i];
-                        }
+                        if (raw_bio_signal[i] > max) max = raw_bio_signal[i];
+                        if (raw_bio_signal[i] < min) min = raw_bio_signal[i];
                     }
 
                     double oldrange = max - min;
                     double newrange = 100;
 
-                    //double[] Scaled;
-                    //Scaled = new double[length];
-                    int m = 0;
                     for (i = 0; i < length; i++)
                     {
-                        //Scaled[i] = ((((raw_bio_signal[i] - min) * newrange) / oldrange) /*+ 0*/);
                         raw_bio_signal[i] = ((((raw_bio_signal[i] - min) * newrange) / oldrange) /*+ 0*/);
-                        //sum = sum + Scaled[i];
                         sum = sum + raw_bio_signal[i];
-                        m++;
                     }
+
                     Double average = sum / length;
                     Double SumSqrt = 0;
                     for (int j = 0; j < i; j++)
                     {
-                        //SumSqrt = SumSqrt + (Scaled[j] - average) * (Scaled[j] - average);//Sum of Square
                         SumSqrt = SumSqrt + (raw_bio_signal[j] - average) * (raw_bio_signal[j] - average);//Sum of Square
                     }
 
@@ -1499,7 +1575,6 @@ namespace PhysiOBS
                     for (int j = 0; j < i; j++)
                     {
                         time_S = time_S + t;
-                        //TableTotal.Rows.Add(time_S, Scaled[j], average, average + Stdev, average - Stdev, average + (2 * Stdev), average - (2 * Stdev));
                         TableTotal.Rows.Add(time_S, raw_bio_signal[j], average, average + Stdev, average - Stdev, average + (2 * Stdev), average - (2 * Stdev));
                     }
                     
@@ -1533,63 +1608,14 @@ namespace PhysiOBS
                     ChartSignal.Series.Add(new Series());
                     ChartSignal.Series.Add(new Series());
                     ChartSignal.Series.Add(new Series());
-                    ChartSignal.Series.Add(new Series());//desmeumeni gia to smootharismeno sima 
-
-                    //Time && Raw Data
-                    ChartSignal.Series[0].BorderWidth = 1;
-                    ChartSignal.Series[0].Color = Color.Black;
-                    ChartSignal.Series[0].XValueMember = TableTotal.Columns[0].ColumnName;
-                    ChartSignal.Series[0].YValueMembers = TableTotal.Columns[1].ColumnName;
-                    ChartSignal.Series[0].ChartType = SeriesChartType.Line;
-                    
-                    //Time && Mean
-                    ChartSignal.Series[1].BorderWidth = 1;
-                    ChartSignal.Series[1].Color = Color.Red;
-                    ChartSignal.Series[1].XValueMember = TableTotal.Columns[0].ColumnName;
-                    ChartSignal.Series[1].YValueMembers = TableTotal.Columns[2].ColumnName;
-                    ChartSignal.Series[1].ChartType = SeriesChartType.Line;
-
-                    //Time && +1SD
-                    ChartSignal.Series[2].BorderWidth = 1;
-                    ChartSignal.Series[2].Color = Color.Sienna;
-                    ChartSignal.Series[2].XValueMember = TableTotal.Columns[0].ColumnName;
-                    ChartSignal.Series[2].ChartType = SeriesChartType.Line;
-                    ChartSignal.Series[2].YValueMembers = TableTotal.Columns[3].ColumnName;
-
-                    //Time && -1SD
-                    ChartSignal.Series[3].BorderWidth = 1;
-                    ChartSignal.Series[3].Color = Color.Sienna;
-                    ChartSignal.Series[3].XValueMember = TableTotal.Columns[0].ColumnName;
-                    ChartSignal.Series[3].ChartType = SeriesChartType.Line;
-                    ChartSignal.Series[3].YValueMembers = TableTotal.Columns[4].ColumnName;
-
-                    //Time && +2SD
-                    ChartSignal.Series[4].BorderWidth = 1;
-                    ChartSignal.Series[4].Color = Color.RoyalBlue;
-                    ChartSignal.Series[4].XValueMember = TableTotal.Columns[0].ColumnName;
-                    ChartSignal.Series[4].ChartType = SeriesChartType.Line;
-                    ChartSignal.Series[4].YValueMembers = TableTotal.Columns[5].ColumnName;
-
-                    //Time && -2SD
-                    ChartSignal.Series[5].BorderWidth = 1;
-                    ChartSignal.Series[5].Color = Color.RoyalBlue;
-                    ChartSignal.Series[5].XValueMember = TableTotal.Columns[0].ColumnName;
-                    ChartSignal.Series[5].ChartType = SeriesChartType.Line;
-                    ChartSignal.Series[5].YValueMembers = TableTotal.Columns[6].ColumnName;
+                    //ChartSignal.Series.Add(new Series());//desmeumeni gia to smootharismeno sima 
 
 
 
-                    CheckBox CB_Mean = (CheckBox)GetSignalControl(Signal, "CBMean_" + Signal.ID);
-                    CB_Mean.Enabled = true;
-                    CB_Mean.Checked = true;
+                                                       
+                    CheckBox CB_RawSignal = (CheckBox)GetSignalControl(Signal, "CBRawSignal_" + Signal.ID);
+                    CB_RawSignal.Checked = true;
 
-                    CheckBox CB_SD1 = (CheckBox)GetSignalControl(Signal, "CBSD1_" + Signal.ID);
-                    CB_SD1.Enabled = true;
-                    CB_SD1.Checked = true;
-
-                    CheckBox CB_SD2 = (CheckBox)GetSignalControl(Signal, "CBSD2_" + Signal.ID);
-                    CB_SD2.Enabled = true;
-                    CB_SD2.Checked = true;
 
                     ChartSignal.DataBind();
                 }
@@ -1617,6 +1643,7 @@ namespace PhysiOBS
         {
 
             Counter_For_Smooth_list.Add(0);
+            SID_Info.Add(SID);
             
             Panel PanelSignal = new Panel();
             PanelSignal.Name = "PanelSignal_" + SID.ToString();
@@ -1690,18 +1717,18 @@ namespace PhysiOBS
             New_Statistics_GB.Controls.Add(CB_RawSignal);
             CB_RawSignal.Name = "CBRawSignal_" + SID;
             CB_RawSignal.Text = "Raw Signal";
-            CB_RawSignal.Enabled = false;
+            CB_RawSignal.Enabled = true;
             CB_RawSignal.ForeColor = Color.Black;
             CB_RawSignal.Parent = New_Statistics_GB;
             CB_RawSignal.SetBounds(6, 13, 86, 17);
             CB_RawSignal.BringToFront();
-            //CB_RawSignal.CheckedChanged += new EventHandler(CB_Raw_CheckedChanged);
+            CB_RawSignal.CheckedChanged += new EventHandler(CB_Raw_CheckedChanged);
 
             CheckBox CB_Mean = new CheckBox();
             New_Statistics_GB.Controls.Add(CB_Mean);
             CB_Mean.Name = "CBMean_" + SID;
             CB_Mean.Text = "Mean";
-            CB_Mean.Enabled = false;
+            CB_Mean.Enabled = true;
             CB_Mean.ForeColor = Color.Red;
             CB_Mean.Parent = New_Statistics_GB;
             CB_Mean.SetBounds(6, 30, 53, 17);
@@ -1712,7 +1739,7 @@ namespace PhysiOBS
             New_Statistics_GB.Controls.Add(CB_SD1);
             CB_SD1.Name = "CBSD1_" + SID;
             CB_SD1.Text = "+/-1SD";
-            CB_SD1.Enabled = false;
+            CB_SD1.Enabled = true;
             CB_SD1.ForeColor = Color.Sienna;
             CB_SD1.Parent = New_Statistics_GB;
             CB_SD1.SetBounds(6, 48, 61, 17);
@@ -1723,7 +1750,7 @@ namespace PhysiOBS
             New_Statistics_GB.Controls.Add(CB_SD2);
             CB_SD2.Name = "CBSD2_" + SID;
             CB_SD2.Text = "+/-2SD";
-            CB_SD2.Enabled = false;
+            CB_SD2.Enabled = true;
             CB_SD2.ForeColor = Color.RoyalBlue;
             CB_SD2.Parent = New_Statistics_GB;
             CB_SD2.SetBounds(6, 66, 61, 17);
@@ -2052,10 +2079,6 @@ namespace PhysiOBS
             }
          
         }
-
-
-
-
 
         //----End of Smoothing Process----//
         #endregion

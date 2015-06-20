@@ -1326,14 +1326,13 @@ namespace PhysiOBS
         private void CB_Mean_CheckedChanged(object sender, EventArgs ee)
         {
             string ID=((CheckBox)sender).Name.Split('_')[1];
+            Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
             if (((CheckBox)sender).Checked == true)
             {
-                Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
                 ch.Series[1].Enabled = true;
             }
             else
             {
-                Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
                 ch.Series[1].Enabled = false;
             }
         }
@@ -1341,15 +1340,14 @@ namespace PhysiOBS
         private void CB_SD_plusminus_1_CheckedChanged(object sender, EventArgs e)
         {
             string ID = ((CheckBox)sender).Name.Split('_')[1];
+            Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
             if (((CheckBox)sender).Checked == true)
             {
-                Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
                 ch.Series[2].Enabled = true;
                 ch.Series[3].Enabled = true;
             }
             else
             {
-                Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
                 ch.Series[2].Enabled = false;
                 ch.Series[3].Enabled = false;
             }
@@ -1357,15 +1355,14 @@ namespace PhysiOBS
         private void CB_SD_plusminus_2_CheckedChanged(object sender, EventArgs e)
         {
             string ID = ((CheckBox)sender).Name.Split('_')[1];
+            Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
             if (((CheckBox)sender).Checked == true)
             {
-                Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
                 ch.Series[4].Enabled = true;
                 ch.Series[5].Enabled = true;
             }
             else
             {
-                Chart ch = (Chart)GetControl(((CheckBox)sender).Parent.Parent, "ChartSignal_" + ID);
                 ch.Series[4].Enabled = false;
                 ch.Series[5].Enabled = false;
             }
@@ -1688,6 +1685,17 @@ namespace PhysiOBS
             New_Statistics_GB.SetBounds(PanelSignal.Width-98, 0, 95, 84);
             New_Statistics_GB.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             New_Statistics_GB.BringToFront();
+           
+            CheckBox CB_RawSignal = new CheckBox();
+            New_Statistics_GB.Controls.Add(CB_RawSignal);
+            CB_RawSignal.Name = "CBRawSignal_" + SID;
+            CB_RawSignal.Text = "Raw Signal";
+            CB_RawSignal.Enabled = false;
+            CB_RawSignal.ForeColor = Color.Black;
+            CB_RawSignal.Parent = New_Statistics_GB;
+            CB_RawSignal.SetBounds(6, 13, 86, 17);
+            CB_RawSignal.BringToFront();
+            //CB_RawSignal.CheckedChanged += new EventHandler(CB_Raw_CheckedChanged);
 
             CheckBox CB_Mean = new CheckBox();
             New_Statistics_GB.Controls.Add(CB_Mean);
@@ -1696,7 +1704,7 @@ namespace PhysiOBS
             CB_Mean.Enabled = false;
             CB_Mean.ForeColor = Color.Red;
             CB_Mean.Parent = New_Statistics_GB;
-            CB_Mean.SetBounds(6, 19, 53, 17);
+            CB_Mean.SetBounds(6, 30, 53, 17);
             CB_Mean.BringToFront();
             CB_Mean.CheckedChanged += new EventHandler(CB_Mean_CheckedChanged);
 
@@ -1707,7 +1715,7 @@ namespace PhysiOBS
             CB_SD1.Enabled = false;
             CB_SD1.ForeColor = Color.Sienna;
             CB_SD1.Parent = New_Statistics_GB;
-            CB_SD1.SetBounds(6, 42, 61, 17);
+            CB_SD1.SetBounds(6, 48, 61, 17);
             CB_SD1.BringToFront();
             CB_SD1.CheckedChanged += new EventHandler(CB_SD_plusminus_1_CheckedChanged);
 
@@ -1718,7 +1726,7 @@ namespace PhysiOBS
             CB_SD2.Enabled = false;
             CB_SD2.ForeColor = Color.RoyalBlue;
             CB_SD2.Parent = New_Statistics_GB;
-            CB_SD2.SetBounds(6, 65, 61, 17);
+            CB_SD2.SetBounds(6, 66, 61, 17);
             CB_SD2.BringToFront();
             CB_SD2.CheckedChanged += new EventHandler(CB_SD_plusminus_2_CheckedChanged);
 
@@ -1787,7 +1795,7 @@ namespace PhysiOBS
             LabelEmotionName.Parent = PanelSignal;
             LabelEmotionName.Text = "....";
             //LabelEmotionName.SetBounds(5, 86, 22, 13);
-            LabelEmotionName.SetBounds(5, 68, 22, 13);
+            LabelEmotionName.SetBounds(5, 69, 22, 13);
             LabelEmotionName.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             /*--Cotrols for smoothing--*/
@@ -1798,7 +1806,7 @@ namespace PhysiOBS
             Error_Correction.Name = "NUDErrorCorrection_" + SID;
             Error_Correction.Parent = PanelSignal;
             //Error_Setting.SetBounds(0, 115, 40, 32);
-            Error_Correction.SetBounds(106, 84, 40, 32);
+            Error_Correction.SetBounds(7, 107, 40, 31);
             Error_Correction.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label Error_Corr_lb = new Label();//Πρόβάλλει το keimeno error correction
@@ -1806,8 +1814,8 @@ namespace PhysiOBS
             Error_Corr_lb.AutoSize = true;
             //Error_Corr_lb.Name = "LabelErrorCorrection_" + SID;
             Error_Corr_lb.Parent = PanelSignal;
-            Error_Corr_lb.Text = "Error Correction(%):";
-            Error_Corr_lb.SetBounds(12, 87, 94, 32);
+            Error_Corr_lb.Text = "Smooth with Error Correction(%):";
+            Error_Corr_lb.SetBounds(5, 90, 94, 32);
             Error_Corr_lb.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Button BTRunsmooth = new Button();
@@ -1815,9 +1823,9 @@ namespace PhysiOBS
             BTRunsmooth.Name = "BTRunsmooth_" + SID;
             BTRunsmooth.Enabled = true;
             BTRunsmooth.Parent = PanelSignal;
-            BTRunsmooth.SetBounds(37, 106, 89, 22);
+            BTRunsmooth.SetBounds(50, 106, 49, 22);
             BTRunsmooth.BringToFront();
-            BTRunsmooth.Text = "Run_Correction";
+            BTRunsmooth.Text = "smooth";
             BTRunsmooth.TextAlign = ContentAlignment.TopLeft;
             BTRunsmooth.Click += new EventHandler(BT_Run_Correction_Click);
             BTRunsmooth.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
@@ -1868,6 +1876,20 @@ namespace PhysiOBS
             theLine2.StartPoint = new System.Drawing.Point(0, 151);
             theLine2.EndPoint = new System.Drawing.Point(163, 151);
             theLine2.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
+            
+            ShapeContainer canvas_3 = new ShapeContainer();
+            LineShape theLine3 = new LineShape();
+            // Set the New_Signal_PL as the parent of the ShapeContainer.
+            canvas_3.Parent = PanelSignal;
+            // Set the canvas as the parent of the LineShape.
+            theLine3.Parent = canvas_2;
+            // Set the starting and ending coordinates for the line.
+            theLine3.BorderWidth = 1;
+            theLine3.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            theLine3.BorderColor = Color.Blue;
+            theLine3.StartPoint = new System.Drawing.Point(0, 87);
+            theLine3.EndPoint = new System.Drawing.Point(163, 87);
+            theLine3.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label LB_SignalID = new Label();
             PanelSignal.Controls.Add(LB_SignalID);

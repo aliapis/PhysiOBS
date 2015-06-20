@@ -76,6 +76,9 @@ namespace PhysiOBS_Kernel
                             writer.WriteStartElement("Sampling");
                             writer.WriteString(s.sampling);
                             writer.WriteEndElement();
+                            writer.WriteStartElement("Smoothing");
+                            writer.WriteString(s.error_correction.ToString());
+                            writer.WriteEndElement();
                             writer.WriteStartElement("Emotions");//<Emotions>
                             if (s.SignalEmotionList.Count() > 0)//Save's emotions for each Signal
                                 {
@@ -240,7 +243,6 @@ namespace PhysiOBS_Kernel
                                         el.format = m_xmlr.ReadElementContentAsString();
                                         continue;
                                     }
-
                                     if (m_xmlr.Name == "Delay")
                                     {
                                         el.delay = Double.Parse(m_xmlr.ReadElementContentAsString());
@@ -254,6 +256,11 @@ namespace PhysiOBS_Kernel
                                     if (m_xmlr.Name == "Sampling")
                                     {
                                         el.sampling = m_xmlr.ReadElementContentAsString();                                        
+                                        continue;
+                                    }
+                                    if (m_xmlr.Name == "Smoothing")
+                                    {
+                                        el.error_correction = double.Parse(m_xmlr.ReadElementContentAsString());
                                         continue;
                                     }
                                     if (m_xmlr.Name == "Emotions")

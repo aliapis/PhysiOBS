@@ -599,7 +599,7 @@ namespace PhysiOBS
                     if (Manager.PhysioProject.SignalAI_ID <= Int32.Parse(s.ID)) Manager.PhysioProject.SignalAI_ID = Int32.Parse(s.ID) + 1;
                     this.Size = new Size(this.Width, this.Height + 160);//Αλλαγή ύψους της Φόρμας 
                     Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height + 160);//Αλλαγή ύψους Total panel
-                    Panel newP = create_signal_panel(Int32.Parse(s.ID), orderID);
+                    Panel newP = create_signal_panel(Int32.Parse(s.ID), orderID, s.error_correction);
                     newP.Visible = false;
                     Total_Signal_PL.Controls.Add(newP);
                     newP.Parent = Total_Signal_PL;
@@ -612,8 +612,56 @@ namespace PhysiOBS
                         Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160);
 
                     }
-
                     draw_graph(s);
+                    
+                    //Load of smooth options
+
+                    if (s.error_correction != 0)
+                    {
+                        Chart ch = (Chart)GetControl(newP, "ChartSignal_" + s.ID);//Selection of the appropriate chart graph
+
+                        NumericUpDown NUD = (NumericUpDown)GetControl(newP, "NUDErrorCorrection_" + s.ID);//Selection of the appropriate Numeric UpDown control
+                        NUD.Value = int.Parse(s.error_correction.ToString());
+                        
+                        //Appropriate index for all lists manipulation
+                        int find_in = 0;
+                        for (int i = 0; i < SID_Info.Count; i++)
+                        {
+                            if (SID_Info[i] == int.Parse(s.ID))
+                            {
+                                find_in = i;
+                                break;
+                            }
+                        }
+                        //end of index finder process
+
+
+                        alltables[find_in].Columns.Add(new DataColumn("Smoothing Signal", typeof(float)));//Add smooth column to appropriate table
+                        ch.Series.Add(new Series());//Add serie to appropriate graph
+
+
+                        MWNumericArray arg1 = rawsignals[find_in];//Signal
+                        MWNumericArray arg2 = s.error_correction / 100;//ErrorGoal default heuristic variable
+                        MWNumericArray arg3 = 1/(1.0 / int.Parse(s.sampling));//to kanw pali akeraio
+                        result = smth_proc.smoothing_testing(1, arg1, arg2, arg3);//to 1 deixnei posa orismata tha exw exodo
+                        output = (MWNumericArray)result[0];//krataw to smootharismeno sima
+                        double[] array_from_mat = (double[])((MWNumericArray)output).ToVector(MWArrayComponent.Real);//metatrepw se double to sima apo matlab
+
+                        for (int j = 0; j < array_from_mat.Length; j++)
+                        {
+                            alltables[find_in].Rows[j][7] = array_from_mat[j];
+
+                        }
+                        ch.Series[6].BorderWidth = 1;
+                        ch.Series[6].Color = Color.Green;
+                        ch.Series[6].ChartType = SeriesChartType.Line;
+                        ch.Series[6].XValueMember = alltables[find_in].Columns[0].ColumnName;
+                        ch.Series[6].YValueMembers = alltables[find_in].Columns[7].ColumnName;
+                    }
+
+                    //end of smooth options
+
+                    
                     foreach (TEmotion em in Manager.PhysioProject.getEmotionListBySignalID(s.ID))
                     {
                         CreateEmotionPanel(em, s.ID);
@@ -1637,13 +1685,19 @@ namespace PhysiOBS
             }
         }  
         
-        private Panel create_signal_panel(int SID, int OrderID) // Δημιουργεί τα controls προγραμματιστικά
+        private Panel create_signal_panel(int SID, int OrderID, double error) // Δημιουργεί τα controls προγραμματιστικά
         {
-
-            Counter_For_Smooth_list.Add(0);
-            SID_Info.Add(SID);
-
-            
+            SID_Info.Add(SID); 
+            error_list.Add(error);
+            if (error == 0) 
+            {
+                Counter_For_Smooth_list.Add(0);       
+            }
+            else
+            {
+                Counter_For_Smooth_list.Add(1);
+            }
+                       
             Panel PanelSignal = new Panel();
             PanelSignal.Name = "PanelSignal_" + SID.ToString();
             PanelSignal.Parent = Total_Signal_PL;
@@ -1944,7 +1998,7 @@ namespace PhysiOBS
             CurrentSignal.ID = Manager.PhysioProject.SignalAI_ID++.ToString();
             this.Size = new Size(this.Width, this.Height+160);//Αλλαγή ύψους της Φόρμας 
             Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height + 160);//Αλλαγή ύψους Total panel
-            Panel newP = create_signal_panel(Int32.Parse(CurrentSignal.ID), Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL"));
+            Panel newP = create_signal_panel(Int32.Parse(CurrentSignal.ID), Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL"),CurrentSignal.error_correction);
             newP.Visible = false;
             Total_Signal_PL.Controls.Add(newP);
             newP.Parent = Total_Signal_PL;
@@ -2040,6 +2094,7 @@ namespace PhysiOBS
 
             TSignal signal = Manager.PhysioProject.signalList.GetSignalByID(ID);//selection of the appropriate signal
             
+            //Appropriate index for all lists manipulation
             int find_in=0;
             for (int i=0;i<SID_Info.Count;i++)
             {
@@ -2049,6 +2104,7 @@ namespace PhysiOBS
                     break;
                 }
             }
+            //end of index finder process
 
   
             NumericUpDown error = (NumericUpDown)GetControl(((Button)sender).Parent.Parent, "NUDErrorCorrection_" + ID);
@@ -2058,9 +2114,10 @@ namespace PhysiOBS
             {
                 if (Counter_For_Smooth_list[find_in] != 0)
                 {
-                    Counter_For_Smooth_list[find_in] = 0;
-                    alltables[find_in].Columns.Remove("Smoothing Signal");
-                    ch.Series.RemoveAt(6);
+                    signal.error_correction = 0.0;//Signal error update
+                    Counter_For_Smooth_list[find_in] = 0;//Signal smooth counter update
+                    alltables[find_in].Columns.Remove("Smoothing Signal");//Remove of smooth column
+                    ch.Series.RemoveAt(6);//Remove of chart serie
 
                 }
                 return;
@@ -2069,7 +2126,6 @@ namespace PhysiOBS
             {
  
                  Counter_For_Smooth_list[find_in] = Counter_For_Smooth_list[find_in] + 1;//Counter for smooth clicks
-
 
                 if (Counter_For_Smooth_list[find_in] == 1)
                 {
@@ -2132,6 +2188,8 @@ namespace PhysiOBS
         {
             this.Top = 1;
         }
+
+ 
 
 
     }

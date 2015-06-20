@@ -122,6 +122,8 @@
             this.MPlayer_UserVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_UserVideo.OcxState")));
             this.MPlayer_UserVideo.Size = new System.Drawing.Size(549, 272);
             this.MPlayer_UserVideo.TabIndex = 0;
+            this.MPlayer_UserVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_UserVideo_OpenStateChange);
+            this.MPlayer_UserVideo.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MPlayer_UserVideo_PlayStateChange);
             // 
             // GB_Screen
             // 
@@ -145,6 +147,7 @@
             this.MPlayer_ScreenVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_ScreenVideo.OcxState")));
             this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(549, 273);
             this.MPlayer_ScreenVideo.TabIndex = 1;
+            this.MPlayer_ScreenVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_ScreenVideo_OpenStateChange);
             // 
             // toolStrip1
             // 

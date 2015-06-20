@@ -20,6 +20,7 @@ namespace PhysiOBS_Kernel
         public Double delay;
         public String output;
         public String sampling;
+        public double error_correction;
         public TEmotionList SignalEmotionList; 
         
         public TSignal()//constructor
@@ -34,6 +35,7 @@ namespace PhysiOBS_Kernel
             delay = 0.0;
             output = "";
             sampling = "";
+            error_correction = 0.0;
             SignalEmotionList = new TEmotionList();
         }
         public TSignal(TSignal s)
@@ -48,6 +50,7 @@ namespace PhysiOBS_Kernel
             delay = s.delay;
             output = s.output;
             sampling = s.sampling;
+            error_correction = s.error_correction;
             SignalEmotionList = s.SignalEmotionList;             
         }
     }

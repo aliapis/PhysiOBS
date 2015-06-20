@@ -1523,7 +1523,6 @@ namespace PhysiOBS
                     TableTotal.Columns.Add(new DataColumn("-1SD", typeof(float)));
                     TableTotal.Columns.Add(new DataColumn("+2SD", typeof(float)));
                     TableTotal.Columns.Add(new DataColumn("-2SD", typeof(float)));
-                    //TableTotal.Columns.Add(new DataColumn("Smoothing Signal", typeof(float)));//smoothing sima
 
                     alltables.Add(TableTotal);//mesa sti lista me ta all tables
 
@@ -1608,7 +1607,6 @@ namespace PhysiOBS
                     ChartSignal.Series.Add(new Series());
                     ChartSignal.Series.Add(new Series());
                     ChartSignal.Series.Add(new Series());
-                    //ChartSignal.Series.Add(new Series());//desmeumeni gia to smootharismeno sima 
 
 
 
@@ -1644,6 +1642,7 @@ namespace PhysiOBS
 
             Counter_For_Smooth_list.Add(0);
             SID_Info.Add(SID);
+
             
             Panel PanelSignal = new Panel();
             PanelSignal.Name = "PanelSignal_" + SID.ToString();
@@ -1994,6 +1993,24 @@ namespace PhysiOBS
                 TSignal DelSignal = Manager.PhysioProject.signalList.GetSignalByID(ID);
                 Manager.PhysioProject.removeSignal(DelSignal);
 
+                int find_in=-1;//
+
+                for (int i = 0; i < SID_Info.Count; i++)
+                {
+                    if (SID_Info[i]==int.Parse(DelSignal.ID))
+                    {
+                        find_in = i;
+                        break;
+                    }
+                }
+
+                SID_Info.RemoveAt(find_in);
+                Counter_For_Smooth_list.RemoveAt(find_in);
+                error_list.RemoveAt(find_in);
+                rawsignals.RemoveAt(find_in);
+                alltables.RemoveAt(find_in);
+
+
                 //2. Remove Panel
                 Panel c = (Panel)Total_Signal_PL.Controls["PanelSignal_" + ID];
                 this.Size = new Size(this.Width, this.Height - 160);//Αλλαγή ύψους της Φόρμας 
@@ -2019,24 +2036,50 @@ namespace PhysiOBS
         {    
             
             string ID = ((Button)sender).Name.Split('_')[1];
-            Chart ch = (Chart)GetControl(((Button)sender).Parent.Parent, "ChartSignal_" + ID);//vriskw to grafima gia na plotarw//
+            Chart ch = (Chart)GetControl(((Button)sender).Parent.Parent, "ChartSignal_" + ID);//Selection of the appropriate chart graph
+
+            TSignal signal = Manager.PhysioProject.signalList.GetSignalByID(ID);//selection of the appropriate signal
             
-            int index = int.Parse(ID);//deiktis gia na xeiristw tis listes
-            
+            int find_in=0;
+            for (int i=0;i<SID_Info.Count;i++)
+            {
+                if (SID_Info[i]==int.Parse(signal.ID))
+                {
+                    find_in=i;
+                    break;
+                }
+            }
+
+  
             NumericUpDown error = (NumericUpDown)GetControl(((Button)sender).Parent.Parent, "NUDErrorCorrection_" + ID);
             double current_selected_error= double.Parse(error.Value.ToString());;
 
             if (current_selected_error == 0) //elegxos giati mporei na xrypisw to run xwris pososto 
             {
+                if (Counter_For_Smooth_list[find_in] != 0)
+                {
+                    Counter_For_Smooth_list[find_in] = 0;
+                    alltables[find_in].Columns.Remove("Smoothing Signal");
+                    ch.Series.RemoveAt(6);
+
+                }
                 return;
             }
             else
             {
-                Counter_For_Smooth_list[index] = Counter_For_Smooth_list[index] + 1;
-                if (Counter_For_Smooth_list[index] == 1)
+ 
+                 Counter_For_Smooth_list[find_in] = Counter_For_Smooth_list[find_in] + 1;//Counter for smooth clicks
+
+
+                if (Counter_For_Smooth_list[find_in] == 1)
                 {
+                    alltables[find_in].Columns.Add(new DataColumn("Smoothing Signal", typeof(float)));//Add smooth column to appropriate table
+                    ch.Series.Add(new Series());//Add serie to appropriate graph
+                    signal.error_correction = current_selected_error;//update of signal error
+
                     error_list.Add(current_selected_error);//gia kathe sima tha exw mia lista pou tha krataw to error wste na to sigrinw me to epomeno
-                    MWNumericArray arg1 = rawsignals[index];//Signal
+
+                    MWNumericArray arg1 = rawsignals[find_in];//Signal
                     MWNumericArray arg2 = current_selected_error / 100;//ErrorGoal default heuristic variable
                     MWNumericArray arg3 = 1 / t;//to kanw pali akeraio
                     result = smth_proc.smoothing_testing(1, arg1, arg2, arg3);//to 1 deixnei posa orismata tha exw exodo
@@ -2045,19 +2088,21 @@ namespace PhysiOBS
 
                     for (int j = 0; j < array_from_mat.Length; j++)
                     {
-                        alltables[index].Rows[j][7] = array_from_mat[j];
+                        alltables[find_in].Rows[j][7] = array_from_mat[j];
 
                     }
                     ch.Series[6].BorderWidth = 1;
                     ch.Series[6].Color = Color.Green;
-                    ch.Series[6].XValueMember = alltables[index].Columns[0].ColumnName;
                     ch.Series[6].ChartType = SeriesChartType.Line;
-                    ch.Series[6].YValueMembers = alltables[index].Columns[7].ColumnName;
+                    ch.Series[6].XValueMember = alltables[find_in].Columns[0].ColumnName;
+                    ch.Series[6].YValueMembers = alltables[find_in].Columns[7].ColumnName;
                 }
-                else if (current_selected_error != error_list[index])//elegxos wste na min trexw to smooth gia idio pososto
+                else if (current_selected_error != error_list[find_in])//elegxos wste na min trexw to smooth gia idio pososto
                 {
-                    error_list[index] = current_selected_error;
-                    MWNumericArray arg1 = rawsignals[index];//Signal
+                    error_list[find_in] = current_selected_error;
+                    signal.error_correction = current_selected_error;//Update of signal error
+                    
+                    MWNumericArray arg1 = rawsignals[find_in];//Signal
                     MWNumericArray arg2 = current_selected_error / 100;//ErrorGoal default heuristic variable
                     MWNumericArray arg3 = 1 / t;//to kanw pali akeraio
                     result = smth_proc.smoothing_testing(1, arg1, arg2, arg3);//to 1 deixnei posa orismata tha exw exodo
@@ -2066,14 +2111,14 @@ namespace PhysiOBS
 
                     for (int j = 0; j < array_from_mat.Length; j++)
                     {
-                        alltables[index].Rows[j][7] = array_from_mat[j];
+                        alltables[find_in].Rows[j][7] = array_from_mat[j];
 
                     }
                     ch.Series[6].BorderWidth = 1;
                     ch.Series[6].Color = Color.Green;
-                    ch.Series[6].XValueMember = alltables[index].Columns[0].ColumnName;
                     ch.Series[6].ChartType = SeriesChartType.Line;
-                    ch.Series[6].YValueMembers = alltables[index].Columns[7].ColumnName;
+                    ch.Series[6].XValueMember = alltables[find_in].Columns[0].ColumnName;
+                    ch.Series[6].YValueMembers = alltables[find_in].Columns[7].ColumnName;
                 }
 
             }

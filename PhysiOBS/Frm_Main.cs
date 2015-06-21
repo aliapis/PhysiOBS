@@ -527,9 +527,16 @@ namespace PhysiOBS
             //Reset Form UI
             PL_TaskLine.Controls.Clear();
             Total_Signal_PL.Controls.Clear();
-            this.Size = new Size (1281, 625);
+            //this.Size = new Size (1281, 625);
             Bar.Size = new Size(2, 36);
-            Total_Signal_PL.Size = new Size(1262, 0);
+            Total_Signal_PL.Size = new Size(this.Width-21, 0);
+            
+            //Reset Smooth Variables
+            SID_Info.Clear();
+            Counter_For_Smooth_list.Clear();
+            error_list.Clear();
+            rawsignals.Clear();
+            alltables.Clear();
             
             //VIDEO_U
             if (Manager.PhysioProject.signalList.GetSignalByType("VIDEO_U") != null)
@@ -605,17 +612,17 @@ namespace PhysiOBS
                     newP.Parent = Total_Signal_PL;
                     if (orderID == 1)
                     {
-                        Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160+14);
+                        Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160 + 14);
                     }
                     else
                     {
                         Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160);
 
                     }
+                    
                     draw_graph(s);
                     
                     //Load of smooth options
-
                     if (s.error_correction != 0)
                     {
                         Chart ch = (Chart)GetControl(newP, "ChartSignal_" + s.ID);//Selection of the appropriate chart graph
@@ -2124,16 +2131,18 @@ namespace PhysiOBS
             }
             else
             {
- 
-                 Counter_For_Smooth_list[find_in] = Counter_For_Smooth_list[find_in] + 1;//Counter for smooth clicks
+                if (current_selected_error != error_list[find_in])
+                {
+                    Counter_For_Smooth_list[find_in] = Counter_For_Smooth_list[find_in] + 1;//Counter for smooth clicks
+                }
+                else return;
 
                 if (Counter_For_Smooth_list[find_in] == 1)
                 {
+                    error_list[find_in]=current_selected_error;//gia kathe sima tha exw mia lista pou tha krataw to error wste na to sigrinw me to epomeno
                     alltables[find_in].Columns.Add(new DataColumn("Smoothing Signal", typeof(float)));//Add smooth column to appropriate table
                     ch.Series.Add(new Series());//Add serie to appropriate graph
                     signal.error_correction = current_selected_error;//update of signal error
-
-                    error_list.Add(current_selected_error);//gia kathe sima tha exw mia lista pou tha krataw to error wste na to sigrinw me to epomeno
 
                     MWNumericArray arg1 = rawsignals[find_in];//Signal
                     MWNumericArray arg2 = current_selected_error / 100;//ErrorGoal default heuristic variable

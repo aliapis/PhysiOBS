@@ -294,7 +294,7 @@
             this.Bar.Location = new System.Drawing.Point(171, 27);
             this.Bar.Margin = new System.Windows.Forms.Padding(0);
             this.Bar.Name = "Bar";
-            this.Bar.Size = new System.Drawing.Size(1, 36);
+            this.Bar.Size = new System.Drawing.Size(2, 36);
             this.Bar.TabIndex = 53;
             this.Bar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Bar_MouseDown);
             this.Bar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Bar_MouseMove);

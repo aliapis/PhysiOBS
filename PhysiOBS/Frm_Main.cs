@@ -1556,27 +1556,33 @@ namespace PhysiOBS
                     t = (float)(1.0 / Int32.Parse(Signal.sampling));
                     float time_S = t;
                     double sum = 0;
+                    
                     //double min=10^6;
                     //double max = -10 ^ 7;
-                   
-
                     //read table for send it to matlab
-                    int ind = 0;
-                    List<double> sample_list = new List<double>();
+                    //int ind = 0;
+                    //List<double> sample_list = new List<double>();                   
+                    //foreach (String line in File.ReadAllLines(Signal.filename))
+                    //{
+                    //    sample_list.Add(double.Parse(line));
+                    //    ind++;
+                    //}
                     
-                    foreach (String line in File.ReadAllLines(Signal.filename))
+                    String[] DATA = File.ReadAllLines(Signal.filename);
+                    double[] raw_bio_signal = new double[DATA.Length];
+                    for (int ind = 0; ind < DATA.Length; ind++)
                     {
-                        sample_list.Add(double.Parse(line));
-                        ind++;
+                        raw_bio_signal[ind] = double.Parse(DATA[ind]);
                     }
 
-                    double[] raw_bio_signal = sample_list.ToArray();//Μετατρέπει τη λίστα σε πίνακα
+                    //double[] raw_bio_signal = sample_list.ToArray();//Μετατρέπει τη λίστα σε πίνακα
 
                     int length = raw_bio_signal.Length;//Βρίσκω το μέγεθος του πίνακα
 
                     rawsignals.Add(raw_bio_signal);//Προσθήκη στη λίστα με τα ακατέργαστα σήματα
 
                     int i = 0;
+                    
                     //for (i = 0; i < length; i++)
                     //{
                     //    if (raw_bio_signal[i] > max) max = raw_bio_signal[i];
@@ -1588,7 +1594,7 @@ namespace PhysiOBS
 
                     for (i = 0; i < length; i++)
                     {
-                    //    raw_bio_signal[i] = ((((raw_bio_signal[i] - min) * newrange) / oldrange) /*+ 0*/);
+                        //raw_bio_signal[i] = ((((raw_bio_signal[i] - min) * newrange) / oldrange) /*+ 0*/);
                         sum = sum + raw_bio_signal[i];
                     }
 
@@ -1634,29 +1640,40 @@ namespace PhysiOBS
                     double IRQ = Q3 - Q1;//endotetartimoriako euros
 
                     //Inner Bounds - Q1 
-                    double inner_upper = Q1 + 1.5 * IRQ;
-                    double inner_lower = Q1 - 1.5 * IRQ;
+                    double inner_upper = Q3 + 1.5 * IRQ;
+                    double inner_lower = Q1 - (1.5 * IRQ);
 
                     //Update the inner bounds
-                    if (min_value < 0 && inner_lower < min_value)
+                    if (min_value < 0)
+                    {
+                        inner_lower = 0;
+                    }
+                    else if (inner_lower < min_value)
                     {
                         inner_lower = min_value;
                     }
-                    else inner_lower = 0;
-                  
+
+                    if (inner_upper>max_value)
+                    {
+                        inner_upper = max_value;
+                    }
+
                     //Outer Bounds - Q3
                     double outer_upper = Q3 + 3 * IRQ;
-                    double outer_lower = Q3 - 3 * IRQ;
+                    double outer_lower = Q1 - (3 * IRQ);
 
                     //Update the outer bounds
-                    //if (outer_lower < min_value) outer_lower = 0;
-                    //if (outer_upper > max_value) outer_upper = 1;
+                    if (min_value < 0)
+                    {
+                        outer_lower = 0;
+                    }
+                    else outer_lower = min_value;
 
 
                     for (int j = 0; j < i; j++)
                     {
                         time_S = time_S + t;
-                        TableTotal.Rows.Add(time_S, raw_bio_signal[j], inner_upper, inner_lower, outer_lower, outer_upper);
+                        TableTotal.Rows.Add(time_S, raw_bio_signal[j],inner_upper, inner_lower, outer_upper,outer_lower);
                     }
 
                     //
@@ -1668,17 +1685,15 @@ namespace PhysiOBS
                     TB_Mean.Text = average.ToString("0.00");
 
                     //Set Graph Scale to a specific range of Value
-                    ChartSignal.ChartAreas[0].Position.Auto = true;
                     ChartSignal.ChartAreas[0].AxisY.Maximum = max_value + IRQ;
                     ChartSignal.ChartAreas[0].AxisY.Minimum = min_value - IRQ;
-
 
 
                     ChartSignal.DataSource = TableTotal;
                     ChartSignal.ChartAreas[0].Position.X = 100;
                     ChartSignal.ChartAreas[0].Position.Y = 100;
                     ChartSignal.ChartAreas[0].Position.Width = 100;
-                    ChartSignal.ChartAreas[0].Position.Height = 90;
+                    ChartSignal.ChartAreas[0].Position.Height = 100;
 
                     ChartSignal.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
                     ChartSignal.ChartAreas[0].AxisY.Enabled = AxisEnabled.False;
@@ -1720,8 +1735,9 @@ namespace PhysiOBS
         
         private Panel create_signal_panel(int SID, int OrderID, double error) // Δημιουργεί τα controls προγραμματιστικά
         {
-            SID_Info.Add(SID); 
-            error_list.Add(error);
+            SID_Info.Add(SID);//krataw to ID toy simatos
+            error_list.Add(error);//Krataw to error correction tou simatos
+            
             if (error == 0)
             {
                 Counter_For_Smooth_list.Add(0);       
@@ -2117,7 +2133,7 @@ namespace PhysiOBS
 
             TSignal signal = Manager.PhysioProject.signalList.GetSignalByID(ID);//selection of the appropriate signal
             
-            //Appropriate index for all lists manipulation
+            //find_in => Appropriate index for all lists manipulation
             int find_in=0;
             for (int i=0;i<SID_Info.Count;i++)
             {
@@ -2141,7 +2157,6 @@ namespace PhysiOBS
                     Counter_For_Smooth_list[find_in] = 0;//Signal smooth counter update
                     alltables[find_in].Columns.Remove("Smoothing Signal");//Remove of smooth column
                     ch.Series.RemoveAt(5);//Remove of chart serie
-
                 }
                 return;
             }
@@ -2201,10 +2216,10 @@ namespace PhysiOBS
                     ch.Series[5].XValueMember = alltables[find_in].Columns[0].ColumnName;
                     ch.Series[5].YValueMembers = alltables[find_in].Columns[6].ColumnName;
                 }
-
             }
          
         }
+        
 
         //----End of Smoothing Process----//
         #endregion
@@ -2212,10 +2227,8 @@ namespace PhysiOBS
         private void Frm_Main_Load(object sender, EventArgs e)
         {
             this.Top = 1;
+            Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
+            Bar.BringToFront();
         }
-
-      
-      
-
     }
 }   

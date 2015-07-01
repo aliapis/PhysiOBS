@@ -572,8 +572,8 @@
             // 
             // SC_MainHor.Panel2
             // 
-            this.SC_MainHor.Panel2.Controls.Add(this.Bar);
             this.SC_MainHor.Panel2.Controls.Add(this.Total_Signal_PL);
+            this.SC_MainHor.Panel2.Controls.Add(this.Bar);
             this.SC_MainHor.Panel2.Controls.Add(this.AddSignalBT);
             this.SC_MainHor.Panel2.Controls.Add(this.BTNext_Task);
             this.SC_MainHor.Panel2.Controls.Add(this.BTPrevious_Task);

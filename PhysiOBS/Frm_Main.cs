@@ -1555,18 +1555,6 @@ namespace PhysiOBS
 
                     t = (float)(1.0 / Int32.Parse(Signal.sampling));
                     float time_S = t;
-                    double sum = 0;
-                    
-                    //double min=10^6;
-                    //double max = -10 ^ 7;
-                    //read table for send it to matlab
-                    //int ind = 0;
-                    //List<double> sample_list = new List<double>();                   
-                    //foreach (String line in File.ReadAllLines(Signal.filename))
-                    //{
-                    //    sample_list.Add(double.Parse(line));
-                    //    ind++;
-                    //}
                     
                     String[] DATA = File.ReadAllLines(Signal.filename);
                     double[] raw_bio_signal = new double[DATA.Length];
@@ -1575,32 +1563,13 @@ namespace PhysiOBS
                         raw_bio_signal[ind] = double.Parse(DATA[ind]);
                     }
 
-                    //double[] raw_bio_signal = sample_list.ToArray();//Μετατρέπει τη λίστα σε πίνακα
-
                     int length = raw_bio_signal.Length;//Βρίσκω το μέγεθος του πίνακα
 
                     rawsignals.Add(raw_bio_signal);//Προσθήκη στη λίστα με τα ακατέργαστα σήματα
-
-                    int i = 0;
                     
-                    //for (i = 0; i < length; i++)
-                    //{
-                    //    if (raw_bio_signal[i] > max) max = raw_bio_signal[i];
-                    //    if (raw_bio_signal[i] < min) min = raw_bio_signal[i];
-                    //}
-
-                    //double oldrange = max - min;
-                    //double newrange = 1;
-
-                    for (i = 0; i < length; i++)
-                    {
-                        //raw_bio_signal[i] = ((((raw_bio_signal[i] - min) * newrange) / oldrange) /*+ 0*/);
-                        sum = sum + raw_bio_signal[i];
-                    }
-
-                    Double average = sum / length;
+                    Double average = raw_bio_signal.Average();
                     Double SumSqrt = 0;
-                    for (int j = 0; j < i; j++)
+                    for (int j = 0; j < DATA.Length; j++)
                     {
                         SumSqrt = SumSqrt + (raw_bio_signal[j] - average) * (raw_bio_signal[j] - average);//Sum of Square
                     }
@@ -1670,7 +1639,7 @@ namespace PhysiOBS
                     else outer_lower = min_value;
 
 
-                    for (int j = 0; j < i; j++)
+                    for (int j = 0; j < DATA.Length; j++)
                     {
                         time_S = time_S + t;
                         TableTotal.Rows.Add(time_S, raw_bio_signal[j],inner_upper, inner_lower, outer_upper,outer_lower);

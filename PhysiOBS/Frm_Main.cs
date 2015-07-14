@@ -394,8 +394,9 @@ namespace PhysiOBS
 
         private void reAlocateBar()
         {
-            int move = (int)(Math.Round(PL_TaskLine.Width * MPlayer_UserVideo.Ctlcontrols.currentPosition * 1000 / Manager.PhysioProject.duration));
+            int move = (int)(Manager.PhysioProject.duration!=0?(Math.Round(PL_TaskLine.Width * MPlayer_UserVideo.Ctlcontrols.currentPosition * 1000 / Manager.PhysioProject.duration)):0);
             Bar.SetBounds(PL_TaskLine.Location.X + move, Bar.Location.Y, Bar.Width, Bar.Height);
+            Bar.Show();
         }
 
         #endregion
@@ -763,8 +764,9 @@ namespace PhysiOBS
             PL_TaskLine.Refresh();
             ClearTasks();
             DrawTasks();
-            reAlocateBar();
             ReAlocateSignalsEmotions();
+            reAlocateBar();
+            Bar.BringToFront();
         }
 
         #region This part of code Resizes and moves the task panels in TaskLine Bar
@@ -1069,6 +1071,7 @@ namespace PhysiOBS
            temp_emotion_panel.Size = new Size(1, ((Panel)sender).Height - 2);
            temp_emotion_panel.Parent = ((Panel)sender);
            temp_emotion_panel.SendToBack();
+           temp_emotion_panel.Top = temp_emotion_panel.Top;
            emotion_mark = true;
            temp_emotion_start_x = e.X;
 
@@ -1557,24 +1560,18 @@ namespace PhysiOBS
                     float time_S = t;
                     
                     String[] DATA = File.ReadAllLines(Signal.filename);
-                    double[] raw_bio_signal = new double[DATA.Length];
-                    for (int ind = 0; ind < DATA.Length; ind++)
+                    int DATAlength = DATA.Length;
+                    double[] raw_bio_signal = new double[DATAlength];
+                    for (int ind = 0; ind < DATAlength; ind++)
                     {
                         raw_bio_signal[ind] = double.Parse(DATA[ind]);
                     }
-
-                    int length = raw_bio_signal.Length;//Βρίσκω το μέγεθος του πίνακα
-
                     rawsignals.Add(raw_bio_signal);//Προσθήκη στη λίστα με τα ακατέργαστα σήματα
-                    
-                    Double average = raw_bio_signal.Average();
-                    Double SumSqrt = 0;
-                    for (int j = 0; j < DATA.Length; j++)
-                    {
-                        SumSqrt = SumSqrt + (raw_bio_signal[j] - average) * (raw_bio_signal[j] - average);//Sum of Square
-                    }
 
-                    double Stdev = Math.Sqrt(SumSqrt / (length - 1)); //Standard Deviation
+                    //Εύρεση Standard Deviation
+                    Double average = raw_bio_signal.Average();
+                    double sumOfSquaresOfDifferences = raw_bio_signal.Select(val => (val - average) * (val - average)).Sum();
+                    double Stdev = Math.Sqrt(sumOfSquaresOfDifferences / raw_bio_signal.Length - 1); 
                     
                     //Μελέτη για χρήση θηκογραμμάτων
                     
@@ -1582,15 +1579,13 @@ namespace PhysiOBS
                     double[] sortedPNumbers = (double[])raw_bio_signal.Clone();
                     raw_bio_signal.CopyTo(sortedPNumbers, 0);
                     Array.Sort(sortedPNumbers);
-
-                                     
+                                   
                     //Quartile 1 - 25%
                     double L25 = (sortedPNumbers.Length + 1) * 0.25 ;
                     int index25 = (int)Math.Round(L25, 0);
                     double decimal25 = L25 - index25;
                     double Q1 = sortedPNumbers[index25] + ((sortedPNumbers[index25 + 1] - sortedPNumbers[index25]) * decimal25);
     
-
                     //Quartile 2 - median 50%
                     double L50 = (sortedPNumbers.Length + 1) * 0.50 ;
                     int index50 = (int)Math.Round(L50, 0);
@@ -1602,7 +1597,6 @@ namespace PhysiOBS
                     int index75 = (int)Math.Round(L75, 0);
                     double decimal75 = L75 - index75;
                     double Q3 = sortedPNumbers[index75] + ((sortedPNumbers[index75 + 1] - sortedPNumbers[index75]) * decimal75);
-
 
                     double min_value = sortedPNumbers[0];
                     double max_value = sortedPNumbers[sortedPNumbers.Length-1];
@@ -1638,11 +1632,10 @@ namespace PhysiOBS
                     }
                     else outer_lower = min_value;
 
-
-                    for (int j = 0; j < DATA.Length; j++)
+                    for (int j = 0; j < DATAlength; j++)
                     {
                         time_S = time_S + t;
-                        TableTotal.Rows.Add(time_S, raw_bio_signal[j],inner_upper, inner_lower, outer_upper,outer_lower);
+                        TableTotal.Rows.Add(time_S, raw_bio_signal[j], inner_upper, inner_lower, outer_upper, outer_lower);
                     }
 
                     //
@@ -1656,7 +1649,6 @@ namespace PhysiOBS
                     //Set Graph Scale to a specific range of Value
                     ChartSignal.ChartAreas[0].AxisY.Maximum = max_value + IRQ;
                     ChartSignal.ChartAreas[0].AxisY.Minimum = min_value - IRQ;
-
 
                     ChartSignal.DataSource = TableTotal;
                     ChartSignal.ChartAreas[0].Position.X = 100;
@@ -1674,11 +1666,8 @@ namespace PhysiOBS
                     ChartSignal.Series.Add(new Series());
                     ChartSignal.Series.Add(new Series());
 
-
-                                                       
                     CheckBox CB_RawSignal = (CheckBox)GetSignalControl(Signal, "CBRawSignal_" + Signal.ID);
                     CB_RawSignal.Checked = true;
-
 
                     ChartSignal.DataBind();
                 }
@@ -2004,9 +1993,9 @@ namespace PhysiOBS
           
             Manager.PhysioProject.signalList.Add(CurrentSignal);
             CurrentSignal.ID = Manager.PhysioProject.SignalAI_ID++.ToString();
-            this.Size = new Size(this.Width, this.Height+160);//Αλλαγή ύψους της Φόρμας 
             Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height + 160);//Αλλαγή ύψους Total panel
-            Panel newP = create_signal_panel(Int32.Parse(CurrentSignal.ID), Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL"),CurrentSignal.error_correction);
+            if (Total_Signal_PL.Top + Total_Signal_PL.Height > PL_Navigation.Top) this.Size = new Size(this.Width, this.Height + 160);//Αλλαγή ύψους της Φόρμας            
+            Panel newP = create_signal_panel(Int32.Parse(CurrentSignal.ID), Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL"), CurrentSignal.error_correction);
             newP.Visible = false;
             Total_Signal_PL.Controls.Add(newP);
             newP.Parent = Total_Signal_PL;

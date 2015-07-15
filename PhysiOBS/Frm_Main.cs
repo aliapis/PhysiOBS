@@ -38,8 +38,6 @@ namespace PhysiOBS
         public bool drag;
         Point? prevPosition = null;
 
-        ToolTip tooltp = new ToolTip();
-
         public int panel_x; //global for drugging panels
         public bool panel_resize;
         public bool panel_drag;
@@ -62,7 +60,6 @@ namespace PhysiOBS
         public MWNumericArray output = null;
         public float t;//sampling rate
         //----end of smoothing variables----//
-
 
         private Boolean IsVideoUloaded
         {
@@ -717,7 +714,7 @@ namespace PhysiOBS
             }
             p.Parent = PL_TaskLine;
             p.Name = t.ID;
-            tooltp.SetToolTip(p, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
+            toolTip.SetToolTip(p, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
         }
 
         public void ClearTasks()
@@ -795,7 +792,7 @@ namespace PhysiOBS
             TTask t = Manager.PhysioProject.taskList.GetTaskByID(p.Name);
             t.start = p.Left * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;  
             t.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;+p.width;
-            tooltp.SetToolTip(((Panel)sender).Parent, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
+            toolTip.SetToolTip(((Panel)sender).Parent, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
             Manager.PhysioProject.criticalList.update(t);
             return;
         }
@@ -816,7 +813,7 @@ namespace PhysiOBS
                 if (right == true) //otan kanw resize mono apo dexia
                 {
                     t.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px;//antistoixo to p.left;+p.width;
-                    tooltp.SetToolTip((Panel)sender, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
+                    toolTip.SetToolTip((Panel)sender, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
                     right = false;
                     Manager.PhysioProject.criticalList.update(t);
                 }
@@ -824,7 +821,7 @@ namespace PhysiOBS
                     if (left == true) //otan kanw resize mono apo aristera
                     {
                         t.start = p.Left * Manager.PhysioProject.m_ana_px;//antistoixo to p.left;
-                        tooltp.SetToolTip((Panel)sender, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
+                        toolTip.SetToolTip((Panel)sender, "Task Name:" + t.name + "\nStart Time:" + t.start.ToString() + "\nStop Time:" + t.stop.ToString() + "\nComments:" + t.comments + "\nSuccess:" + t.succeed.ToString());
                         left = false;
                         Manager.PhysioProject.criticalList.update(t);
                     }
@@ -872,7 +869,7 @@ namespace PhysiOBS
                 drag.Location = new Point(3, 0);
                 drag.Size = new Size(panel1.Width - 6, panel1.Height);
 
-                tooltp.SetToolTip((Panel)sender, "Start: " + PixelToTime(panel1.Left).ToString());
+                toolTip.SetToolTip((Panel)sender, "Start: " + PixelToTime(panel1.Left).ToString());
 
             }
         }
@@ -894,7 +891,7 @@ namespace PhysiOBS
                 drag.Location = new Point(3, 0);
                 drag.Size = new Size(panel1.Width - 6, panel1.Height);
 
-                tooltp.SetToolTip((Panel)sender, "Stop: " + PixelToTime(panel1.Left + panel1.Width).ToString());
+                toolTip.SetToolTip((Panel)sender, "Stop: " + PixelToTime(panel1.Left + panel1.Width).ToString());
 
             }
         }
@@ -1208,7 +1205,7 @@ namespace PhysiOBS
             TEmotion em = Manager.PhysioProject.getEmotionListBySignalID(SignalID).GetEmotionByID(p.Name);
             em.start = p.Left * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;  
             em.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;+p.width;               
-            tooltp.SetToolTip((Panel)sender, "Emotion Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
+            toolTip.SetToolTip((Panel)sender, "Emotion Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
             Manager.PhysioProject.criticalList.update(em);
             return;
         }
@@ -1229,7 +1226,7 @@ namespace PhysiOBS
                 if (right == true) //otan kanw resize mono apo dexia
                 {
                     em.stop = (p.Left + p.Width) * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;+p.width;
-                    tooltp.SetToolTip((Panel)sender, "Emotion Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
+                    toolTip.SetToolTip((Panel)sender, "Emotion Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
                     right = false;
                     Manager.PhysioProject.criticalList.update(em);
                 }
@@ -1237,7 +1234,7 @@ namespace PhysiOBS
                     if (left == true) // otan kanw resize mono apo aristera
                     {
                         em.start = p.Left * Manager.PhysioProject.m_ana_px; //antistoixo to p.left;
-                        tooltp.SetToolTip((Panel)sender, "Task Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
+                        toolTip.SetToolTip((Panel)sender, "Task Name:" + em.name + "\nStart Time:" + em.start.ToString() + "\nStop Time:" + em.stop.ToString() + "\nComments:" + em.comments);
                         left = false;
                         Manager.PhysioProject.criticalList.update(em);
                     }
@@ -1279,7 +1276,7 @@ namespace PhysiOBS
                 Panel drag = (Panel)panel1.Controls[0];
                 drag.Location = new Point(3, 0);
                 drag.Size = new Size(panel1.Width - 6, 4);
-                tooltp.SetToolTip((Panel)sender, "Start: " + PixelToTime(panel1.Left).ToString("0,000"));
+                toolTip.SetToolTip((Panel)sender, "Start: " + PixelToTime(panel1.Left).ToString("0,000"));
             }
         }
         public void EMouseRResizeMoves(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -1298,7 +1295,7 @@ namespace PhysiOBS
                 Panel drag = (Panel)panel1.Controls[0];
                 drag.Location = new Point(3, 0);
                 drag.Size = new Size(panel1.Width - 6, 4);
-                tooltp.SetToolTip((Panel)sender, "Stop: " + PixelToTime(panel1.Left + panel1.Width).ToString("0,000"));
+                toolTip.SetToolTip((Panel)sender, "Stop: " + PixelToTime(panel1.Left + panel1.Width).ToString("0,000"));
             }
         }
 
@@ -1356,7 +1353,7 @@ namespace PhysiOBS
             var pos = e.Location;
             if (prevPosition.HasValue && pos == prevPosition.Value)
                 return;
-            tooltp.RemoveAll();
+            //toolTip.RemoveAll();
             prevPosition = pos;
             var results = ((Chart)sender).HitTest(pos.X, pos.Y, false, ChartElementType.DataPoint);
             foreach (var result in results)
@@ -1373,7 +1370,7 @@ namespace PhysiOBS
                         if (Math.Abs(pos.X - pointXPixel) < 2 && Math.Abs(pos.Y - pointYPixel) < 2)
                         {
                             //tooltp.SetToolTip(Chart_Signal1, "X=" + prop.XValue.ToString("0.000") + ", Y=" + prop.YValues[0].ToString("0.000"));
-                            tooltp.Show("Time(sec)=" + prop.XValue.ToString("0.000") + ", Signal Value=" + prop.YValues[0].ToString("0.000"), ((Chart)sender), pos.X, pos.Y);
+                            toolTip.Show("Time(sec)=" + prop.XValue.ToString("0.000") + ", Signal Value=" + prop.YValues[0].ToString("0.000"), ((Chart)sender), pos.X, pos.Y, 2000);
                         }
                     }
                 }
@@ -1721,17 +1718,17 @@ namespace PhysiOBS
             PanelGraph.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
            
             Button BTRemoveSignal = new Button();
-            PanelSignal.Controls.Add(BTRemoveSignal);
             BTRemoveSignal.Name = "BTRemoveSignal_" + SID;
             BTRemoveSignal.Enabled = false;
             BTRemoveSignal.BackgroundImage = Properties.Resources.rs;
             BTRemoveSignal.BackgroundImageLayout = ImageLayout.Stretch;
-            BTRemoveSignal.Parent = PanelSignal;
             BTRemoveSignal.SetBounds(8, 22, 45, 45);
             BTRemoveSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
-            BTRemoveSignal.Click += new EventHandler(BTRemoveSignalClick_NK);//Κλήση Event   
-            //ToolTip tooltp = new ToolTip();
-            //tooltp.SetToolTip(BTRemoveSignal, "iuiiiuiuiuiuiu");
+            BTRemoveSignal.Click += new EventHandler(BTRemoveSignalClick_NK);//Κλήση Event
+            BTRemoveSignal.MouseHover += (sender, e) => ToolTipHover(sender, e, "Remove this signal.");
+            BTRemoveSignal.MouseLeave += new EventHandler(ToolTipLeave);//Κλήση Event
+            PanelSignal.Controls.Add(BTRemoveSignal);
+
 
             Button ΒΤNextEmotion = new Button();
             PanelSignal.Controls.Add(ΒΤNextEmotion);
@@ -1873,7 +1870,9 @@ namespace PhysiOBS
             //LabelEmotionName.SetBounds(5, 86, 22, 13);
             LabelEmotionName.SetBounds(5, 69, 22, 13);
             LabelEmotionName.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
+           // tooltp.SetToolTip(LabelEmotionName, "popopopopopopo");
 
+            
             /*--Cotrols for smoothing--*/
             NumericUpDown Error_Correction = new NumericUpDown();//setting error correction value
             PanelSignal.Controls.Add(Error_Correction);
@@ -2000,7 +1999,7 @@ namespace PhysiOBS
             Total_Signal_PL.Controls.Add(newP);
             newP.Parent = Total_Signal_PL;
             Total_Signal_PL.SendToBack();
-           
+          
             BT_PlayPause.BringToFront();
             BT_Stop.BringToFront();
             BTPrevious_Total.BringToFront();
@@ -2019,6 +2018,19 @@ namespace PhysiOBS
             newP.Visible = true;
             newP.BringToFront();
 
+
+        }
+
+        private void ToolTipHover(object sender, EventArgs e, string m)
+        {
+            toolTip.Active = false;
+            toolTip.Active = true;
+            toolTip.Show(m, (Control)sender, (((Control)sender).Width / 2) + 2, ((Control)sender).Height + 2);
+        }
+
+        private void ToolTipLeave(object sender, EventArgs e)
+        {
+            toolTip.Hide((Control)sender);
         }
 
         private void ReorderSignalPanels()

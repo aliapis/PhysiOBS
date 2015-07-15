@@ -465,7 +465,7 @@
             this.BT_Add_Video_U.Name = "BT_Add_Video_U";
             this.BT_Add_Video_U.Size = new System.Drawing.Size(50, 50);
             this.BT_Add_Video_U.TabIndex = 21;
-            this.toolTip.SetToolTip(this.BT_Add_Video_U, "Open User\'s Video");
+            this.toolTip.SetToolTip(this.BT_Add_Video_U, "Open User Video");
             this.BT_Add_Video_U.UseVisualStyleBackColor = true;
             this.BT_Add_Video_U.Click += new System.EventHandler(this.BT_Add_Video_U_Click_1);
             // 

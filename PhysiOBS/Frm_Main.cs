@@ -43,6 +43,10 @@ namespace PhysiOBS
 
         Panel temp_emotion_panel = new Panel();
         TransparentPanel temp_emotion_panel_in_graph = new TransparentPanel();
+        PictureBox BarUp = new PictureBox();
+        PictureBox BarDown = new PictureBox();
+
+
         Panel current_emotion_panel;
         int temp_emotion_start_x;
         bool emotion_mark = false;
@@ -338,6 +342,66 @@ namespace PhysiOBS
         #endregion
 
         #region This Part of Code allowing user to move the project play bar....
+
+
+        private void intializeBar()
+        {
+            BarUp.Visible = true;
+            BarUp.BackgroundImage = Properties.Resources.BarUp;
+            Bar.Parent.Controls.Add(BarUp);
+            BarUp.Parent = Bar.Parent;
+            BarUp.Left = 163;
+            BarUp.Top = 14;
+            BarUp.Width = 18;
+            BarUp.Height = 13;
+            BarUp.BackgroundImageLayout = ImageLayout.Center;
+            BarUp.BringToFront();
+            BarUp.Cursor = Cursors.SizeWE;
+
+            BarDown.Visible = true;
+            BarDown.BackgroundImage = Properties.Resources.BarDown;
+            Bar.Parent.Controls.Add(BarDown);
+            BarDown.Parent = Bar.Parent;
+            BarDown.Left = 163;
+            BarDown.Top = 63;
+            BarDown.Width = 18;
+            BarDown.Height = 13;
+            BarDown.BackgroundImageLayout = ImageLayout.Center;
+            BarDown.BringToFront();
+            BarDown.Cursor = Cursors.SizeWE;
+
+            BarUp.MouseDown += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseDown);
+            BarUp.MouseUp += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseUp);
+            BarUp.MouseMove += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseMove);
+            BarDown.MouseDown += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseDown);
+            BarDown.MouseUp += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseUp);
+            BarDown.MouseMove += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseMove);
+
+        }
+
+        private void Bar_LocationChanged(object sender, EventArgs e)
+        {
+            reAlocateBarArrows();
+        }
+        private void reAlocateBarArrows()
+        {
+            BarUp.Left = Bar.Left - 8;
+            BarDown.Left = Bar.Left - 8;
+        }
+
+        private void BarArrow_MouseDown(object sender, MouseEventArgs e)
+        {
+            Bar_MouseDown(Bar, e);
+        }
+        private void BarArrow_MouseMove(object sender, MouseEventArgs e)
+        {
+            Bar_MouseMove(Bar, e);
+        }
+        private void BarArrow_MouseUp(object sender, MouseEventArgs e)
+        {
+            Bar_MouseUp(Bar, e);
+        }
+
         Control actcontrol;
         Point preloc;
         private void Bar_MouseDown(object sender, MouseEventArgs e)
@@ -480,7 +544,6 @@ namespace PhysiOBS
             Manager.PhysioProject.signalList.Clear();
             Manager.PhysioProject.taskList.Clear();
 
-            //Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
             Manager.loadProject(openFileDialog1.FileName);
             Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
             Manager.PhysioProject.duration = Manager.PhysioProject.signalList.GetSignalByType("VIDEO_U").duration;
@@ -618,7 +681,7 @@ namespace PhysiOBS
                         Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160);
 
                     }
-                    
+                    BarDown.Top = Bar.Height + Bar.Top;
                     draw_graph(s);
                     
                     //Load of smooth options
@@ -2041,8 +2104,8 @@ namespace PhysiOBS
             else
             {
                 Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160);
-
             }
+            BarDown.Top = Bar.Height + Bar.Top;
             draw_graph(CurrentSignal);
 
             newP.Visible = true;
@@ -2109,6 +2172,7 @@ namespace PhysiOBS
                 this.Size = new Size(this.Width, this.Height - 160);//Αλλαγή ύψους της Φόρμας 
                 Total_Signal_PL.Size = new Size(Total_Signal_PL.Width, Total_Signal_PL.Height - 160);//Αλλαγή ύψους Total panel                    
                 Bar.Size = new Size(2, Bar.Height - 160);//Αρχικοποίηση Bar
+                BarDown.Top = Bar.Height + Bar.Top;
                 if (Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL") == 0)
                 Bar.Size = new Size(2, 36);//Αρχικοποίηση Bar
                 c.Dispose();
@@ -2224,11 +2288,15 @@ namespace PhysiOBS
         //----End of Smoothing Process----//
         #endregion
 
+
         private void Frm_Main_Load(object sender, EventArgs e)
         {
             this.Top = 1;
             Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
             Bar.BringToFront();
+            intializeBar();
         }
+
+
     }
 }   

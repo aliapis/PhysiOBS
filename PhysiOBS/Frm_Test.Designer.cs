@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Test));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -37,6 +36,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Test));
             this.BT_add_PhySignal = new System.Windows.Forms.Button();
             this.BT_clear_em = new System.Windows.Forms.Panel();
             this.GB_statistics = new System.Windows.Forms.GroupBox();
@@ -45,20 +45,20 @@
             this.CB_SD_plusminus_1 = new System.Windows.Forms.CheckBox();
             this.TB_mean = new System.Windows.Forms.TextBox();
             this.TB_std = new System.Windows.Forms.TextBox();
-            this.BT_Obs_Emotions = new System.Windows.Forms.Button();
-            this.BT_previous_emotion = new System.Windows.Forms.Button();
-            this.BT_next_emotion = new System.Windows.Forms.Button();
             this.LB_obs_emotion = new System.Windows.Forms.Label();
             this.PL_Emotions_Bar = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.LB_S1 = new System.Windows.Forms.Label();
-            this.BT_Pro_S1 = new System.Windows.Forms.Button();
-            this.BT_Remove_S1 = new System.Windows.Forms.Button();
             this.PL_Signal1_Graph = new System.Windows.Forms.Panel();
             this.Chart_Signal2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.Line_up = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.Line_down = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.BT_Obs_Emotions = new System.Windows.Forms.Button();
+            this.BT_previous_emotion = new System.Windows.Forms.Button();
+            this.BT_next_emotion = new System.Windows.Forms.Button();
+            this.BT_Pro_S1 = new System.Windows.Forms.Button();
+            this.BT_Remove_S1 = new System.Windows.Forms.Button();
             this.BT_clear_em.SuspendLayout();
             this.GB_statistics.SuspendLayout();
             this.PL_Signal1_Graph.SuspendLayout();
@@ -170,35 +170,6 @@
             this.TB_std.TabIndex = 96;
             this.TB_std.Text = "St.Dev";
             // 
-            // BT_Obs_Emotions
-            // 
-            this.BT_Obs_Emotions.BackgroundImage = global::PhysiOBS.Properties.Resources.em_table;
-            this.BT_Obs_Emotions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Obs_Emotions.Enabled = false;
-            this.BT_Obs_Emotions.Location = new System.Drawing.Point(1155, 107);
-            this.BT_Obs_Emotions.Name = "BT_Obs_Emotions";
-            this.BT_Obs_Emotions.Size = new System.Drawing.Size(45, 43);
-            this.BT_Obs_Emotions.TabIndex = 93;
-            this.BT_Obs_Emotions.UseVisualStyleBackColor = true;
-            // 
-            // BT_previous_emotion
-            // 
-            this.BT_previous_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_previous_emotion.Image")));
-            this.BT_previous_emotion.Location = new System.Drawing.Point(112, 2);
-            this.BT_previous_emotion.Name = "BT_previous_emotion";
-            this.BT_previous_emotion.Size = new System.Drawing.Size(45, 38);
-            this.BT_previous_emotion.TabIndex = 92;
-            this.BT_previous_emotion.UseVisualStyleBackColor = true;
-            // 
-            // BT_next_emotion
-            // 
-            this.BT_next_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_next_emotion.Image")));
-            this.BT_next_emotion.Location = new System.Drawing.Point(112, 46);
-            this.BT_next_emotion.Name = "BT_next_emotion";
-            this.BT_next_emotion.Size = new System.Drawing.Size(45, 38);
-            this.BT_next_emotion.TabIndex = 92;
-            this.BT_next_emotion.UseVisualStyleBackColor = true;
-            // 
             // LB_obs_emotion
             // 
             this.LB_obs_emotion.AutoSize = true;
@@ -240,29 +211,6 @@
             this.LB_S1.TabIndex = 40;
             this.LB_S1.Text = ".....";
             this.LB_S1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // BT_Pro_S1
-            // 
-            this.BT_Pro_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pro_S1.BackgroundImage")));
-            this.BT_Pro_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Pro_S1.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.BT_Pro_S1.Location = new System.Drawing.Point(8, 21);
-            this.BT_Pro_S1.Name = "BT_Pro_S1";
-            this.BT_Pro_S1.Size = new System.Drawing.Size(45, 45);
-            this.BT_Pro_S1.TabIndex = 41;
-            this.BT_Pro_S1.UseVisualStyleBackColor = true;
-            // 
-            // BT_Remove_S1
-            // 
-            this.BT_Remove_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Remove_S1.BackgroundImage")));
-            this.BT_Remove_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Remove_S1.Enabled = false;
-            this.BT_Remove_S1.ForeColor = System.Drawing.Color.Silver;
-            this.BT_Remove_S1.Location = new System.Drawing.Point(57, 21);
-            this.BT_Remove_S1.Name = "BT_Remove_S1";
-            this.BT_Remove_S1.Size = new System.Drawing.Size(45, 45);
-            this.BT_Remove_S1.TabIndex = 42;
-            this.BT_Remove_S1.UseVisualStyleBackColor = true;
             // 
             // PL_Signal1_Graph
             // 
@@ -358,11 +306,64 @@
             this.Line_down.Y1 = 151;
             this.Line_down.Y2 = 151;
             // 
+            // BT_Obs_Emotions
+            // 
+            this.BT_Obs_Emotions.BackgroundImage = global::PhysiOBS.Properties.Resources.em_table;
+            this.BT_Obs_Emotions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Obs_Emotions.Enabled = false;
+            this.BT_Obs_Emotions.Location = new System.Drawing.Point(1155, 107);
+            this.BT_Obs_Emotions.Name = "BT_Obs_Emotions";
+            this.BT_Obs_Emotions.Size = new System.Drawing.Size(45, 43);
+            this.BT_Obs_Emotions.TabIndex = 93;
+            this.BT_Obs_Emotions.UseVisualStyleBackColor = true;
+            // 
+            // BT_previous_emotion
+            // 
+            this.BT_previous_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_previous_emotion.Image")));
+            this.BT_previous_emotion.Location = new System.Drawing.Point(112, 2);
+            this.BT_previous_emotion.Name = "BT_previous_emotion";
+            this.BT_previous_emotion.Size = new System.Drawing.Size(45, 38);
+            this.BT_previous_emotion.TabIndex = 92;
+            this.BT_previous_emotion.UseVisualStyleBackColor = true;
+            // 
+            // BT_next_emotion
+            // 
+            this.BT_next_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_next_emotion.Image")));
+            this.BT_next_emotion.Location = new System.Drawing.Point(112, 46);
+            this.BT_next_emotion.Name = "BT_next_emotion";
+            this.BT_next_emotion.Size = new System.Drawing.Size(45, 38);
+            this.BT_next_emotion.TabIndex = 92;
+            this.BT_next_emotion.UseVisualStyleBackColor = true;
+            // 
+            // BT_Pro_S1
+            // 
+            this.BT_Pro_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pro_S1.BackgroundImage")));
+            this.BT_Pro_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Pro_S1.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.BT_Pro_S1.Location = new System.Drawing.Point(8, 21);
+            this.BT_Pro_S1.Name = "BT_Pro_S1";
+            this.BT_Pro_S1.Size = new System.Drawing.Size(45, 45);
+            this.BT_Pro_S1.TabIndex = 41;
+            this.BT_Pro_S1.UseVisualStyleBackColor = true;
+            // 
+            // BT_Remove_S1
+            // 
+            this.BT_Remove_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Remove_S1.BackgroundImage")));
+            this.BT_Remove_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Remove_S1.Enabled = false;
+            this.BT_Remove_S1.ForeColor = System.Drawing.Color.Silver;
+            this.BT_Remove_S1.Location = new System.Drawing.Point(57, 21);
+            this.BT_Remove_S1.Name = "BT_Remove_S1";
+            this.BT_Remove_S1.Size = new System.Drawing.Size(45, 45);
+            this.BT_Remove_S1.TabIndex = 42;
+            this.BT_Remove_S1.UseVisualStyleBackColor = true;
+            // 
             // Frm_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1263, 199);
+            this.BackColor = System.Drawing.Color.Tomato;
+            this.ClientSize = new System.Drawing.Size(1263, 588);
             this.Controls.Add(this.BT_clear_em);
             this.Controls.Add(this.BT_add_PhySignal);
             this.Name = "Frm_Test";

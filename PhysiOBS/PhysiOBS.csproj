@@ -81,6 +81,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TranparentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Frm_Emotions_Grid.cs">
       <SubType>Form</SubType>
     </Compile>

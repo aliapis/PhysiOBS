@@ -160,5 +160,10 @@ namespace PhysiOBS
 
            
         }
+
+        private void Chart_Signal2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

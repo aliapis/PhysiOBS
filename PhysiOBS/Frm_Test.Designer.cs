@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Test));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.BT_add_PhySignal = new System.Windows.Forms.Button();
             this.BT_clear_em = new System.Windows.Forms.Panel();
             this.GB_statistics = new System.Windows.Forms.GroupBox();
@@ -45,20 +45,20 @@
             this.CB_SD_plusminus_1 = new System.Windows.Forms.CheckBox();
             this.TB_mean = new System.Windows.Forms.TextBox();
             this.TB_std = new System.Windows.Forms.TextBox();
-            this.BT_Obs_Emotions = new System.Windows.Forms.Button();
-            this.BT_previous_emotion = new System.Windows.Forms.Button();
-            this.BT_next_emotion = new System.Windows.Forms.Button();
             this.LB_obs_emotion = new System.Windows.Forms.Label();
             this.PL_Emotions_Bar = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.LB_S1 = new System.Windows.Forms.Label();
-            this.BT_Pro_S1 = new System.Windows.Forms.Button();
-            this.BT_Remove_S1 = new System.Windows.Forms.Button();
             this.PL_Signal1_Graph = new System.Windows.Forms.Panel();
             this.Chart_Signal2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.Line_up = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.Line_down = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.BT_Obs_Emotions = new System.Windows.Forms.Button();
+            this.BT_previous_emotion = new System.Windows.Forms.Button();
+            this.BT_next_emotion = new System.Windows.Forms.Button();
+            this.BT_Pro_S1 = new System.Windows.Forms.Button();
+            this.BT_Remove_S1 = new System.Windows.Forms.Button();
             this.BT_clear_em.SuspendLayout();
             this.GB_statistics.SuspendLayout();
             this.PL_Signal1_Graph.SuspendLayout();
@@ -170,35 +170,6 @@
             this.TB_std.TabIndex = 96;
             this.TB_std.Text = "St.Dev";
             // 
-            // BT_Obs_Emotions
-            // 
-            this.BT_Obs_Emotions.BackgroundImage = global::PhysiOBS.Properties.Resources.em_table;
-            this.BT_Obs_Emotions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Obs_Emotions.Enabled = false;
-            this.BT_Obs_Emotions.Location = new System.Drawing.Point(1155, 107);
-            this.BT_Obs_Emotions.Name = "BT_Obs_Emotions";
-            this.BT_Obs_Emotions.Size = new System.Drawing.Size(45, 43);
-            this.BT_Obs_Emotions.TabIndex = 93;
-            this.BT_Obs_Emotions.UseVisualStyleBackColor = true;
-            // 
-            // BT_previous_emotion
-            // 
-            this.BT_previous_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_previous_emotion.Image")));
-            this.BT_previous_emotion.Location = new System.Drawing.Point(112, 2);
-            this.BT_previous_emotion.Name = "BT_previous_emotion";
-            this.BT_previous_emotion.Size = new System.Drawing.Size(45, 38);
-            this.BT_previous_emotion.TabIndex = 92;
-            this.BT_previous_emotion.UseVisualStyleBackColor = true;
-            // 
-            // BT_next_emotion
-            // 
-            this.BT_next_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_next_emotion.Image")));
-            this.BT_next_emotion.Location = new System.Drawing.Point(112, 46);
-            this.BT_next_emotion.Name = "BT_next_emotion";
-            this.BT_next_emotion.Size = new System.Drawing.Size(45, 38);
-            this.BT_next_emotion.TabIndex = 92;
-            this.BT_next_emotion.UseVisualStyleBackColor = true;
-            // 
             // LB_obs_emotion
             // 
             this.LB_obs_emotion.AutoSize = true;
@@ -241,29 +212,6 @@
             this.LB_S1.Text = ".....";
             this.LB_S1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // BT_Pro_S1
-            // 
-            this.BT_Pro_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pro_S1.BackgroundImage")));
-            this.BT_Pro_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Pro_S1.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.BT_Pro_S1.Location = new System.Drawing.Point(8, 21);
-            this.BT_Pro_S1.Name = "BT_Pro_S1";
-            this.BT_Pro_S1.Size = new System.Drawing.Size(45, 45);
-            this.BT_Pro_S1.TabIndex = 41;
-            this.BT_Pro_S1.UseVisualStyleBackColor = true;
-            // 
-            // BT_Remove_S1
-            // 
-            this.BT_Remove_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Remove_S1.BackgroundImage")));
-            this.BT_Remove_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Remove_S1.Enabled = false;
-            this.BT_Remove_S1.ForeColor = System.Drawing.Color.Silver;
-            this.BT_Remove_S1.Location = new System.Drawing.Point(57, 21);
-            this.BT_Remove_S1.Name = "BT_Remove_S1";
-            this.BT_Remove_S1.Size = new System.Drawing.Size(45, 45);
-            this.BT_Remove_S1.TabIndex = 42;
-            this.BT_Remove_S1.UseVisualStyleBackColor = true;
-            // 
             // PL_Signal1_Graph
             // 
             this.PL_Signal1_Graph.Controls.Add(this.Chart_Signal2);
@@ -274,56 +222,57 @@
             // 
             // Chart_Signal2
             // 
-            chartArea3.BorderColor = System.Drawing.Color.White;
-            chartArea3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea3.Name = "ChartArea1";
-            this.Chart_Signal2.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.Chart_Signal2.Legends.Add(legend3);
+            chartArea1.BorderColor = System.Drawing.Color.White;
+            chartArea1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.Name = "ChartArea1";
+            this.Chart_Signal2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.Chart_Signal2.Legends.Add(legend1);
             this.Chart_Signal2.Location = new System.Drawing.Point(0, 1);
             this.Chart_Signal2.Name = "Chart_Signal2";
             this.Chart_Signal2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series13.ChartArea = "ChartArea1";
-            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series13.IsVisibleInLegend = false;
-            series13.Legend = "Legend1";
-            series13.Name = "Time && Raw";
-            series13.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            series14.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series14.ChartArea = "ChartArea1";
-            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series14.IsVisibleInLegend = false;
-            series14.Legend = "Legend1";
-            series14.Name = "Time && Mean";
-            series15.ChartArea = "ChartArea1";
-            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series15.IsVisibleInLegend = false;
-            series15.Legend = "Legend1";
-            series15.Name = "Time && 1SD";
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.IsVisibleInLegend = false;
-            series16.Legend = "Legend1";
-            series16.Name = "Time && -1 SD";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.IsVisibleInLegend = false;
-            series17.Legend = "Legend1";
-            series17.Name = "Time && 2 SD";
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series18.IsVisibleInLegend = false;
-            series18.Legend = "Legend1";
-            series18.Name = "Time && -2 SD";
-            this.Chart_Signal2.Series.Add(series13);
-            this.Chart_Signal2.Series.Add(series14);
-            this.Chart_Signal2.Series.Add(series15);
-            this.Chart_Signal2.Series.Add(series16);
-            this.Chart_Signal2.Series.Add(series17);
-            this.Chart_Signal2.Series.Add(series18);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Time && Raw";
+            series1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Time && Mean";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Time && 1SD";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Time && -1 SD";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Time && 2 SD";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.IsVisibleInLegend = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Time && -2 SD";
+            this.Chart_Signal2.Series.Add(series1);
+            this.Chart_Signal2.Series.Add(series2);
+            this.Chart_Signal2.Series.Add(series3);
+            this.Chart_Signal2.Series.Add(series4);
+            this.Chart_Signal2.Series.Add(series5);
+            this.Chart_Signal2.Series.Add(series6);
             this.Chart_Signal2.Size = new System.Drawing.Size(990, 105);
             this.Chart_Signal2.TabIndex = 0;
             this.Chart_Signal2.Text = "chart1";
+            this.Chart_Signal2.Click += new System.EventHandler(this.Chart_Signal2_Click);
             // 
             // shapeContainer1
             // 
@@ -357,11 +306,64 @@
             this.Line_down.Y1 = 151;
             this.Line_down.Y2 = 151;
             // 
+            // BT_Obs_Emotions
+            // 
+            this.BT_Obs_Emotions.BackgroundImage = global::PhysiOBS.Properties.Resources.em_table;
+            this.BT_Obs_Emotions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Obs_Emotions.Enabled = false;
+            this.BT_Obs_Emotions.Location = new System.Drawing.Point(1155, 107);
+            this.BT_Obs_Emotions.Name = "BT_Obs_Emotions";
+            this.BT_Obs_Emotions.Size = new System.Drawing.Size(45, 43);
+            this.BT_Obs_Emotions.TabIndex = 93;
+            this.BT_Obs_Emotions.UseVisualStyleBackColor = true;
+            // 
+            // BT_previous_emotion
+            // 
+            this.BT_previous_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_previous_emotion.Image")));
+            this.BT_previous_emotion.Location = new System.Drawing.Point(112, 2);
+            this.BT_previous_emotion.Name = "BT_previous_emotion";
+            this.BT_previous_emotion.Size = new System.Drawing.Size(45, 38);
+            this.BT_previous_emotion.TabIndex = 92;
+            this.BT_previous_emotion.UseVisualStyleBackColor = true;
+            // 
+            // BT_next_emotion
+            // 
+            this.BT_next_emotion.Image = ((System.Drawing.Image)(resources.GetObject("BT_next_emotion.Image")));
+            this.BT_next_emotion.Location = new System.Drawing.Point(112, 46);
+            this.BT_next_emotion.Name = "BT_next_emotion";
+            this.BT_next_emotion.Size = new System.Drawing.Size(45, 38);
+            this.BT_next_emotion.TabIndex = 92;
+            this.BT_next_emotion.UseVisualStyleBackColor = true;
+            // 
+            // BT_Pro_S1
+            // 
+            this.BT_Pro_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pro_S1.BackgroundImage")));
+            this.BT_Pro_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Pro_S1.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.BT_Pro_S1.Location = new System.Drawing.Point(8, 21);
+            this.BT_Pro_S1.Name = "BT_Pro_S1";
+            this.BT_Pro_S1.Size = new System.Drawing.Size(45, 45);
+            this.BT_Pro_S1.TabIndex = 41;
+            this.BT_Pro_S1.UseVisualStyleBackColor = true;
+            // 
+            // BT_Remove_S1
+            // 
+            this.BT_Remove_S1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Remove_S1.BackgroundImage")));
+            this.BT_Remove_S1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Remove_S1.Enabled = false;
+            this.BT_Remove_S1.ForeColor = System.Drawing.Color.Silver;
+            this.BT_Remove_S1.Location = new System.Drawing.Point(57, 21);
+            this.BT_Remove_S1.Name = "BT_Remove_S1";
+            this.BT_Remove_S1.Size = new System.Drawing.Size(45, 45);
+            this.BT_Remove_S1.TabIndex = 42;
+            this.BT_Remove_S1.UseVisualStyleBackColor = true;
+            // 
             // Frm_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1263, 199);
+            this.BackColor = System.Drawing.Color.Tomato;
+            this.ClientSize = new System.Drawing.Size(1263, 588);
             this.Controls.Add(this.BT_clear_em);
             this.Controls.Add(this.BT_add_PhySignal);
             this.Name = "Frm_Test";

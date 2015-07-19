@@ -81,6 +81,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TranparentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Frm_Emotions_Grid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +255,12 @@
       <Project>{e3edd338-ea06-45de-9220-4848acc9dc3c}</Project>
       <Name>PhysiOBS_Kernel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BarUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BarDown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

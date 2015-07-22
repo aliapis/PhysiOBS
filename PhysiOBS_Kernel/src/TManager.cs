@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Globalization; 
+using System.Globalization;
+using System.IO;
+using System.IO.Compression;
 
 namespace PhysiOBS_Kernel
 {
@@ -20,8 +22,43 @@ namespace PhysiOBS_Kernel
         public String filename()
         {
             return PhysioProject.filename;
-        }       
-        public int saveProject(String Path)
+        }
+
+        public int saveProjectCompact(String Path, DirectoryInfo temp)
+        {
+            try
+            {
+                string zipPath = Path;
+                string[] p=Path.Split('\\');
+                string projectfilename = p[p.Length-1]; 
+
+                Path = Path.Replace(".phy", ".xml");
+                int code = saveProject(Path, true);
+                if (code < 0) return -1;
+
+
+                if (!temp.Exists)
+                    temp.Create();
+                else
+                {
+                    foreach(System.IO.FileInfo file in temp.GetFiles()) file.Delete();
+                    foreach(System.IO.DirectoryInfo subDirectory in temp.GetDirectories()) subDirectory.Delete(true);
+                }
+                File.Move(Path, temp.FullName + "\\" + projectfilename.Replace(".phy", ".xml"));
+                foreach (TSignal s in PhysioProject.signalList)
+                {
+                    p = s.filename.Split('\\');
+                    File.Copy(s.filename, temp.FullName + "\\" + p[p.Length-1]);
+                }
+                ZipFile.CreateFromDirectory(temp.FullName, zipPath);
+                return 1;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public int saveProject(String Path, Boolean RelativePaths=false)
         {
             try
             {
@@ -50,7 +87,8 @@ namespace PhysiOBS_Kernel
                             writer.WriteString(s.ID);
                             writer.WriteEndElement();
                             writer.WriteStartElement("Filename");
-                            writer.WriteString(s.filename);
+                            string[] pathstring = s.filename.Split('\\');
+                            writer.WriteString(RelativePaths ? pathstring[pathstring.Length-1]: s.filename);
                             writer.WriteEndElement();
                             writer.WriteStartElement("Title");
                             writer.WriteString(s.title);
@@ -163,7 +201,31 @@ namespace PhysiOBS_Kernel
                 return -1;
             }
         }
-        public int loadProject(String Path)
+        public int loadCompactProject(String Path, DirectoryInfo temp)
+        {
+            try
+            {
+                string zipPath = Path;
+
+
+                if (!temp.Exists)
+                    temp.Create();
+                else
+                {
+                    foreach (System.IO.FileInfo file in temp.GetFiles()) file.Delete();
+                    foreach (System.IO.DirectoryInfo subDirectory in temp.GetDirectories()) subDirectory.Delete(true);
+                }
+                ZipFile.ExtractToDirectory(zipPath, temp.FullName);
+                Directory.SetCurrentDirectory(temp.FullName);
+                int code = loadProject(temp.FullName + "\\" + temp.GetFiles("*.xml")[0].Name, temp.FullName);
+                return code;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public int loadProject(String Path, String initpath="")
         {
             try
             {
@@ -215,7 +277,7 @@ namespace PhysiOBS_Kernel
                                     }
                                     if (m_xmlr.Name == "Filename")
                                     {
-                                        el.filename = m_xmlr.ReadElementContentAsString();
+                                        el.filename = initpath+"\\"+m_xmlr.ReadElementContentAsString();
                                         continue;
                                     }
                                     if (m_xmlr.Name == "Title")

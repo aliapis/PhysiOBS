@@ -533,8 +533,8 @@ namespace PhysiOBS
         private void BT_open_project_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.DefaultExt = "xml";
-            openFileDialog1.Filter = "Xml Files|*.xml";
+//            openFileDialog1.DefaultExt = "xml";
+            openFileDialog1.Filter = "(Xml Files, PhysiObj Compact Files)|*.xml;*.phy";
             //openFileDialog1.InitialDirectory = "C:\\";
             DialogResult result = openFileDialog1.ShowDialog();
 
@@ -544,7 +544,13 @@ namespace PhysiOBS
             Manager.PhysioProject.signalList.Clear();
             Manager.PhysioProject.taskList.Clear();
 
-            Manager.loadProject(openFileDialog1.FileName);
+            if (openFileDialog1.FileName.EndsWith(".phy"))
+            {
+                DirectoryInfo TempFolder = new System.IO.DirectoryInfo(Application.StartupPath + "\\Temp");
+                Manager.loadCompactProject(openFileDialog1.FileName, TempFolder);
+            }
+            else
+                Manager.loadProject(openFileDialog1.FileName);
             Manager.PhysioProject.panelWidth = PL_TaskLine.Width;
             Manager.PhysioProject.duration = Manager.PhysioProject.signalList.GetSignalByType("VIDEO_U").duration;
             Timer_Project.Interval = Manager.PhysioProject.m_ana_px;
@@ -566,11 +572,34 @@ namespace PhysiOBS
                 saveFileDialog1.Title = "Save as an xml File";
                 saveFileDialog1.DefaultExt = "xml";
                 saveFileDialog1.Filter = "Xml Files|*.xml";
-                saveFileDialog1.InitialDirectory = "C:\\";
                 if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
                 {
                     String filename = saveFileDialog1.FileName;
                     Manager.saveProject(filename);
+                }
+            }
+        }
+
+       //Save Project Compact Button in menustrip!!
+        private void BT_SaveCompact_Click(object sender, EventArgs e)
+        {
+            if (!IsVideoSloaded && !IsVideoUloaded)
+            {
+                MessageBox.Show("PhysiOBS needs at least one video source (User or Screen)", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            else
+            {
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                if (Manager.filename() != "") saveFileDialog1.FileName = Manager.filename();
+                saveFileDialog1.Title = "Save as a PhysiObj Compact(zip) File";
+                saveFileDialog1.DefaultExt = "phy";
+                saveFileDialog1.Filter = "PhysiObj Compact(zip) Files|*.phy";
+                if (saveFileDialog1.ShowDialog() != DialogResult.Cancel)
+                {
+                    String filename = saveFileDialog1.FileName;
+                    DirectoryInfo TempFolder = new System.IO.DirectoryInfo(Application.StartupPath + "\\Temp");
+                    Manager.saveProjectCompact(filename, TempFolder);
                 }
             }
         }
@@ -2296,6 +2325,7 @@ namespace PhysiOBS
             Bar.BringToFront();
             intializeBar();
         }
+
 
 
     }

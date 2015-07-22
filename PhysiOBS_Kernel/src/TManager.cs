@@ -48,6 +48,7 @@ namespace PhysiOBS_Kernel
                 foreach (TSignal s in PhysioProject.signalList)
                 {
                     p = s.filename.Split('\\');
+                    if (File.Exists(temp.FullName + "\\" + p[p.Length-1])) continue;
                     File.Copy(s.filename, temp.FullName + "\\" + p[p.Length-1]);
                 }
                 ZipFile.CreateFromDirectory(temp.FullName, zipPath);

@@ -600,7 +600,7 @@
             this.BT_Task_Frm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.BT_Task_Frm.Image = global::PhysiOBS.Properties.Resources.task_are;
             this.BT_Task_Frm.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BT_Task_Frm.Location = new System.Drawing.Point(1160, 5);
+            this.BT_Task_Frm.Location = new System.Drawing.Point(1164, 5);
             this.BT_Task_Frm.Name = "BT_Task_Frm";
             this.BT_Task_Frm.Size = new System.Drawing.Size(97, 70);
             this.BT_Task_Frm.TabIndex = 58;

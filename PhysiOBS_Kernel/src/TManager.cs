@@ -277,7 +277,7 @@ namespace PhysiOBS_Kernel
                                     }
                                     if (m_xmlr.Name == "Filename")
                                     {
-                                        el.filename = initpath+"\\"+m_xmlr.ReadElementContentAsString();
+                                        el.filename = (initpath!=""?initpath+"\\"+m_xmlr.ReadElementContentAsString():m_xmlr.ReadElementContentAsString());
                                         continue;
                                     }
                                     if (m_xmlr.Name == "Title")

@@ -43,6 +43,7 @@
             this.BT_signal_analysis = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_emotion_options = new System.Windows.Forms.ToolStripButton();
+            this.BT_SaveCompact = new System.Windows.Forms.ToolStripButton();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.PL_TaskLine = new System.Windows.Forms.Panel();
@@ -159,7 +160,8 @@
             this.toolStripSeparator1,
             this.BT_signal_analysis,
             this.toolStripSeparator2,
-            this.BT_emotion_options});
+            this.BT_emotion_options,
+            this.BT_SaveCompact});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1265, 63);
@@ -229,6 +231,18 @@
             this.BT_emotion_options.Name = "BT_emotion_options";
             this.BT_emotion_options.Size = new System.Drawing.Size(50, 50);
             this.BT_emotion_options.Text = "Emotion Options";
+            // 
+            // BT_SaveCompact
+            // 
+            this.BT_SaveCompact.AutoSize = false;
+            this.BT_SaveCompact.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BT_SaveCompact.Image = global::PhysiOBS.Properties.Resources.savezip;
+            this.BT_SaveCompact.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BT_SaveCompact.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BT_SaveCompact.Name = "BT_SaveCompact";
+            this.BT_SaveCompact.Size = new System.Drawing.Size(50, 50);
+            this.BT_SaveCompact.Text = "BT_SaveCompact";
+            this.BT_SaveCompact.Click += new System.EventHandler(this.BT_SaveCompact_Click);
             // 
             // shapeContainer1
             // 
@@ -725,6 +739,7 @@
         private System.Windows.Forms.Label LB_Duration;
         private AxWMPLib.AxWindowsMediaPlayer MPlayer_UserVideo;
         private AxWMPLib.AxWindowsMediaPlayer MPlayer_ScreenVideo;
+        private System.Windows.Forms.ToolStripButton BT_SaveCompact;
     }
 }
 

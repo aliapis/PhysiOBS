@@ -2237,8 +2237,7 @@ namespace PhysiOBS
                 }
             }
             //end of index finder process
-
-            
+           
             NumericUpDown error = (NumericUpDown)GetControl(((Button)sender).Parent.Parent, "NUDErrorCorrection_" + ID);
             double current_selected_error= double.Parse(error.Value.ToString());;
 
@@ -2247,6 +2246,7 @@ namespace PhysiOBS
                 if (Counter_For_Smooth_list[find_in] != 0)
                 {
                     signal.error_correction = 0.0;//Signal error update
+                    error_list[find_in] = 0.0;
                     Counter_For_Smooth_list[find_in] = 0;//Signal smooth counter update
                     alltables[find_in].Columns.Remove("Smoothing Signal");//Remove of smooth column
                     ch.Series.RemoveAt(5);//Remove of chart serie

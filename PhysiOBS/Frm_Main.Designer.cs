@@ -164,7 +164,7 @@
             this.BT_SaveCompact});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1265, 63);
+            this.toolStrip1.Size = new System.Drawing.Size(1265, 55);
             this.toolStrip1.TabIndex = 55;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -184,7 +184,7 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 63);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 55);
             // 
             // BT_save_project
             // 
@@ -201,7 +201,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 63);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
             // 
             // BT_signal_analysis
             // 
@@ -218,7 +218,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 63);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
             // 
             // BT_emotion_options
             // 
@@ -251,7 +251,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1263, 155);
+            this.shapeContainer1.Size = new System.Drawing.Size(1263, 162);
             this.shapeContainer1.TabIndex = 59;
             this.shapeContainer1.TabStop = false;
             // 
@@ -558,7 +558,7 @@
             this.SC_MainHor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SC_MainHor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SC_MainHor.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.SC_MainHor.Location = new System.Drawing.Point(0, 63);
+            this.SC_MainHor.Location = new System.Drawing.Point(0, 55);
             this.SC_MainHor.Margin = new System.Windows.Forms.Padding(0);
             this.SC_MainHor.Name = "SC_MainHor";
             this.SC_MainHor.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -579,7 +579,7 @@
             this.SC_MainHor.Panel2.Controls.Add(this.PL_TaskLine);
             this.SC_MainHor.Panel2.Controls.Add(this.PL_Navigation);
             this.SC_MainHor.Panel2.Controls.Add(this.shapeContainer1);
-            this.SC_MainHor.Size = new System.Drawing.Size(1265, 459);
+            this.SC_MainHor.Size = new System.Drawing.Size(1265, 466);
             this.SC_MainHor.SplitterDistance = 300;
             this.SC_MainHor.SplitterWidth = 2;
             this.SC_MainHor.TabIndex = 101;
@@ -633,7 +633,7 @@
             this.PL_Navigation.Controls.Add(this.LB_Time);
             this.PL_Navigation.Controls.Add(this.tb_time);
             this.PL_Navigation.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PL_Navigation.Location = new System.Drawing.Point(0, 93);
+            this.PL_Navigation.Location = new System.Drawing.Point(0, 100);
             this.PL_Navigation.Name = "PL_Navigation";
             this.PL_Navigation.Size = new System.Drawing.Size(1263, 62);
             this.PL_Navigation.TabIndex = 101;
@@ -654,7 +654,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1265, 522);
+            this.ClientSize = new System.Drawing.Size(1265, 521);
             this.Controls.Add(this.SC_MainHor);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

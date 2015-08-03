@@ -367,8 +367,7 @@ namespace PhysiOBS
             BarDown.Width = 18;
             BarDown.Height = 13;
             BarDown.BackgroundImageLayout = ImageLayout.Center;
-            //BarDown.BringToFront();
-            BarDown.SendToBack();
+            BarDown.BringToFront();
             BarDown.Cursor = Cursors.SizeWE;
 
             BarUp.MouseDown += new System.Windows.Forms.MouseEventHandler(BarArrow_MouseDown);

@@ -1686,7 +1686,7 @@ namespace PhysiOBS
                     //Εύρεση Standard Deviation
                     Double average = raw_bio_signal.Average();
                     double sumOfSquaresOfDifferences = raw_bio_signal.Select(val => (val - average) * (val - average)).Sum();
-                    double Stdev = Math.Sqrt(sumOfSquaresOfDifferences / raw_bio_signal.Length - 1); 
+                    double Stdev = Math.Sqrt(sumOfSquaresOfDifferences / (raw_bio_signal.Length - 1)); 
                     
                     //Μελέτη για χρήση θηκογραμμάτων
                     
@@ -2071,8 +2071,8 @@ namespace PhysiOBS
             // Set the starting and ending coordinates for the line.
             theLine2.BorderWidth = 2;
             theLine2.BorderColor = Color.Blue;
-            theLine2.StartPoint = new System.Drawing.Point(0, 151);
-            theLine2.EndPoint = new System.Drawing.Point(163, 151);
+            theLine2.StartPoint = new System.Drawing.Point(0, 150);
+            theLine2.EndPoint = new System.Drawing.Point(163, 150);
             theLine2.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
             
             ShapeContainer canvas_3 = new ShapeContainer();
@@ -2203,7 +2203,12 @@ namespace PhysiOBS
                 Bar.Size = new Size(2, Bar.Height - 160);//Αρχικοποίηση Bar
                 BarDown.Top = Bar.Height + Bar.Top;
                 if (Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL") == 0)
-                Bar.Size = new Size(2, 36);//Αρχικοποίηση Bar
+                {
+                    Bar.Size = new Size(2, 36);//Αρχικοποίηση Bar
+                    BarDown.Top = 63;
+                }
+               
+                
                 c.Dispose();
                 ReorderSignalPanels();
             }

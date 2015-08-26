@@ -106,7 +106,7 @@ namespace PhysiOBS
        
         private void BT_RemoveTask_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("The selected emotion will be removed!!!" + Environment.NewLine + "Are you Sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("The selected task will be removed!!!" + Environment.NewLine + "Are you Sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 //user clicked yes          
                 int selectedIndex = dataGridView1.CurrentCell.RowIndex;

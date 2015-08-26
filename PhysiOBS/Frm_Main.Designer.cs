@@ -185,7 +185,7 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 58);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 62);
             // 
             // BT_save_project
             // 
@@ -202,7 +202,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 58);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 62);
             // 
             // BT_signal_analysis
             // 
@@ -219,7 +219,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 58);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 62);
             // 
             // BT_emotion_options
             // 

@@ -56,6 +56,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>back_sq_3E4_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -85,6 +88,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Frm_About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_About.Designer.cs">
+      <DependentUpon>Frm_About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,6 +164,9 @@
     <Compile Include="testform.Designer.cs">
       <DependentUpon>testform.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Frm_About.resx">
+      <DependentUpon>Frm_About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm_Emotions_Grid.resx">
       <DependentUpon>Frm_Emotions_Grid.cs</DependentUpon>
     </EmbeddedResource>
@@ -241,7 +253,6 @@
     <None Include="Resources\tables-icon.png" />
     <None Include="Resources\table_icon1.png" />
     <None Include="Resources\table_icon.png" />
-    <None Include="Resources\back.png" />
     <None Include="Resources\forw.png" />
     <None Include="Resources\rs.png" />
     <None Include="Resources\48%284%29.png" />
@@ -251,8 +262,6 @@
     <None Include="Resources\72%285%29.png" />
     <None Include="Resources\128%282%29.png" />
     <None Include="Resources\em_table.png" />
-    <None Include="Resources\play.png" />
-    <None Include="Resources\pause.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhysiOBS_Kernel\PhysiOBS_Kernel.csproj">
@@ -271,6 +280,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\savezip.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back_sq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause_trans.png" />
+    <None Include="Resources\next_trans.png" />
+    <None Include="Resources\next2.png" />
+    <None Include="Resources\stop_trans.png" />
+    <None Include="Resources\play_trans.png" />
+    <None Include="Resources\prev_trans.png" />
+    <None Include="Resources\prev2.png" />
+    <None Include="Resources\BarUp_small.png" />
+    <None Include="Resources\BarDown_small.png" />
+    <None Include="Resources\remove_signal.png" />
+    <None Include="Resources\complete_Save_TR.png" />
+    <None Include="Resources\next1.png" />
+    <None Include="Resources\stop1.png" />
+    <None Include="Resources\play.png" />
+    <None Include="Resources\prev1.png" />
+    <None Include="Resources\pause.png" />
+    <None Include="Resources\next.png" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\play1.png" />
+    <None Include="Resources\prev.png" />
+    <None Include="Resources\algorithm-icon.png" />
+    <None Include="Resources\add_video.png" />
+    <None Include="Resources\applications-system.png" />
+    <None Include="Resources\algorithm.png" />
+    <None Include="Resources\algorithm_small.png" />
+    <None Include="Resources\add_signal.png" />
+    <None Include="Resources\add_signal1.png" />
+    <None Include="Resources\48%281%29.png" />
+    <Content Include="back_sq_3E4_icon.ico" />
+    <Content Include="Resources\back.png" />
+    <None Include="Resources\complete_Save2.png" />
+    <None Include="Resources\back_small1.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\OPEN.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

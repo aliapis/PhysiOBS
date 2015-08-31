@@ -36,14 +36,8 @@
             this.GB_Screen = new System.Windows.Forms.GroupBox();
             this.MPlayer_ScreenVideo = new AxWMPLib.AxWindowsMediaPlayer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.BT_open_project = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_save_project = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_signal_analysis = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_emotion_options = new System.Windows.Forms.ToolStripButton();
-            this.BT_SaveCompact = new System.Windows.Forms.ToolStripButton();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.PL_TaskLine = new System.Windows.Forms.Panel();
@@ -66,6 +60,10 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Total_Signal_PL = new System.Windows.Forms.Panel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.SC_MainHor = new System.Windows.Forms.SplitContainer();
+            this.SV_VideoSplitter = new System.Windows.Forms.SplitContainer();
+            this.PL_Navigation = new System.Windows.Forms.Panel();
+            this.LB_Duration = new System.Windows.Forms.Label();
             this.BT_Add_Video_U = new System.Windows.Forms.Button();
             this.BT_video_U_properties = new System.Windows.Forms.Button();
             this.BT_Add_Video_S = new System.Windows.Forms.Button();
@@ -73,15 +71,16 @@
             this.AddSignalBT = new System.Windows.Forms.Button();
             this.BTNext_Task = new System.Windows.Forms.Button();
             this.BTPrevious_Task = new System.Windows.Forms.Button();
+            this.BT_Task_Frm = new System.Windows.Forms.Button();
             this.BTNext_Total = new System.Windows.Forms.Button();
             this.BTPrevious_Total = new System.Windows.Forms.Button();
             this.BT_PlayPause = new System.Windows.Forms.Button();
             this.BT_Stop = new System.Windows.Forms.Button();
-            this.SC_MainHor = new System.Windows.Forms.SplitContainer();
-            this.SV_VideoSplitter = new System.Windows.Forms.SplitContainer();
-            this.BT_Task_Frm = new System.Windows.Forms.Button();
-            this.PL_Navigation = new System.Windows.Forms.Panel();
-            this.LB_Duration = new System.Windows.Forms.Label();
+            this.BT_open_project = new System.Windows.Forms.ToolStripButton();
+            this.BT_save_project = new System.Windows.Forms.ToolStripButton();
+            this.BT_SaveCompact = new System.Windows.Forms.ToolStripButton();
+            this.BT_signal_analysis = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.GB_uservideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_UserVideo)).BeginInit();
             this.GB_Screen.SuspendLayout();
@@ -107,9 +106,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GB_uservideo.AutoSize = true;
             this.GB_uservideo.Controls.Add(this.MPlayer_UserVideo);
-            this.GB_uservideo.Location = new System.Drawing.Point(67, 4);
+            this.GB_uservideo.Location = new System.Drawing.Point(57, 4);
             this.GB_uservideo.Name = "GB_uservideo";
-            this.GB_uservideo.Size = new System.Drawing.Size(555, 291);
+            this.GB_uservideo.Size = new System.Drawing.Size(565, 291);
             this.GB_uservideo.TabIndex = 1;
             this.GB_uservideo.TabStop = false;
             this.GB_uservideo.Text = "User Observation";
@@ -121,7 +120,7 @@
             this.MPlayer_UserVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_UserVideo.Name = "MPlayer_UserVideo";
             this.MPlayer_UserVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_UserVideo.OcxState")));
-            this.MPlayer_UserVideo.Size = new System.Drawing.Size(549, 272);
+            this.MPlayer_UserVideo.Size = new System.Drawing.Size(559, 272);
             this.MPlayer_UserVideo.TabIndex = 0;
             this.MPlayer_UserVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_UserVideo_OpenStateChange);
             this.MPlayer_UserVideo.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MPlayer_UserVideo_PlayStateChange);
@@ -132,9 +131,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GB_Screen.Controls.Add(this.MPlayer_ScreenVideo);
-            this.GB_Screen.Location = new System.Drawing.Point(11, 3);
+            this.GB_Screen.Location = new System.Drawing.Point(8, 3);
             this.GB_Screen.Name = "GB_Screen";
-            this.GB_Screen.Size = new System.Drawing.Size(555, 292);
+            this.GB_Screen.Size = new System.Drawing.Size(566, 292);
             this.GB_Screen.TabIndex = 2;
             this.GB_Screen.TabStop = false;
             this.GB_Screen.Text = "Screen Capture";
@@ -146,104 +145,38 @@
             this.MPlayer_ScreenVideo.Location = new System.Drawing.Point(3, 16);
             this.MPlayer_ScreenVideo.Name = "MPlayer_ScreenVideo";
             this.MPlayer_ScreenVideo.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MPlayer_ScreenVideo.OcxState")));
-            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(549, 273);
+            this.MPlayer_ScreenVideo.Size = new System.Drawing.Size(560, 273);
             this.MPlayer_ScreenVideo.TabIndex = 1;
             this.MPlayer_ScreenVideo.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.MPlayer_ScreenVideo_OpenStateChange);
             // 
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BT_open_project,
-            this.toolStripSeparator4,
             this.BT_save_project,
+            this.BT_SaveCompact,
             this.toolStripSeparator1,
             this.BT_signal_analysis,
             this.toolStripSeparator2,
-            this.BT_emotion_options,
-            this.BT_SaveCompact});
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1265, 62);
             this.toolStrip1.TabIndex = 55;
             this.toolStrip1.TabStop = true;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // BT_open_project
-            // 
-            this.BT_open_project.AutoSize = false;
-            this.BT_open_project.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BT_open_project.Image = ((System.Drawing.Image)(resources.GetObject("BT_open_project.Image")));
-            this.BT_open_project.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BT_open_project.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BT_open_project.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BT_open_project.Name = "BT_open_project";
-            this.BT_open_project.Size = new System.Drawing.Size(50, 50);
-            this.BT_open_project.Text = "Open Project";
-            this.BT_open_project.Click += new System.EventHandler(this.BT_open_project_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 62);
-            // 
-            // BT_save_project
-            // 
-            this.BT_save_project.AutoSize = false;
-            this.BT_save_project.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BT_save_project.Image = ((System.Drawing.Image)(resources.GetObject("BT_save_project.Image")));
-            this.BT_save_project.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BT_save_project.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BT_save_project.Name = "BT_save_project";
-            this.BT_save_project.Size = new System.Drawing.Size(50, 50);
-            this.BT_save_project.Text = "Save Project";
-            this.BT_save_project.Click += new System.EventHandler(this.BT_save_project_Click);
+            this.toolStrip1.Text = "About...";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 62);
             // 
-            // BT_signal_analysis
-            // 
-            this.BT_signal_analysis.AutoSize = false;
-            this.BT_signal_analysis.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BT_signal_analysis.Image = ((System.Drawing.Image)(resources.GetObject("BT_signal_analysis.Image")));
-            this.BT_signal_analysis.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BT_signal_analysis.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BT_signal_analysis.Name = "BT_signal_analysis";
-            this.BT_signal_analysis.Size = new System.Drawing.Size(50, 50);
-            this.BT_signal_analysis.Text = "Signal Analysis";
-            this.BT_signal_analysis.Click += new System.EventHandler(this.BT_signal_analysis_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 62);
-            // 
-            // BT_emotion_options
-            // 
-            this.BT_emotion_options.AutoSize = false;
-            this.BT_emotion_options.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BT_emotion_options.Image = global::PhysiOBS.Properties.Resources._48;
-            this.BT_emotion_options.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BT_emotion_options.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BT_emotion_options.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_emotion_options.Name = "BT_emotion_options";
-            this.BT_emotion_options.Size = new System.Drawing.Size(50, 50);
-            this.BT_emotion_options.Text = "Emotion Options";
-            // 
-            // BT_SaveCompact
-            // 
-            this.BT_SaveCompact.AutoSize = false;
-            this.BT_SaveCompact.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BT_SaveCompact.Image = global::PhysiOBS.Properties.Resources.savezip;
-            this.BT_SaveCompact.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BT_SaveCompact.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BT_SaveCompact.Name = "BT_SaveCompact";
-            this.BT_SaveCompact.Size = new System.Drawing.Size(50, 50);
-            this.BT_SaveCompact.Text = "BT_SaveCompact";
-            this.BT_SaveCompact.Click += new System.EventHandler(this.BT_SaveCompact_Click);
             // 
             // shapeContainer1
             // 
@@ -252,7 +185,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1263, 155);
+            this.shapeContainer1.Size = new System.Drawing.Size(1263, 194);
             this.shapeContainer1.TabIndex = 59;
             this.shapeContainer1.TabStop = false;
             // 
@@ -263,8 +196,8 @@
             this.lineShape1.BorderColor = System.Drawing.Color.Blue;
             this.lineShape1.BorderWidth = 3;
             this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 7;
-            this.lineShape1.X2 = 1256;
+            this.lineShape1.X1 = 3;
+            this.lineShape1.X2 = 1260;
             this.lineShape1.Y1 = 80;
             this.lineShape1.Y2 = 80;
             // 
@@ -304,7 +237,7 @@
             this.tb_time.BackColor = System.Drawing.SystemColors.Info;
             this.tb_time.Enabled = false;
             this.tb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.tb_time.Location = new System.Drawing.Point(793, 14);
+            this.tb_time.Location = new System.Drawing.Point(762, 17);
             this.tb_time.Name = "tb_time";
             this.tb_time.Size = new System.Drawing.Size(103, 24);
             this.tb_time.TabIndex = 74;
@@ -316,7 +249,7 @@
             this.LB_Time.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LB_Time.AutoSize = true;
             this.LB_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.LB_Time.Location = new System.Drawing.Point(902, 14);
+            this.LB_Time.Location = new System.Drawing.Point(871, 19);
             this.LB_Time.Name = "LB_Time";
             this.LB_Time.Size = new System.Drawing.Size(91, 20);
             this.LB_Time.TabIndex = 75;
@@ -411,149 +344,6 @@
             this.Total_Signal_PL.Size = new System.Drawing.Size(1260, 0);
             this.Total_Signal_PL.TabIndex = 99;
             // 
-            // BT_Add_Video_U
-            // 
-            this.BT_Add_Video_U.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Add_Video_U.BackgroundImage")));
-            this.BT_Add_Video_U.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Add_Video_U.Location = new System.Drawing.Point(11, 21);
-            this.BT_Add_Video_U.Name = "BT_Add_Video_U";
-            this.BT_Add_Video_U.Size = new System.Drawing.Size(50, 50);
-            this.BT_Add_Video_U.TabIndex = 21;
-            this.toolTip.SetToolTip(this.BT_Add_Video_U, "Open User Video");
-            this.BT_Add_Video_U.UseVisualStyleBackColor = true;
-            this.BT_Add_Video_U.Click += new System.EventHandler(this.BT_Add_Video_U_Click_1);
-            // 
-            // BT_video_U_properties
-            // 
-            this.BT_video_U_properties.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_video_U_properties.BackgroundImage")));
-            this.BT_video_U_properties.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_video_U_properties.Enabled = false;
-            this.BT_video_U_properties.Location = new System.Drawing.Point(11, 77);
-            this.BT_video_U_properties.Name = "BT_video_U_properties";
-            this.BT_video_U_properties.Size = new System.Drawing.Size(50, 50);
-            this.BT_video_U_properties.TabIndex = 22;
-            this.toolTip.SetToolTip(this.BT_video_U_properties, "User\'s options");
-            this.BT_video_U_properties.UseVisualStyleBackColor = true;
-            this.BT_video_U_properties.Click += new System.EventHandler(this.BT_video_U_properties_Click);
-            // 
-            // BT_Add_Video_S
-            // 
-            this.BT_Add_Video_S.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BT_Add_Video_S.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Add_Video_S.BackgroundImage")));
-            this.BT_Add_Video_S.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Add_Video_S.Location = new System.Drawing.Point(572, 19);
-            this.BT_Add_Video_S.Name = "BT_Add_Video_S";
-            this.BT_Add_Video_S.Size = new System.Drawing.Size(50, 50);
-            this.BT_Add_Video_S.TabIndex = 23;
-            this.toolTip.SetToolTip(this.BT_Add_Video_S, "Open Screen Video");
-            this.BT_Add_Video_S.UseVisualStyleBackColor = true;
-            this.BT_Add_Video_S.Click += new System.EventHandler(this.BT_Add_Video_S_Click);
-            // 
-            // BT_video_S_Properties
-            // 
-            this.BT_video_S_Properties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BT_video_S_Properties.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_video_S_Properties.BackgroundImage")));
-            this.BT_video_S_Properties.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_video_S_Properties.Enabled = false;
-            this.BT_video_S_Properties.Location = new System.Drawing.Point(572, 75);
-            this.BT_video_S_Properties.Name = "BT_video_S_Properties";
-            this.BT_video_S_Properties.Size = new System.Drawing.Size(50, 50);
-            this.BT_video_S_Properties.TabIndex = 24;
-            this.toolTip.SetToolTip(this.BT_video_S_Properties, "Screen Option");
-            this.BT_video_S_Properties.UseVisualStyleBackColor = true;
-            this.BT_video_S_Properties.Click += new System.EventHandler(this.BT_video_S_Properties_Click);
-            // 
-            // AddSignalBT
-            // 
-            this.AddSignalBT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.AddSignalBT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.AddSignalBT.Image = global::PhysiOBS.Properties.Resources.AddSignal;
-            this.AddSignalBT.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.AddSignalBT.Location = new System.Drawing.Point(5, 5);
-            this.AddSignalBT.Name = "AddSignalBT";
-            this.AddSignalBT.Size = new System.Drawing.Size(61, 70);
-            this.AddSignalBT.TabIndex = 41;
-            this.AddSignalBT.Text = "Add \r\nSignal";
-            this.AddSignalBT.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolTip.SetToolTip(this.AddSignalBT, "Add Physiological Signal");
-            this.AddSignalBT.UseVisualStyleBackColor = true;
-            this.AddSignalBT.Click += new System.EventHandler(this.BTAddSignalClick);
-            // 
-            // BTNext_Task
-            // 
-            this.BTNext_Task.Image = global::PhysiOBS.Properties.Resources.forw;
-            this.BTNext_Task.Location = new System.Drawing.Point(120, 26);
-            this.BTNext_Task.Name = "BTNext_Task";
-            this.BTNext_Task.Size = new System.Drawing.Size(45, 38);
-            this.BTNext_Task.TabIndex = 91;
-            this.toolTip.SetToolTip(this.BTNext_Task, "Next Point");
-            this.BTNext_Task.UseVisualStyleBackColor = true;
-            this.BTNext_Task.Click += new System.EventHandler(this.ΒΤNextClick);
-            // 
-            // BTPrevious_Task
-            // 
-            this.BTPrevious_Task.Image = global::PhysiOBS.Properties.Resources.back;
-            this.BTPrevious_Task.Location = new System.Drawing.Point(72, 26);
-            this.BTPrevious_Task.Name = "BTPrevious_Task";
-            this.BTPrevious_Task.Size = new System.Drawing.Size(45, 38);
-            this.BTPrevious_Task.TabIndex = 90;
-            this.toolTip.SetToolTip(this.BTPrevious_Task, "Previous Point");
-            this.BTPrevious_Task.UseVisualStyleBackColor = true;
-            this.BTPrevious_Task.Click += new System.EventHandler(this.BTPreviousClick);
-            // 
-            // BTNext_Total
-            // 
-            this.BTNext_Total.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BTNext_Total.Image = ((System.Drawing.Image)(resources.GetObject("BTNext_Total.Image")));
-            this.BTNext_Total.Location = new System.Drawing.Point(729, 0);
-            this.BTNext_Total.Name = "BTNext_Total";
-            this.BTNext_Total.Size = new System.Drawing.Size(58, 55);
-            this.BTNext_Total.TabIndex = 77;
-            this.toolTip.SetToolTip(this.BTNext_Total, "Next point (Task-Signal)");
-            this.BTNext_Total.UseVisualStyleBackColor = true;
-            this.BTNext_Total.Click += new System.EventHandler(this.ΒΤNextClick);
-            // 
-            // BTPrevious_Total
-            // 
-            this.BTPrevious_Total.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BTPrevious_Total.Image = ((System.Drawing.Image)(resources.GetObject("BTPrevious_Total.Image")));
-            this.BTPrevious_Total.Location = new System.Drawing.Point(530, 0);
-            this.BTPrevious_Total.Name = "BTPrevious_Total";
-            this.BTPrevious_Total.Size = new System.Drawing.Size(62, 55);
-            this.BTPrevious_Total.TabIndex = 76;
-            this.toolTip.SetToolTip(this.BTPrevious_Total, "Previous Point (Task-Signal)");
-            this.BTPrevious_Total.UseVisualStyleBackColor = true;
-            this.BTPrevious_Total.Click += new System.EventHandler(this.BTPreviousClick);
-            // 
-            // BT_PlayPause
-            // 
-            this.BT_PlayPause.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BT_PlayPause.Enabled = false;
-            this.BT_PlayPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.BT_PlayPause.Image = global::PhysiOBS.Properties.Resources.play;
-            this.BT_PlayPause.Location = new System.Drawing.Point(600, 0);
-            this.BT_PlayPause.Name = "BT_PlayPause";
-            this.BT_PlayPause.Size = new System.Drawing.Size(56, 55);
-            this.BT_PlayPause.TabIndex = 36;
-            this.BT_PlayPause.Text = " ";
-            this.toolTip.SetToolTip(this.BT_PlayPause, "Play All");
-            this.BT_PlayPause.UseVisualStyleBackColor = true;
-            this.BT_PlayPause.Click += new System.EventHandler(this.BT_Pause_Click);
-            // 
-            // BT_Stop
-            // 
-            this.BT_Stop.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BT_Stop.Enabled = false;
-            this.BT_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.BT_Stop.Image = ((System.Drawing.Image)(resources.GetObject("BT_Stop.Image")));
-            this.BT_Stop.Location = new System.Drawing.Point(662, 0);
-            this.BT_Stop.Name = "BT_Stop";
-            this.BT_Stop.Size = new System.Drawing.Size(58, 55);
-            this.BT_Stop.TabIndex = 37;
-            this.toolTip.SetToolTip(this.BT_Stop, "Stop All");
-            this.BT_Stop.UseVisualStyleBackColor = true;
-            this.BT_Stop.Click += new System.EventHandler(this.BT_Stop_Click);
-            // 
             // SC_MainHor
             // 
             this.SC_MainHor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -566,11 +356,13 @@
             // 
             // SC_MainHor.Panel1
             // 
+            this.SC_MainHor.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.SC_MainHor.Panel1.Controls.Add(this.SV_VideoSplitter);
             this.SC_MainHor.Panel1MinSize = 300;
             // 
             // SC_MainHor.Panel2
             // 
+            this.SC_MainHor.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.SC_MainHor.Panel2.Controls.Add(this.Total_Signal_PL);
             this.SC_MainHor.Panel2.Controls.Add(this.Bar);
             this.SC_MainHor.Panel2.Controls.Add(this.AddSignalBT);
@@ -580,7 +372,8 @@
             this.SC_MainHor.Panel2.Controls.Add(this.PL_TaskLine);
             this.SC_MainHor.Panel2.Controls.Add(this.PL_Navigation);
             this.SC_MainHor.Panel2.Controls.Add(this.shapeContainer1);
-            this.SC_MainHor.Size = new System.Drawing.Size(1265, 459);
+            this.SC_MainHor.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.SC_MainHor_Panel2_Paint);
+            this.SC_MainHor.Size = new System.Drawing.Size(1265, 498);
             this.SC_MainHor.SplitterDistance = 300;
             this.SC_MainHor.SplitterWidth = 2;
             this.SC_MainHor.TabIndex = 101;
@@ -594,12 +387,14 @@
             // 
             // SV_VideoSplitter.Panel1
             // 
+            this.SV_VideoSplitter.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SV_VideoSplitter.Panel1.Controls.Add(this.GB_uservideo);
             this.SV_VideoSplitter.Panel1.Controls.Add(this.BT_Add_Video_U);
             this.SV_VideoSplitter.Panel1.Controls.Add(this.BT_video_U_properties);
             // 
             // SV_VideoSplitter.Panel2
             // 
+            this.SV_VideoSplitter.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SV_VideoSplitter.Panel2.Controls.Add(this.GB_Screen);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_Add_Video_S);
             this.SV_VideoSplitter.Panel2.Controls.Add(this.BT_video_S_Properties);
@@ -607,25 +402,10 @@
             this.SV_VideoSplitter.SplitterDistance = 628;
             this.SV_VideoSplitter.TabIndex = 25;
             // 
-            // BT_Task_Frm
-            // 
-            this.BT_Task_Frm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BT_Task_Frm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BT_Task_Frm.Enabled = false;
-            this.BT_Task_Frm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.BT_Task_Frm.Image = global::PhysiOBS.Properties.Resources.task_are;
-            this.BT_Task_Frm.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.BT_Task_Frm.Location = new System.Drawing.Point(1164, 5);
-            this.BT_Task_Frm.Name = "BT_Task_Frm";
-            this.BT_Task_Frm.Size = new System.Drawing.Size(97, 70);
-            this.BT_Task_Frm.TabIndex = 58;
-            this.BT_Task_Frm.Text = "Manage Tasks";
-            this.BT_Task_Frm.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BT_Task_Frm.UseVisualStyleBackColor = true;
-            this.BT_Task_Frm.Click += new System.EventHandler(this.BT_Task_Frm_Click);
-            // 
             // PL_Navigation
             // 
+            this.PL_Navigation.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.PL_Navigation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PL_Navigation.Controls.Add(this.LB_Duration);
             this.PL_Navigation.Controls.Add(this.BTNext_Total);
             this.PL_Navigation.Controls.Add(this.BTPrevious_Total);
@@ -634,9 +414,9 @@
             this.PL_Navigation.Controls.Add(this.LB_Time);
             this.PL_Navigation.Controls.Add(this.tb_time);
             this.PL_Navigation.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PL_Navigation.Location = new System.Drawing.Point(0, 93);
+            this.PL_Navigation.Location = new System.Drawing.Point(0, 133);
             this.PL_Navigation.Name = "PL_Navigation";
-            this.PL_Navigation.Size = new System.Drawing.Size(1263, 62);
+            this.PL_Navigation.Size = new System.Drawing.Size(1263, 61);
             this.PL_Navigation.TabIndex = 101;
             // 
             // LB_Duration
@@ -644,25 +424,254 @@
             this.LB_Duration.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LB_Duration.AutoSize = true;
             this.LB_Duration.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.LB_Duration.Location = new System.Drawing.Point(999, 14);
+            this.LB_Duration.Location = new System.Drawing.Point(968, 19);
             this.LB_Duration.Name = "LB_Duration";
             this.LB_Duration.Size = new System.Drawing.Size(52, 20);
             this.LB_Duration.TabIndex = 78;
             this.LB_Duration.Text = "Total: ";
+            // 
+            // BT_Add_Video_U
+            // 
+            this.BT_Add_Video_U.Cursor = System.Windows.Forms.Cursors.Default;
+            this.BT_Add_Video_U.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Add_Video_U.Image = global::PhysiOBS.Properties.Resources.add_video;
+            this.BT_Add_Video_U.Location = new System.Drawing.Point(11, 19);
+            this.BT_Add_Video_U.Name = "BT_Add_Video_U";
+            this.BT_Add_Video_U.Size = new System.Drawing.Size(40, 40);
+            this.BT_Add_Video_U.TabIndex = 21;
+            this.toolTip.SetToolTip(this.BT_Add_Video_U, "Open User Video");
+            this.BT_Add_Video_U.UseVisualStyleBackColor = true;
+            this.BT_Add_Video_U.Click += new System.EventHandler(this.BT_Add_Video_U_Click_1);
+            // 
+            // BT_video_U_properties
+            // 
+            this.BT_video_U_properties.Enabled = false;
+            this.BT_video_U_properties.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_video_U_properties.Image = global::PhysiOBS.Properties.Resources.applications_system;
+            this.BT_video_U_properties.Location = new System.Drawing.Point(11, 63);
+            this.BT_video_U_properties.Name = "BT_video_U_properties";
+            this.BT_video_U_properties.Size = new System.Drawing.Size(40, 40);
+            this.BT_video_U_properties.TabIndex = 22;
+            this.toolTip.SetToolTip(this.BT_video_U_properties, "User\'s options");
+            this.BT_video_U_properties.UseVisualStyleBackColor = true;
+            this.BT_video_U_properties.Click += new System.EventHandler(this.BT_video_U_properties_Click);
+            // 
+            // BT_Add_Video_S
+            // 
+            this.BT_Add_Video_S.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BT_Add_Video_S.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Add_Video_S.Image = global::PhysiOBS.Properties.Resources.add_video;
+            this.BT_Add_Video_S.Location = new System.Drawing.Point(580, 19);
+            this.BT_Add_Video_S.Name = "BT_Add_Video_S";
+            this.BT_Add_Video_S.Size = new System.Drawing.Size(40, 40);
+            this.BT_Add_Video_S.TabIndex = 23;
+            this.toolTip.SetToolTip(this.BT_Add_Video_S, "Open Screen Video");
+            this.BT_Add_Video_S.UseVisualStyleBackColor = true;
+            this.BT_Add_Video_S.Click += new System.EventHandler(this.BT_Add_Video_S_Click);
+            // 
+            // BT_video_S_Properties
+            // 
+            this.BT_video_S_Properties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BT_video_S_Properties.Enabled = false;
+            this.BT_video_S_Properties.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_video_S_Properties.Image = global::PhysiOBS.Properties.Resources.applications_system;
+            this.BT_video_S_Properties.Location = new System.Drawing.Point(580, 65);
+            this.BT_video_S_Properties.Name = "BT_video_S_Properties";
+            this.BT_video_S_Properties.Size = new System.Drawing.Size(40, 40);
+            this.BT_video_S_Properties.TabIndex = 24;
+            this.toolTip.SetToolTip(this.BT_video_S_Properties, "Screen Option");
+            this.BT_video_S_Properties.UseVisualStyleBackColor = true;
+            this.BT_video_S_Properties.Click += new System.EventHandler(this.BT_video_S_Properties_Click);
+            // 
+            // AddSignalBT
+            // 
+            this.AddSignalBT.AutoSize = true;
+            this.AddSignalBT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.AddSignalBT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddSignalBT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.AddSignalBT.Image = global::PhysiOBS.Properties.Resources.add_signal1;
+            this.AddSignalBT.Location = new System.Drawing.Point(3, 4);
+            this.AddSignalBT.Name = "AddSignalBT";
+            this.AddSignalBT.Size = new System.Drawing.Size(72, 72);
+            this.AddSignalBT.TabIndex = 41;
+            this.AddSignalBT.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.AddSignalBT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip.SetToolTip(this.AddSignalBT, "Add Physiological Signal");
+            this.AddSignalBT.UseVisualStyleBackColor = false;
+            this.AddSignalBT.Click += new System.EventHandler(this.BTAddSignalClick);
+            // 
+            // BTNext_Task
+            // 
+            this.BTNext_Task.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTNext_Task.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNext_Task.Image = global::PhysiOBS.Properties.Resources.forw;
+            this.BTNext_Task.Location = new System.Drawing.Point(123, 26);
+            this.BTNext_Task.Name = "BTNext_Task";
+            this.BTNext_Task.Size = new System.Drawing.Size(42, 38);
+            this.BTNext_Task.TabIndex = 91;
+            this.toolTip.SetToolTip(this.BTNext_Task, "Next Point");
+            this.BTNext_Task.UseVisualStyleBackColor = true;
+            this.BTNext_Task.Click += new System.EventHandler(this.ΒΤNextClick);
+            // 
+            // BTPrevious_Task
+            // 
+            this.BTPrevious_Task.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTPrevious_Task.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTPrevious_Task.Image = global::PhysiOBS.Properties.Resources.back1;
+            this.BTPrevious_Task.Location = new System.Drawing.Point(80, 26);
+            this.BTPrevious_Task.Name = "BTPrevious_Task";
+            this.BTPrevious_Task.Size = new System.Drawing.Size(40, 38);
+            this.BTPrevious_Task.TabIndex = 90;
+            this.toolTip.SetToolTip(this.BTPrevious_Task, "Previous Point");
+            this.BTPrevious_Task.UseVisualStyleBackColor = true;
+            this.BTPrevious_Task.Click += new System.EventHandler(this.BTPreviousClick);
+            // 
+            // BT_Task_Frm
+            // 
+            this.BT_Task_Frm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BT_Task_Frm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Task_Frm.Enabled = false;
+            this.BT_Task_Frm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Task_Frm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.BT_Task_Frm.Image = global::PhysiOBS.Properties.Resources._48_1_;
+            this.BT_Task_Frm.Location = new System.Drawing.Point(1164, 5);
+            this.BT_Task_Frm.Name = "BT_Task_Frm";
+            this.BT_Task_Frm.Size = new System.Drawing.Size(96, 72);
+            this.BT_Task_Frm.TabIndex = 58;
+            this.BT_Task_Frm.Text = "Manage Tasks";
+            this.BT_Task_Frm.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.BT_Task_Frm.UseVisualStyleBackColor = true;
+            this.BT_Task_Frm.Click += new System.EventHandler(this.BT_Task_Frm_Click);
+            // 
+            // BTNext_Total
+            // 
+            this.BTNext_Total.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BTNext_Total.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BTNext_Total.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNext_Total.Image = global::PhysiOBS.Properties.Resources.next_trans;
+            this.BTNext_Total.Location = new System.Drawing.Point(697, 5);
+            this.BTNext_Total.Name = "BTNext_Total";
+            this.BTNext_Total.Size = new System.Drawing.Size(50, 50);
+            this.BTNext_Total.TabIndex = 77;
+            this.toolTip.SetToolTip(this.BTNext_Total, "Next point (Task-Signal)");
+            this.BTNext_Total.UseVisualStyleBackColor = true;
+            this.BTNext_Total.Click += new System.EventHandler(this.ΒΤNextClick);
+            // 
+            // BTPrevious_Total
+            // 
+            this.BTPrevious_Total.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BTPrevious_Total.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTPrevious_Total.Image = global::PhysiOBS.Properties.Resources.prev_trans;
+            this.BTPrevious_Total.Location = new System.Drawing.Point(529, 5);
+            this.BTPrevious_Total.Name = "BTPrevious_Total";
+            this.BTPrevious_Total.Size = new System.Drawing.Size(50, 50);
+            this.BTPrevious_Total.TabIndex = 76;
+            this.toolTip.SetToolTip(this.BTPrevious_Total, "Previous Point (Task-Signal)");
+            this.BTPrevious_Total.UseVisualStyleBackColor = true;
+            this.BTPrevious_Total.Click += new System.EventHandler(this.BTPreviousClick);
+            // 
+            // BT_PlayPause
+            // 
+            this.BT_PlayPause.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BT_PlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_PlayPause.Enabled = false;
+            this.BT_PlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_PlayPause.Image = global::PhysiOBS.Properties.Resources.play_trans;
+            this.BT_PlayPause.Location = new System.Drawing.Point(585, 5);
+            this.BT_PlayPause.Name = "BT_PlayPause";
+            this.BT_PlayPause.Size = new System.Drawing.Size(50, 50);
+            this.BT_PlayPause.TabIndex = 36;
+            this.BT_PlayPause.Text = " ";
+            this.toolTip.SetToolTip(this.BT_PlayPause, "Play All");
+            this.BT_PlayPause.UseVisualStyleBackColor = true;
+            this.BT_PlayPause.Click += new System.EventHandler(this.BT_Pause_Click);
+            // 
+            // BT_Stop
+            // 
+            this.BT_Stop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BT_Stop.BackgroundImage = global::PhysiOBS.Properties.Resources.stop;
+            this.BT_Stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_Stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Stop.Image = global::PhysiOBS.Properties.Resources.stop_trans;
+            this.BT_Stop.Location = new System.Drawing.Point(641, 5);
+            this.BT_Stop.Name = "BT_Stop";
+            this.BT_Stop.Size = new System.Drawing.Size(50, 50);
+            this.BT_Stop.TabIndex = 37;
+            this.toolTip.SetToolTip(this.BT_Stop, "Stop All");
+            this.BT_Stop.UseVisualStyleBackColor = true;
+            this.BT_Stop.Click += new System.EventHandler(this.BT_Stop_Click);
+            // 
+            // BT_open_project
+            // 
+            this.BT_open_project.Image = global::PhysiOBS.Properties.Resources.OPEN;
+            this.BT_open_project.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BT_open_project.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BT_open_project.Name = "BT_open_project";
+            this.BT_open_project.Size = new System.Drawing.Size(80, 59);
+            this.BT_open_project.Text = "Open Project";
+            this.BT_open_project.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BT_open_project.Click += new System.EventHandler(this.BT_open_project_Click);
+            // 
+            // BT_save_project
+            // 
+            this.BT_save_project.Image = global::PhysiOBS.Properties.Resources.save;
+            this.BT_save_project.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BT_save_project.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BT_save_project.Name = "BT_save_project";
+            this.BT_save_project.Size = new System.Drawing.Size(75, 59);
+            this.BT_save_project.Text = "Save Project";
+            this.BT_save_project.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BT_save_project.Click += new System.EventHandler(this.BT_save_project_Click);
+            // 
+            // BT_SaveCompact
+            // 
+            this.BT_SaveCompact.Image = global::PhysiOBS.Properties.Resources.complete_Save_TR;
+            this.BT_SaveCompact.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BT_SaveCompact.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BT_SaveCompact.Name = "BT_SaveCompact";
+            this.BT_SaveCompact.Size = new System.Drawing.Size(87, 59);
+            this.BT_SaveCompact.Text = "Compact Save";
+            this.BT_SaveCompact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BT_SaveCompact.Click += new System.EventHandler(this.BT_SaveCompact_Click);
+            // 
+            // BT_signal_analysis
+            // 
+            this.BT_signal_analysis.Image = global::PhysiOBS.Properties.Resources.algorithm_icon;
+            this.BT_signal_analysis.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.BT_signal_analysis.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BT_signal_analysis.Name = "BT_signal_analysis";
+            this.BT_signal_analysis.Size = new System.Drawing.Size(89, 59);
+            this.BT_signal_analysis.Text = "Signal Analysis";
+            this.BT_signal_analysis.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.BT_signal_analysis.Click += new System.EventHandler(this.BT_signal_analysis_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton1.Image = global::PhysiOBS.Properties.Resources.back_small1;
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(59, 59);
+            this.toolStripButton1.Text = "About . . ";
+            this.toolStripButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1265, 521);
+            this.ClientSize = new System.Drawing.Size(1265, 560);
             this.Controls.Add(this.SC_MainHor);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1281, 560);
             this.Name = "Frm_Main";
             this.ShowIcon = false;
-            this.Text = " ";
+            this.Text = " PhysiObj Emotion Detection";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.GB_uservideo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MPlayer_UserVideo)).EndInit();
@@ -674,6 +683,7 @@
             this.EmotionsMenou.ResumeLayout(false);
             this.SC_MainHor.Panel1.ResumeLayout(false);
             this.SC_MainHor.Panel2.ResumeLayout(false);
+            this.SC_MainHor.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SC_MainHor)).EndInit();
             this.SC_MainHor.ResumeLayout(false);
             this.SV_VideoSplitter.Panel1.ResumeLayout(false);
@@ -702,7 +712,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton BT_save_project;
         private System.Windows.Forms.ToolStripButton BT_open_project;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton BT_signal_analysis;
         private System.Windows.Forms.Button BT_Task_Frm;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
@@ -716,7 +725,6 @@
         private System.Windows.Forms.Button BTNext_Total;
         private System.Windows.Forms.ContextMenuStrip Obs_Emot;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton BT_emotion_options;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
@@ -741,6 +749,7 @@
         private AxWMPLib.AxWindowsMediaPlayer MPlayer_UserVideo;
         private AxWMPLib.AxWindowsMediaPlayer MPlayer_ScreenVideo;
         private System.Windows.Forms.ToolStripButton BT_SaveCompact;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

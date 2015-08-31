@@ -209,7 +209,7 @@ namespace PhysiOBS
                     {
                         MPlayer_ScreenVideo.Ctlcontrols.play();
                     }
-                    Bitmap b2 = new Bitmap(Properties.Resources.pause);
+                    Bitmap b2 = new Bitmap(Properties.Resources.pause_trans);
                     BT_PlayPause.Image = b2;
                 }
                 else if ((CurrentVideo_S == null) && (CurrentVideo_U == null))
@@ -246,7 +246,7 @@ namespace PhysiOBS
                 MPlayer_ScreenVideo.Ctlcontrols.pause();
                 Timer_Project.Stop();
                 BT_PlayPause.Text = " ";
-                Bitmap b2 = new Bitmap(Properties.Resources.play);
+                Bitmap b2 = new Bitmap(Properties.Resources.play_trans);
                 BT_PlayPause.Image = b2;
             }
         }
@@ -257,7 +257,7 @@ namespace PhysiOBS
             MPlayer_UserVideo.Ctlcontrols.stop();
             MPlayer_ScreenVideo.Ctlcontrols.stop();
             Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
-            Bitmap b2 = new Bitmap(Properties.Resources.play);
+            Bitmap b2 = new Bitmap(Properties.Resources.play_trans);
             BT_PlayPause.Image = b2;
         }
 
@@ -299,7 +299,7 @@ namespace PhysiOBS
                 tb_time.Text = "  ";
                 BTPrevious_Total.Enabled = true;
                 BTNext_Total.Enabled = true;
-                Bitmap b2 = new Bitmap(Properties.Resources.play);
+                Bitmap b2 = new Bitmap(Properties.Resources.play_trans);
                 BT_PlayPause.Image = b2;
             }
             else if (e.newState == 3)
@@ -347,26 +347,24 @@ namespace PhysiOBS
         private void intializeBar()
         {
             BarUp.Visible = true;
-            BarUp.BackgroundImage = Properties.Resources.BarUp;
+            BarUp.Image = Properties.Resources.BarUp_small;
             Bar.Parent.Controls.Add(BarUp);
             BarUp.Parent = Bar.Parent;
-            BarUp.Left = 163;
-            BarUp.Top = 14;
-            BarUp.Width = 18;
-            BarUp.Height = 13;
-            BarUp.BackgroundImageLayout = ImageLayout.Center;
+            BarUp.Left = 167;
+            BarUp.Top = 18;
+            BarUp.Width = 12;
+            BarUp.Height = 9;
             BarUp.BringToFront();
             BarUp.Cursor = Cursors.SizeWE;
 
             BarDown.Visible = true;
-            BarDown.BackgroundImage = Properties.Resources.BarDown;
+            BarDown.Image = Properties.Resources.BarDown_small;
             Bar.Parent.Controls.Add(BarDown);
             BarDown.Parent = Bar.Parent;
-            BarDown.Left = 163;
+            BarDown.Left = 167;
             BarDown.Top = 63;
-            BarDown.Width = 18;
-            BarDown.Height = 13;
-            BarDown.BackgroundImageLayout = ImageLayout.Center;
+            BarDown.Width = 12;
+            BarDown.Height = 9;
             BarDown.BringToFront();
             BarDown.Cursor = Cursors.SizeWE;
 
@@ -385,8 +383,8 @@ namespace PhysiOBS
         }
         private void reAlocateBarArrows()
         {
-            BarUp.Left = Bar.Left - 8;
-            BarDown.Left = Bar.Left - 8;
+            BarUp.Left = Bar.Left - 4;
+            BarDown.Left = Bar.Left - 4;
         }
 
         private void BarArrow_MouseDown(object sender, MouseEventArgs e)
@@ -703,12 +701,11 @@ namespace PhysiOBS
                     newP.Parent = Total_Signal_PL;
                     if (orderID == 1)
                     {
-                        Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160 + 14);
+                        Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 164 + 14);
                     }
                     else
                     {
                         Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160);
-
                     }
                     BarDown.Top = Bar.Height + Bar.Top;
                     draw_graph(s);
@@ -1826,6 +1823,7 @@ namespace PhysiOBS
             PanelSignal.SetBounds(5, (OrderID - 1) * (160), Total_Signal_PL.Width-9, 156);
             PanelSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
             PanelSignal.BringToFront();
+            PanelSignal.BorderStyle = BorderStyle.FixedSingle;
 
             Panel PanelGraph = new Panel();
             PanelSignal.Controls.Add(PanelGraph);
@@ -1849,9 +1847,9 @@ namespace PhysiOBS
             Button BTRemoveSignal = new Button();
             BTRemoveSignal.Name = "BTRemoveSignal_" + SID;
             BTRemoveSignal.Enabled = false;
-            BTRemoveSignal.BackgroundImage = Properties.Resources.rs;
-            BTRemoveSignal.BackgroundImageLayout = ImageLayout.Stretch;
-            BTRemoveSignal.SetBounds(8, 22, 45, 45);
+            BTRemoveSignal.Image = Properties.Resources.remove_signal;
+            BTRemoveSignal.FlatStyle = FlatStyle.Flat;
+            BTRemoveSignal.SetBounds(135, 4, 25, 25);
             BTRemoveSignal.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTRemoveSignal.Click += new EventHandler(BTRemoveSignalClick_NK);//Κλήση Event
             BTRemoveSignal.MouseHover += (sender, e) => ToolTipHover(sender, e, "Remove this signal.");
@@ -1864,18 +1862,20 @@ namespace PhysiOBS
             ΒΤNextEmotion.Name = "ΒΤNextEmotion_" + SID;
             ΒΤNextEmotion.BackgroundImage = Properties.Resources.forw;
             ΒΤNextEmotion.BackgroundImageLayout = ImageLayout.Center;
+            ΒΤNextEmotion.FlatStyle = FlatStyle.Flat;
             ΒΤNextEmotion.Parent = PanelSignal;
-            ΒΤNextEmotion.SetBounds(113, 25, 45, 38);
+            ΒΤNextEmotion.SetBounds(113, 112, 45, 38);
             ΒΤNextEmotion.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             ΒΤNextEmotion.Click += new EventHandler(ΒΤNextClick);//Κλήση Event next Event
 
             Button BTPreviousEmotion = new Button();
             PanelSignal.Controls.Add(BTPreviousEmotion);
             BTPreviousEmotion.Name = "BTPreviousEmotion_" + SID;
-            BTPreviousEmotion.BackgroundImage = Properties.Resources.back;
+            BTPreviousEmotion.BackgroundImage = Properties.Resources.back1;
             BTPreviousEmotion.BackgroundImageLayout = ImageLayout.Center;
+            BTPreviousEmotion.FlatStyle = FlatStyle.Flat;
             BTPreviousEmotion.Parent = PanelSignal;
-            BTPreviousEmotion.SetBounds(65, 25, 45, 38);
+            BTPreviousEmotion.SetBounds(65, 112, 45, 38);
             BTPreviousEmotion.BringToFront();
             BTPreviousEmotion.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
             BTPreviousEmotion.Click += new EventHandler(BTPreviousClick);//Κλήση Event next Event
@@ -1964,7 +1964,8 @@ namespace PhysiOBS
             BTObservedEmotions.BackgroundImage = Properties.Resources.em_table;
             BTObservedEmotions.BackgroundImageLayout = ImageLayout.Stretch;
             BTObservedEmotions.Parent = PanelSignal;
-            BTObservedEmotions.SetBounds(PanelSignal.Width - 98, 104, 45, 43);
+            BTObservedEmotions.FlatStyle = FlatStyle.Flat;
+            BTObservedEmotions.SetBounds(PanelSignal.Width - 98, 108, 45, 43);
             BTObservedEmotions.BringToFront();
             BTObservedEmotions.Click += new EventHandler(BT_Obs_Emotios_Click);
             BTObservedEmotions.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
@@ -1975,7 +1976,7 @@ namespace PhysiOBS
             EmList.Text = "Em. List";
             EmList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8);
             EmList.Parent = PanelSignal;
-            EmList.SetBounds(PanelSignal.Width - 98, 90, 96, 3);
+            EmList.SetBounds(PanelSignal.Width - 98, 94, 96, 3);
             //EmList.SetBounds(PanelSignal.Width - 98, 104, 45, 43);
             EmList.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
 
@@ -1986,7 +1987,7 @@ namespace PhysiOBS
             LabelEmotionName.Parent = PanelSignal;
             LabelEmotionName.Text = "....";
             //LabelEmotionName.SetBounds(5, 86, 22, 13);
-            LabelEmotionName.SetBounds(5, 69, 22, 13);
+            LabelEmotionName.SetBounds(5, 36, 22, 13);
             LabelEmotionName.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
            // tooltp.SetToolTip(LabelEmotionName, "popopopopopopo");
 
@@ -1999,7 +2000,7 @@ namespace PhysiOBS
             Error_Correction.Name = "NUDErrorCorrection_" + SID;
             Error_Correction.Parent = PanelSignal;
             //Error_Setting.SetBounds(0, 115, 40, 32);
-            Error_Correction.SetBounds(7, 107, 40, 31);
+            Error_Correction.SetBounds(7, 74, 40, 31);
             Error_Correction.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label Error_Corr_lb = new Label();//Πρόβάλλει το keimeno error correction
@@ -2008,7 +2009,7 @@ namespace PhysiOBS
             //Error_Corr_lb.Name = "LabelErrorCorrection_" + SID;
             Error_Corr_lb.Parent = PanelSignal;
             Error_Corr_lb.Text = "Smooth with Error Correction(%):";
-            Error_Corr_lb.SetBounds(5, 90, 94, 32);
+            Error_Corr_lb.SetBounds(5, 57, 94, 32);
             Error_Corr_lb.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Button BTRunsmooth = new Button();
@@ -2016,24 +2017,15 @@ namespace PhysiOBS
             BTRunsmooth.Name = "BTRunsmooth_" + SID;
             BTRunsmooth.Enabled = true;
             BTRunsmooth.Parent = PanelSignal;
-            BTRunsmooth.SetBounds(50, 106, 49, 22);
+            BTRunsmooth.SetBounds(50, 74, 55, 22);
             BTRunsmooth.BringToFront();
             BTRunsmooth.Text = "smooth";
+            BTRunsmooth.FlatStyle = FlatStyle.Flat;
             BTRunsmooth.TextAlign = ContentAlignment.TopLeft;
             BTRunsmooth.Click += new EventHandler(BT_Run_Correction_Click);
             BTRunsmooth.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             /*--end of smoothing controls--*/
-
-            Label New_Obs_Emotions_LB = new Label();
-            PanelSignal.Controls.Add(New_Obs_Emotions_LB);
-            New_Obs_Emotions_LB.AutoSize = true;
-            New_Obs_Emotions_LB.Text = "Emotions Panel";
-            New_Obs_Emotions_LB.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Bold);
-            New_Obs_Emotions_LB.Parent = PanelSignal;
-            New_Obs_Emotions_LB.SetBounds(26, 132, 135, 15);
-            New_Obs_Emotions_LB.SendToBack();
-            New_Obs_Emotions_LB.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Chart ChartSignal = new Chart();
             PanelGraph.Controls.Add(ChartSignal);
@@ -2046,48 +2038,6 @@ namespace PhysiOBS
             ChartSignal.MouseDown += new MouseEventHandler(PL_Emotions_Bar_MouseDown);
             ChartSignal.MouseMove += new MouseEventHandler(PL_Emotions_Bar_MouseMove);
             ChartSignal.MouseUp += new MouseEventHandler(PL_Emotions_Bar_MouseUp);
-
-
-            ShapeContainer canvas = new ShapeContainer();
-            LineShape theLine1 = new LineShape();
-            // Set the New_Signal_PL as the parent of the ShapeContainer.
-            canvas.Parent = PanelSignal;
-            // Set the canvas as the parent of the LineShape.
-            theLine1.Parent = canvas;
-            // Set the starting and ending coordinates for the line.
-            theLine1.BorderWidth = 2;
-            theLine1.BorderColor = Color.Blue;
-            theLine1.SelectionColor = Color.Blue;
-            theLine1.StartPoint = new System.Drawing.Point(0, 130);
-            theLine1.EndPoint = new System.Drawing.Point(163, 130);
-            theLine1.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
-
-            ShapeContainer canvas_2 = new ShapeContainer();
-            LineShape theLine2 = new LineShape();
-            // Set the New_Signal_PL as the parent of the ShapeContainer.
-            canvas_2.Parent = PanelSignal;
-            // Set the canvas as the parent of the LineShape.
-            theLine2.Parent = canvas_2;
-            // Set the starting and ending coordinates for the line.
-            theLine2.BorderWidth = 2;
-            theLine2.BorderColor = Color.Blue;
-            theLine2.StartPoint = new System.Drawing.Point(0, 150);
-            theLine2.EndPoint = new System.Drawing.Point(163, 150);
-            theLine2.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
-            
-            ShapeContainer canvas_3 = new ShapeContainer();
-            LineShape theLine3 = new LineShape();
-            // Set the New_Signal_PL as the parent of the ShapeContainer.
-            canvas_3.Parent = PanelSignal;
-            // Set the canvas as the parent of the LineShape.
-            theLine3.Parent = canvas_2;
-            // Set the starting and ending coordinates for the line.
-            theLine3.BorderWidth = 1;
-            theLine3.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            theLine3.BorderColor = Color.Blue;
-            theLine3.StartPoint = new System.Drawing.Point(0, 87);
-            theLine3.EndPoint = new System.Drawing.Point(163, 87);
-            theLine3.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
 
             Label LB_SignalID = new Label();
             PanelSignal.Controls.Add(LB_SignalID);
@@ -2128,7 +2078,7 @@ namespace PhysiOBS
             BTNext_Total.BringToFront();
             if (Manager.PhysioProject.signalList.GetSignalCountByType("Bio-SIGNAL") == 1)
             {
-                Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 160 + 14);
+                Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height + 164 + 14);
             }
             else
             {
@@ -2329,6 +2279,17 @@ namespace PhysiOBS
             Bar.SetBounds(PL_TaskLine.Location.X, Bar.Location.Y, Bar.Width, Bar.Height);
             Bar.BringToFront();
             intializeBar();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            Frm_About frmAbout = new Frm_About();
+            frmAbout.ShowDialog();
+        }
+
+        private void SC_MainHor_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
 
